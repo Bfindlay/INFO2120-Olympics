@@ -1,0 +1,43 @@
+{
+  "name": "info2120-olympics-app",
+  "version": "0.0.1",
+  "description": "Olympics scheduling app",
+  "scripts": {
+    "build": "webpack --config webpack.config.js --progress --profile --colors",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bfindlay/Express-React-Boilerplate.git"
+  },
+  "keywords": [],
+  "author": "Bfindlay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bfindlay/Express-React-Boilerplate.git"
+  },
+  "homepage": "https://github.com/Bfindlay/Express-React-Boilerplate.git",
+  "devDependencies": {
+    "babel-core": "6.21.0",
+    "babel-loader": "6.2.10",
+    "babel-preset-es2015": "6.18.0",
+    "babel-preset-react": "6.16.0",
+    "babel-preset-stage-0": "6.16.0",
+    "eslint": "3.13.1",
+    "eslint-plugin-react": "6.9.0",
+    "react-dom": "^15.4.1",
+    "style-loader": "0.13.1",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "babel-preset-react-hmre": "*",
+    "react": "*",
+    "react-cookie": "*",
+    "react-dom": "*",
+    "react-redux": "*",
+    "react-router": "*",
+    "redux": "*",
+    "redux-thunk": "*"
+  }
+}
