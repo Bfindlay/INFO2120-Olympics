@@ -6,12 +6,15 @@ const app = express();
 const path= require('path');
 const PORT = process.env.PORT || 3000;
 const DEV = true;
+const API = require('./API');
 
 /* For Development */
 if(DEV){
-  app.use('/build', express.static('dist'))
+
+  app.use('/build', express.static(path.join(__dirname, '/dist/')));
   app.use(express.static(__dirname + '/dist'));
-  app.use('/public', express.static('public'))
+  app.use('/public', express.static(path.join(__dirname, '/src/public/')));
+  app.use('/api', API);
 
   app.listen(PORT +1 , () => {
     console.log('Api server running on', PORT);

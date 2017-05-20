@@ -1,0 +1,45 @@
+
+.app-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/** NAVBAR ***/
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #eee;
+    padding: 20px;
+
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menu ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  background-color: grey;
+}
+.menu li {
+  padding: 20px;
+  margin-left: 20px;
+  background-color: orange;
+  color: rgba(255, 0, 0, 0.9);
+  font-size: 16px;
+  font-weight: bold;
+}

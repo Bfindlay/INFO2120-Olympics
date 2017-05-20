@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-
+import NavBar from './NavBar';
 class App extends Component {
   render() {
     return (
-        <h1> Welcome To React-Express-Boilerplate</h1>
+        <div className='app-container'>
+          <NavBar />
+          <h1> Im GROOT </h1>
+        </div>
     )
   }
 }
