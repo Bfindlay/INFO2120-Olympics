@@ -2,9 +2,10 @@ import React from 'react';
 import { render } from 'react-dom';
 //import { Router, Route, IndexRoute } from 'react-router';
 
-import { HashRouter as Router , Route, IndexRoute} from 'react-router-dom'
+import { Router, hashHistory, Route, IndexRoute } from 'react-router'
 
 import App from './components/App';
+import SignIn from './components/SignIn';
 import Root from './components/Root';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -17,10 +18,11 @@ const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 render(
    <Provider store={store}>
-    <Root>
-        <Router>
-            <App/>
+        <Router history={hashHistory}>
+            <Route path ='/' component={Root}>
+              <IndexRoute component={App} />
+              <Route path="SignIn" component={SignIn} />
+            </Route>
         </Router> 
-      </Root>
     </Provider>,
     container);
