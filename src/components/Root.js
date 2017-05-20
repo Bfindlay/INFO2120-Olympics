@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import NavBar from './NavBar';
 
 class Root extends  Component{
     constructor(){
@@ -13,7 +13,10 @@ class Root extends  Component{
 
     render(){
         return(
-            { ...this.props.children }
+            <div className='app-container'>
+                <NavBar />
+                {this.props.children}
+            </div>
         )
     }
 }
