@@ -5,8 +5,8 @@ const config = {
     user: 'y17i2x20_bfin5330',
     database: 'y17i2x20_loli0102',
     password: '450258163',
-    max: 10,
-    idleTimeoutMillis: 30000
+    max: 1,
+    idleTimeoutMillis: 3000
 };
 
 module.exports = config;
