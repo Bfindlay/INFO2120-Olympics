@@ -5,14 +5,10 @@ class NavBar extends Component {
 
     constructor(){
         super();
-        this.state = {
-            signed: false,
-            user: null
-        }
     }
     
     render(){
-        const{ signed } = this.state;
+        const{ signed } = this.props.DB;
         console.log('signed', signed);
         if(signed){
             return(

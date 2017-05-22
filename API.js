@@ -35,13 +35,12 @@ Router.post('/login', (req, res) => {
     attemptLogin(auth).then( result => {
         //successfull login, send auth token to user
         let token = generateToken(user);
-        res.status(200).send(token);
+        console.log(token);
+        res.send({token});
 
     }).catch(err => {
         //login failed
     })
-
-    res.sendStatus(200);
 });
 
 Router.post('/', (req, res) => {
