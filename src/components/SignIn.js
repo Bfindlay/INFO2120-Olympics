@@ -25,14 +25,14 @@ class SignIn extends Component{
         return(
             <div className="login-page">
                 <div className="form">
-                    <form className="login-form">
+                    <div className="login-form">
                     <label> Email </label>
-                    <input type="email" placeholder="John@Smith.com" onChange={({ target }) => this.setState({email: target.value}) }/>
-                    <label> Password </label>
+                    <input type="text" placeholder="John@Smith.com" onChange={({ target }) => this.setState({email: target.value}) }/>
+                    <label> Password</label>
                     <input type="password" placeholder="*********" onChange={({ target }) => this.setState({password: target.value}) }/>
                         <button onClick={() => this.props.logIn(this.state) }>login</button>
                     <p className="message">Not registered? <a href="#">Create an account</a></p>
-                    </form>
+                    </div>
                 </div>
             </div>
         )

@@ -11,12 +11,12 @@ class NavBar extends Component {
         return(
             <div className='navbar'>
                 <div className='title' onClick={() => hashHistory.push('/')}>
-                    <h1> Olympics App </h1>
+                    <h1> Olympics DB </h1>
                 </div>
                 <div className="menu">
                     <ul>
                         <li>
-                            <h3 href="#home">My Details</h3>
+                            <h3 href="#home">My Detail</h3>
                         </li>
                         <li>
                             <h3 href="#about">Events</h3>
