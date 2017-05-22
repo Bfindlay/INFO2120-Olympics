@@ -4,7 +4,15 @@ const Router = Express.Router();
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken'); 
 const bcrypt = require('bcrypt-nodejs');
+const pg = require('pg');
+const config = require('./dbconfig');
 
+/**** DATABASE CONNECTION *****/
+console.log('-----CONNECTING TO DATABASE ------');
+const client = new pg.Client(config);
+client.connect( err => {
+    console.log('an error occured ', err);
+})
 Router.use(bodyParser.json()); // support json encoded bodies
 Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 

@@ -38,6 +38,7 @@
     "body-parser": "^1.17.2",
     "jsonwebtoken": "^7.4.1",
     "jwt-decode": "^2.2.0",
+    "pg": "^6.2.2",
     "react": "^15.2.1",
     "react-cookie": "^1.0.4",
     "react-dom": "^15.2.1",

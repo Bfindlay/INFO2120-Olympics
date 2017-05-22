@@ -3,10 +3,9 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
 const express = require('express');
 const app = express();
-const path= require('path');
+const path = require('path');
 const PORT = process.env.PORT || 3000;
 const DEV = true;
-
 
 
 const API = require('./API');
