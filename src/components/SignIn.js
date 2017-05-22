@@ -10,10 +10,9 @@ class SignIn extends Component{
         //let signed = (cookie.load('token')) ? true :false;
         this.state = {
             password: '',
-            email: ''
+            id: ''
         }
      }
-        
     
     render(){
 
@@ -26,8 +25,8 @@ class SignIn extends Component{
             <div className="login-page">
                 <div className="form">
                     <div className="login-form">
-                    <label> Email </label>
-                    <input type="text" placeholder="John@Smith.com" onChange={({ target }) => this.setState({email: target.value}) }/>
+                    <label> Member ID </label>
+                    <input type="text" placeholder="1244223" onChange={({ target }) => this.setState({id: target.value}) }/>
                     <label> Password</label>
                     <input type="password" placeholder="*********" onChange={({ target }) => this.setState({password: target.value}) }/>
                         <button onClick={() => this.props.logIn(this.state) }>login</button>

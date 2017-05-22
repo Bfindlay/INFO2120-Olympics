@@ -6,6 +6,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-nodejs');
 const pg = require('pg');
 const config = require('./dbconfig');
+const SECRET_TOKEN = 'x1ODH27zt4sMUMW882iwCp3T6cvWBf38';
+
+/**** TESTING **** */
+let user = { id: 1234, name: 'Brett', type: 'Athlete' }
+
 
 /**** DATABASE CONNECTION *****/
 console.log('-----CONNECTING TO DATABASE ------');
@@ -24,10 +29,13 @@ Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 Router.post('/login', (req, res) => {
     const { auth } = req.body;
-    console.log('login request', email, password);
+    const { id, password } = auth;
+    console.log('login request', id, password);
 
     attemptLogin(auth).then( result => {
         //successfull login, send auth token to user
+        let token = generateToken(user);
+        res.status(200).send(token);
 
     }).catch(err => {
         //login failed
@@ -60,6 +68,9 @@ Router.post('/sign-up', function(req, res) {
 	});
 });
 
+
+
+/*** USER LOGIN AND VERIFICATION FUNCTIONS */
 let registerUser = ( name, password, email) => {
 	//TODO check if exists, resolve or reject depending on result
 	return new Promise(function(resolve, reject) {
@@ -89,8 +100,15 @@ const attemptLogin = auth => {
     })
 }
 
+let generateToken = user => {
+     return jwt.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            data: { id : user.id, name: user.name, type: user.type}
+        }, SECRET_TOKEN);
+}
 
 
+/**************************** */
 
 
 
