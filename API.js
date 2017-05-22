@@ -20,6 +20,8 @@ client.connect( err => {
         console.log('an error occured ', err);
     }else{
         console.log("Successfull database connection");
+        let query = client.query("SELECT member_id, family_name, given_names FROM Member WHERE member_id = 'A000025646'");
+        console.log(query)
     }
         
 })
