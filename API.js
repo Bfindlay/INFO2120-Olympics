@@ -11,7 +11,12 @@ const config = require('./dbconfig');
 console.log('-----CONNECTING TO DATABASE ------');
 const client = new pg.Client(config);
 client.connect( err => {
-    console.log('an error occured ', err);
+    if(err){
+        console.log('an error occured ', err);
+    }else{
+        console.log("Successfull database connection");
+    }
+        
 })
 Router.use(bodyParser.json()); // support json encoded bodies
 Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
