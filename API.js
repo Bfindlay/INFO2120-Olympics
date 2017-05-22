@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt-nodejs');
 const pg = require('pg');
 const config = require('./dbconfig');
 const SECRET_TOKEN = 'x1ODH27zt4sMUMW882iwCp3T6cvWBf38';
+Router.use(bodyParser.json()); // support json encoded bodies
+Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /**** TESTING **** */
 let user = { id: 1234, name: 'Brett', type: 'Athlete' }
@@ -14,21 +16,20 @@ let user = { id: 1234, name: 'Brett', type: 'Athlete' }
 
 /**** DATABASE CONNECTION *****/
 console.log('-----CONNECTING TO DATABASE ------');
-const client = new pg.Client(config);
-client.connect( err => {
+const pool = new pg.Pool(config);
+pool.on('error', function (err, client) {
+  console.error('idle client error', err.message, err.stack);
+});
+
+pool.query("SELECT member_id, family_name, given_names FROM Member WHERE member_id = 'A000025646'", (err, res) => {
     if(err){
-        console.log('an error occured ', err);
-    }else{
-        console.log("Successfull database connection");
-        let query = client.query("SELECT member_id, family_name, given_names FROM Member WHERE member_id = 'A000025646'");
-        console.log(query)
+        return console.error('error in query', err);
     }
-        
-})
-Router.use(bodyParser.json()); // support json encoded bodies
-Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+    console.log('query result', res);
+});
 
 
+/****** API ENDPOINTS ************/
 Router.post('/login', (req, res) => {
     const { auth } = req.body;
     const { id, password } = auth;
@@ -71,7 +72,7 @@ Router.post('/sign-up', function(req, res) {
 
 
 
-/*** USER LOGIN AND VERIFICATION FUNCTIONS */
+/***************USER LOGIN AND VERIFICATION FUNCTIONS ***************/
 let registerUser = ( name, password, email) => {
 	//TODO check if exists, resolve or reject depending on result
 	return new Promise(function(resolve, reject) {
