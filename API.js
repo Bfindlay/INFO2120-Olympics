@@ -21,12 +21,6 @@ pool.on('error', function (err, client) {
   console.error('idle client error', err.message, err.stack);
 });
 
-pool.query("SELECT member_id, family_name, given_names FROM olympics.Member WHERE member_id = 'A000025646'", (err, res) => {
-    if(err){
-        return console.error('error in query', err);
-    }
-    console.log('query result', res);
-});
 
 
 /****** API ENDPOINTS ************/
@@ -38,11 +32,11 @@ Router.post('/login', (req, res) => {
     attemptLogin(auth).then( result => {
         //successfull login, send auth token to user
         let token = generateToken(user);
-        console.log(token);
         res.send({token});
 
     }).catch(err => {
         //login failed
+        console.log(err);
     })
 });
 
@@ -76,7 +70,9 @@ Router.post('/sign-up', function(req, res) {
 let registerUser = ( name, password, email) => {
 	//TODO check if exists, resolve or reject depending on result
 	return new Promise(function(resolve, reject) {
-	
+        pool.query(`INSERT INTO member VALUES()'`, (err, res) => {
+
+        });
 	});
 };
 
@@ -93,12 +89,21 @@ let hashPassword = (password_plain_text) => {
 
 const attemptLogin = auth => {
     return new Promise( (resolve, reject ) => {
-        //check database for a user
-        if(true){
-            resolve({});
-        }else{
-            reject('Wrong details');
-        }
+        const{ id, password } = auth;
+        pool.query(`SELECT * FROM olympics.Member WHERE member_id = '${id}'`, (err, res) => {
+            const { pass_word, rowCount } = res.rows[0];
+            if( rowCount == 0){
+                // User doesnt exist, reject login request
+                 reject('User Doesnt Exist!');
+            }else{
+                // User exists check password hash
+                bcrypt.compare(password, pass_word, (err,res) => {
+				    if (err) 
+                        reject(err);
+				    return (res) ? resolve(res) : reject('Wrong Password');
+			    });
+            }
+        });
     })
 }
 

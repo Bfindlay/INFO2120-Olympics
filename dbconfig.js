@@ -1,10 +1,10 @@
 
 const config = {
-    host: 'soit-db-pro-2.ucc.usyd.edu.au',
+    host: 'localhost',
     port: '5432',
-    user: 'y17i2x20_loli0102',
-    database: 'y17i2x20_loli0102',
-    password: '450264005',
+    user: 'Brett',
+    database: 'Brett',
+    password: '',
     max: 1,
     idleTimeoutMillis: 3000
 };
