@@ -10,7 +10,6 @@ class NavBar extends Component {
     
     render(){
         const{ signed } = this.props.DB;
-        console.log('signed', signed);
         if(signed){
             return(
                 <div className='navbar'>

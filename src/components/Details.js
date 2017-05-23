@@ -9,18 +9,17 @@ class Details extends Component {
     }
 
     render(){
-        console.log('hi', this.props.state.DB);
-        // const{ country_code, family_name, given_names, member_id, title } = this.props.DB.data;
-        // console.log(ountry_code, family_name, given_names, member_id, title );
+        const{ country_code, family_name, given_names, member_id, title, accommodation } = this.props.DB;
+      
         return(
             <div>
                  <div className="details-container">
                     <h1> Details </h1>
                     <div className="details-module">
-                        <h3>Member ID:</h3>
-                        <h3>Name: </h3>
-                        <h3>Type: </h3>
-                        <h3>Accomodation: </h3>
+                        <h3>Member ID: {member_id}</h3>
+                        <h3>Name: {family_name}</h3>
+                        <h3>Type: {member_id}</h3>
+                        <h3>Accomodation: {accommodation}</h3>
 
                     </div>
                 </div>
@@ -29,5 +28,5 @@ class Details extends Component {
     }
 }
 
-const mapStateToProps = state => ({state});
+const mapStateToProps = ({ DB }) => ({DB});
 export default connect(mapStateToProps, {})(Details);

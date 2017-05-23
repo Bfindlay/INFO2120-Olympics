@@ -13,10 +13,8 @@ export const logIn = auth => {
             .then(response => {
                 const{ token } = response.data;
                 let decoded = jwt(token);
-                console.log('decoded', decoded);
                 cookie.save('token', token, {path: '/', maxAge: 600 });
                 cookie.save('member', decoded, {path: '/', maxAge: 600 } );
-                hashHistory.push('/Details');
                 dispatch({type: LOG_IN, payload: decoded});
             })
             .catch( response => {

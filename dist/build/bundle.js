@@ -27858,7 +27858,6 @@
 
 	            var signed = this.props.DB.signed;
 
-	            console.log('signed', signed);
 	            if (signed) {
 	                return _react2.default.createElement(
 	                    'div',
@@ -30192,10 +30191,8 @@
 	            var token = response.data.token;
 
 	            var decoded = (0, _jwtDecode2.default)(token);
-	            console.log('decoded', decoded);
 	            _reactCookie2.default.save('token', token, { path: '/', maxAge: 600 });
 	            _reactCookie2.default.save('member', decoded, { path: '/', maxAge: 600 });
-	            _reactRouter.hashHistory.push('/Details');
 	            dispatch({ type: _types.LOG_IN, payload: decoded });
 	        }).catch(function (response) {
 	            console.log('error', response);
@@ -34483,9 +34480,15 @@
 	    _createClass(Details, [{
 	        key: 'render',
 	        value: function render() {
-	            console.log('hi', this.props.state.DB);
-	            // const{ country_code, family_name, given_names, member_id, title } = this.props.DB.data;
-	            // console.log(ountry_code, family_name, given_names, member_id, title );
+	            var _props$DB = this.props.DB,
+	                country_code = _props$DB.country_code,
+	                family_name = _props$DB.family_name,
+	                given_names = _props$DB.given_names,
+	                member_id = _props$DB.member_id,
+	                title = _props$DB.title,
+	                accommodation = _props$DB.accommodation;
+
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -34503,22 +34506,26 @@
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            'Member ID:'
+	                            'Member ID: ',
+	                            member_id
 	                        ),
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            'Name: '
+	                            'Name: ',
+	                            family_name
 	                        ),
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            'Type: '
+	                            'Type: ',
+	                            member_id
 	                        ),
 	                        _react2.default.createElement(
 	                            'h3',
 	                            null,
-	                            'Accomodation: '
+	                            'Accomodation: ',
+	                            accommodation
 	                        )
 	                    )
 	                )
@@ -34529,8 +34536,9 @@
 	    return Details;
 	}(_react.Component);
 
-	var mapStateToProps = function mapStateToProps(state) {
-	    return { state: state };
+	var mapStateToProps = function mapStateToProps(_ref) {
+	    var DB = _ref.DB;
+	    return { DB: DB };
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(Details);
 
@@ -34678,7 +34686,7 @@
 
 /***/ },
 /* 322 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -34688,10 +34696,15 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	var _reactRouter = __webpack_require__(182);
+
 	var INITIAL_STATE = {
+	    accomodation: null,
+	    country_code: null,
+	    family_name: null,
+	    given_names: null,
 	    member_id: null,
-	    name: null,
-	    type: null,
+	    title: null,
 	    signed: false
 	};
 
@@ -34704,15 +34717,25 @@
 	        case 'LOG_IN':
 	            {
 	                var _action$payload$data = action.payload.data,
-	                    id = _action$payload$data.id,
-	                    name = _action$payload$data.name,
-	                    type = _action$payload$data.type;
+	                    accomodation = _action$payload$data.accomodation,
+	                    country_code = _action$payload$data.country_code,
+	                    family_name = _action$payload$data.family_name,
+	                    given_names = _action$payload$data.given_names,
+	                    member_id = _action$payload$data.member_id,
+	                    title = _action$payload$data.title;
 
-	                return _extends({}, state, { signed: true, member_id: id, name: name, type: type });
+	                _reactRouter.hashHistory.push('/Details');
+	                return _extends({}, state, { signed: true,
+	                    accomodation: accomodation,
+	                    country_code: country_code,
+	                    family_name: family_name,
+	                    given_names: given_names, member_id: member_id,
+	                    title: title
+	                });
 	            }
 	        case 'LOG_OUT':
 	            {
-	                console.log('logout');
+	                _reactRouter.hashHistory.push('/');
 	                return _extends({}, state, { member_id: null, name: null, type: null, signed: false });
 	            }
 	        default:
