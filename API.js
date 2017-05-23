@@ -25,17 +25,42 @@ pool.on('error', function (err, client) {
 
 /****** API ENDPOINTS ************/
 
+Router.get('/details/:member_id', (req, res) =>{
+    const { member_id } = req.params;
+    pool.query(`SELECT M.member_id as member_id, accommodation as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B 
+        WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M WHERE M.member_id = '${member_id}'GROUP BY M.member_id;`, (err, response ) =>{
+            if(err){
+                console.log(err);   //TODO handle errors
+                res.status(500).send("error");
+            }
+            res.send(response.rows);
+    });
+});
 
-Router.post('/Test', (req,res) =>{
-    const { query } = req.body
-    
-     pool.query(query, (err, res) => {
-        if(err)
-           return console.error(err);
-        console.log(res);
-     });
+Router.get('/bookings/:member_id', (req, res) =>{
+    const { member_id } = req.params;
+    pool.query(`SELECT B.booked_for, B.booked_by, J.depart_time FROM olympics.booking B JOIN olympics.journey J ON (J.journey_id = B.journey_id) 
+        WHERE booked_for = '${member_id}' ORDER by J.depart_time ASC;`, (err, response) => {
+            if(err){
+                console.log(err); //TODO ERROR HANDLING
+                res.status(500).send("error in booking search");
+            }
+            res.send(response.rows);
+        });
+});
 
-})
+Router.get('/journey/:member_id', (req, res) => {
+    const { member_id } = req.params;
+    pool.query(`SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked, FROM olympics.Journey WHERE depart_time >= date.entered  
+                AND depart_time <= date.entered AND to_place = location.entered ORDER BY depart_time ASC;`, (err, response) => {
+        if(err){
+            console.log(err); //TODO ERROR HANDLING
+            res.status(500).send("error in booking search");
+        }
+        res.send(response.rows);
+    });
+});
+
 Router.post('/login', (req, res) => {
     const { auth } = req.body;
     const { id, password } = auth;
@@ -49,7 +74,7 @@ Router.post('/login', (req, res) => {
     }).catch(err => {
         //login failed
         console.log(err);
-    })
+    });
 });
 
 Router.post('/', (req, res) => {
