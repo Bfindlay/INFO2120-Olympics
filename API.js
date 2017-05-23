@@ -11,8 +11,6 @@ Router.use(bodyParser.json()); // support json encoded bodies
 Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 /**** TESTING **** */
-let user = { id: 1234, name: 'Brett', type: 'Athlete' }
-
 
 /**** DATABASE CONNECTION *****/
 console.log('-----CONNECTING TO DATABASE ------');
@@ -44,8 +42,9 @@ Router.get('/bookings/:member_id', (req, res) =>{
             if(err){
                 console.log(err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
+            }else{
+                 res.send(response.rows);
             }
-            res.send(response.rows);
         });
 });
 
@@ -56,8 +55,10 @@ Router.get('/journey/:member_id', (req, res) => {
         if(err){
             console.log(err); //TODO ERROR HANDLING
             res.status(500).send("error in booking search");
+        }else{
+            res.send(response.rows);
         }
-        res.send(response.rows);
+        
     });
 });
 
@@ -68,7 +69,8 @@ Router.post('/login', (req, res) => {
 
     attemptLogin(auth).then( result => {
         //successfull login, send auth token to user
-        let token = generateToken(user);
+        const { title, member_id, family_name, given_names, country_code, accommodation } = result;
+        let token = generateToken({ title, member_id, family_name, given_names, country_code, accommodation });
         res.send({token});
 
     }).catch(err => {
@@ -134,11 +136,12 @@ const attemptLogin = auth => {
                  reject('User Doesnt Exist!');
             }else{
                 // User exists check password hash
-                bcrypt.compare(password, pass_word, (err,res) => {
-				    if (err) 
-                        reject(err);
-				    return (res) ? resolve(res) : reject('Wrong Password');
-			    });
+                // bcrypt.compare(password, pass_word, (err,res) => {
+				//     if (err) 
+                //         reject(err);
+				//     return (res) ? resolve(res) : reject('Wrong Password');
+			    // });
+                return ( password == pass_word) ? resolve(res.rows[0]) : reject("Wrong Password");
             }
         });
     })
@@ -147,7 +150,7 @@ const attemptLogin = auth => {
 let generateToken = user => {
      return jwt.sign({
             exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            data: { id : user.id, name: user.name, type: user.type}
+            data: user
         }, SECRET_TOKEN);
 }
 

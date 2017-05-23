@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import cookie from 'react-cookie';
 import NavBar from './NavBar';
+import { reloadUser } from '../actions';
 
 class Root extends  Component{
     constructor(){
@@ -8,7 +10,10 @@ class Root extends  Component{
     }
 
     componentWillMount(){
-
+        const user = cookie.load('member');
+        if(user){
+            this.props.reloadUser(user);
+        }
     }
 
     render(){
@@ -22,4 +27,4 @@ class Root extends  Component{
 }
 
 const mapStateToProp = ({ DB }) => ({ DB });
-export default connect(mapStateToProp, {})(Root);
+export default connect(mapStateToProp, {reloadUser})(Root);

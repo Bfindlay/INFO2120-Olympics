@@ -65,7 +65,25 @@ body{
     color:  #00e6e6
 }
 
+/*** USER DETAILS ****/
 
+.details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.details-module {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    justify-content: center;
+    width: 60vw;
+    align-items: flex-start;
+    text-align: left;
+    padding: 40px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
 
 /*****************************/
 

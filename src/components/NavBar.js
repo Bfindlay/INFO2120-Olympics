@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
+import { logOut } from '../actions';
 class NavBar extends Component {
 
     constructor(){
@@ -31,7 +32,7 @@ class NavBar extends Component {
                                 <h3 href="#contact">Journey</h3>
                             </li>
                             <li>
-                                <h3 href="#contact">Log Out</h3>
+                                <a onClick= {() => this.props.logOut()}><h3 href="#contact">Log Out</h3></a>
                             </li>
                         </ul>
                         </div>
@@ -61,4 +62,4 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = ({ DB }) => ({ DB });
-export default connect(mapStateToProps, {})(NavBar);
+export default connect(mapStateToProps, { logOut })(NavBar);
