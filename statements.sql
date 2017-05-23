@@ -14,7 +14,7 @@ INSERT INTO olympics.Booking
 -- Member Details
 --WHERE clause should match the member_id from login screen.	
 SELECT M.member_id as member_id, accommodation as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B WHERE booked_for = 'A000043404')) as bookings
-FROM Member M
+FROM olympics.Member M
 WHERE M.member_id = 'A000043404'
 GROUP BY M.member_id;
 
@@ -31,7 +31,7 @@ ORDER by J.depart_time ASC;
 
 --Search Journeys
 SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked,
-FROM Journey
+FROM olympics.Journey
 WHERE depart_time >= date.entered 
     AND depart_time <= date.entered 
     AND to_place = location.entered
@@ -48,8 +48,12 @@ From Event;
 
 --Browse Event results (Dunno if it works)
 SELECT M.given_name || m.famiy_name AS Medallist, medal AS Medal, E.event_name AS Event
-FROM participates P JOIN Athelete A ON (P.athelete_id = A.member_id) 
-                    JOIN event E ON (P.event_id = E.event_id) 
-                    JOIN member M ON (A.athelete_id = M.member_id)
+FROM olympics.participates P JOIN olympics.Athelete A ON (P.athelete_id = A.member_id) 
+                             JOIN olympics.event E ON (P.event_id = E.event_id) 
+                             JOIN olympics.member M ON (A.athelete_id = M.member_id)
 ORDER BY Medallist ASC;
+
+--PAGED Results
+--USE LIMIT xxx, etc
+
 
