@@ -1,4 +1,5 @@
 
 
-Queries:
-> Create a person
+> Error handling on API Requests
+    * Send messages to prompt the user of errors etc
+> Sanitize input

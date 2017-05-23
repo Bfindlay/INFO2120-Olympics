@@ -22,7 +22,7 @@ class Query extends Component{
                 <div className="form">
                     <div className="login-form">
                     <label> Query </label>
-                    <input type="text" placeholder="SELECT * From" onChange={({ target }) => this.setState({query: target.value}) }/>
+                    <input type="text" placeholder="SELECT * FROM" onChange={({ target }) => this.setState({query: target.value}) }/>
                         <button onClick={() => this.submitQuery() }>Submit Query</button>
                     </div>
                 </div>
