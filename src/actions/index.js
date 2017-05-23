@@ -7,6 +7,7 @@ import axios from 'axios';
 import jwt from 'jwt-decode';
 import cookie from 'react-cookie';
 import { hashHistory } from 'react-router';
+
 export const logIn = auth => {
     return (dispatch) => {
         axios.post('/api/login', { auth })
