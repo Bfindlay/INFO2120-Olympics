@@ -21,7 +21,7 @@ pool.on('error', function (err, client) {
   console.error('idle client error', err.message, err.stack);
 });
 
-pool.query("SELECT member_id, family_name, given_names FROM Member WHERE member_id = 'A000025646'", (err, res) => {
+pool.query("SELECT member_id, family_name, given_names FROM olympics.Member WHERE member_id = 'A000025646'", (err, res) => {
     if(err){
         return console.error('error in query', err);
     }
