@@ -7,6 +7,7 @@ import { Router, hashHistory, Route, IndexRoute } from 'react-router'
 import App from './components/App';
 import SignIn from './components/SignIn';
 import Root from './components/Root';
+import Query from './components/Query';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import { Provider } from 'react-redux'
@@ -22,6 +23,7 @@ render(
             <Route path ='/' component={Root}>
               <IndexRoute component={App} />
               <Route path="SignIn" component={SignIn} />
+              <Route path="Query" component={Query} />
             </Route>
         </Router> 
     </Provider>,

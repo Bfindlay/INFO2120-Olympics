@@ -24,6 +24,18 @@ pool.on('error', function (err, client) {
 
 
 /****** API ENDPOINTS ************/
+
+
+Router.post('/Test', (req,res) =>{
+    const { query } = req.body
+    
+     pool.query(query, (err, res) => {
+        if(err)
+           return console.error(err);
+        console.log(res);
+     });
+
+})
 Router.post('/login', (req, res) => {
     const { auth } = req.body;
     const { id, password } = auth;
