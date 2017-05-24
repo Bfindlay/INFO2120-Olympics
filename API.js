@@ -20,6 +20,18 @@ pool.on('error', function (err, client) {
 });
 
 
+/**** FOR TESTING  ******/
+
+Router.post('/Test', (req,res) =>{
+    const { query } = req.body
+    
+     pool.query(query, (err, res) => {
+        if(err)
+           return console.error(err);
+        console.log(res);
+     });
+
+})
 
 /****** API ENDPOINTS ************/
 
@@ -48,19 +60,23 @@ Router.get('/bookings/:member_id', (req, res) =>{
         });
 });
 
-Router.get('/journey/:member_id', (req, res) => {
-    const { member_id } = req.params;
-    pool.query(`SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked, FROM olympics.Journey WHERE depart_time >= date.entered  
-                AND depart_time <= date.entered AND to_place = location.entered ORDER BY depart_time ASC;`, (err, response) => {
+Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
+    const { id, from, to, date } = req.params;
+    const newDate = new Date(date.replace(' ', 'T'));
+    console.log('date is now', newDate);
+    const { token } = req.body;
+    console.log(date);
+    pool.query(`SELECT depart_time, from_place, to_place, nbooked  FROM olympics.Journey WHERE depart_time = ${date}  
+                 AND to_place = ${to} AND from_place = ${from} AND member_id = ${id} ORDER BY depart_time ASC;`, (err, response) => {
         if(err){
             console.log(err); //TODO ERROR HANDLING
-            res.status(500).send("error in booking search");
+            res.status(500).send("error in journey search");
         }else{
             res.send(response.rows);
         }
         
     });
-});
+})
 
 Router.post('/login', (req, res) => {
     const { auth } = req.body;

@@ -4,6 +4,7 @@ html{
     width: 100%;
     position: fixed;
     font-family: 'Roboto', sans-serif;
+    background: #FBFBFF;
 }
 body{
     margin: 0;
@@ -13,8 +14,22 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex:1;
 }
+.app-body{
+    display:flex;
+}
+/*** Footer ***/
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    background: #FBFBFF;
 
+}
 /** NAVBAR ***/
 
 .navbar{
@@ -23,11 +38,16 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #eee;
+    background: #FBFBFF;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
-
+.navbar li {
+    color: #FF934F;
+}
+.title h1 {
+    color: #FF934F;
+}
 .menu {
   display: flex;
   align-items: center;
@@ -58,11 +78,11 @@ body{
 
 
 .menu li:hover {
-    color:  #00e6e6
+    color:  #FF6100;
 }
 
-.title:hover {
-    color:  #00e6e6
+.title:hover h1 {
+    color:  #FF6100;
 }
 
 /*** USER DETAILS ****/
@@ -83,6 +103,70 @@ body{
     text-align: left;
     padding: 40px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+/********** Journeys ***********/
+
+.journeys{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 4em;
+}
+
+.field {
+  margin: 25px auto;
+  width: 200px;
+  display: block;
+  border: none;
+  padding: 10px 0;
+  border-bottom: solid 1px #00A7E1;
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background: 
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0) 96%,
+      #1abc9c 4%);
+  background-position: -200px 0;
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  color: #0e6252;
+}
+
+.field::-webkit-input-placeholder {
+  transition: all 0.3s ease-in-out;
+}
+
+.field:focus {
+  box-shadow: none;
+  outline: none;
+  background-position: 0 0;
+}
+
+.field:focus::-webkit-input-placeholder {
+  color: #00A7E1;
+  font-size: 11px;
+  transform: translateY(-20px);
+  visibility: visible !important;
+}
+
+.submit {
+  display: block;
+  margin: 25px auto;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  background-color: #00A7E1;
+  border: 1px solid #00A7E1;
+  color: #FFF;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit:hover {
+  background-color: #FFF;
+  color: #00A7E1;
 }
 
 /*****************************/
