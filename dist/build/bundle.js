@@ -447,18 +447,30 @@ object-assign
 */
 
 
+<<<<<<< HEAD
 /* eslint-disable no-unused-vars */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+=======
+	var _Journey = __webpack_require__(319);
+
+	var _Journey2 = _interopRequireDefault(_Journey);
+
+	var _Query = __webpack_require__(320);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 function toObject(val) {
 	if (val === null || val === undefined) {
 		throw new TypeError('Object.assign cannot be called with null or undefined');
 	}
 
+<<<<<<< HEAD
 	return Object(val);
 }
+=======
+	var _reduxThunk = __webpack_require__(321);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 function shouldUseNative() {
 	try {
@@ -466,7 +478,11 @@ function shouldUseNative() {
 			return false;
 		}
 
+<<<<<<< HEAD
 		// Detect buggy property enumeration order in older V8 versions.
+=======
+	var _reducers = __webpack_require__(322);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
 		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
@@ -504,6 +520,7 @@ function shouldUseNative() {
 	}
 }
 
+<<<<<<< HEAD
 module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	var from;
 	var to = toObject(target);
@@ -517,6 +534,30 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 				to[key] = from[key];
 			}
 		}
+=======
+	var container = document.getElementById('app');
+	//import { Router, Route, IndexRoute } from 'react-router';
+
+	var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+	(0, _reactDom.render)(_react2.default.createElement(
+	    _reactRedux.Provider,
+	    { store: store },
+	    _react2.default.createElement(
+	        _reactRouter.Router,
+	        { history: _reactRouter.hashHistory },
+	        _react2.default.createElement(
+	            _reactRouter.Route,
+	            { path: '/', component: _Root2.default },
+	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _App2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'SignIn', component: _SignIn2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'Query', component: _Query2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'Details', component: _Details2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'Journey', component: _Journey2.default })
+	        )
+	    )
+	), container);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 		if (getOwnPropertySymbols) {
 			symbols = getOwnPropertySymbols(from);
@@ -13829,6 +13870,198 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+<<<<<<< HEAD
+=======
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(243);
+
+	var _reactRouter = __webpack_require__(182);
+
+	var _actions = __webpack_require__(279);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NavBar = function (_Component) {
+	    _inherits(NavBar, _Component);
+
+	    function NavBar() {
+	        _classCallCheck(this, NavBar);
+
+	        return _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this));
+	    }
+
+	    _createClass(NavBar, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var signed = this.props.DB.signed;
+
+	            if (signed) {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'navbar' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title', onClick: function onClick() {
+	                                return _reactRouter.hashHistory.push('/');
+	                            } },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            ' Olympics DB '
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'menu' },
+	                        _react2.default.createElement(
+	                            'ul',
+	                            null,
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _reactRouter.hashHistory.push('/Details');
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'My Detail'
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    null,
+	                                    'Events'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'h3',
+	                                    null,
+	                                    'My Bookings'
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _reactRouter.hashHistory.push('/Journey');
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'Journey'
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _this2.props.logOut();
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        { href: '#contact' },
+	                                        'Log Out'
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
+	                );
+	            } else {
+	                return _react2.default.createElement(
+	                    'div',
+	                    { className: 'navbar' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title', onClick: function onClick() {
+	                                return _reactRouter.hashHistory.push('/');
+	                            } },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            ' Olympics DB '
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'menu' },
+	                        _react2.default.createElement(
+	                            'ul',
+	                            null,
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _reactRouter.hashHistory.push('/Register');
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'Register'
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _reactRouter.hashHistory.push('/SignIn');
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'Log In'
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
+	                );
+	            }
+	        }
+	    }]);
+
+	    return NavBar;
+	}(_react.Component);
+
+	var mapStateToProps = function mapStateToProps(_ref) {
+	    var DB = _ref.DB;
+	    return { DB: DB };
+	};
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { logOut: _actions.logOut })(NavBar);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 
 
@@ -20261,7 +20494,14 @@ var _invariant = __webpack_require__(8);
 
 var _invariant2 = _interopRequireDefault(_invariant);
 
+<<<<<<< HEAD
 var _ExecutionEnvironment = __webpack_require__(53);
+=======
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.logOut = exports.reloadUser = exports.searchJourney = exports.logIn = undefined;
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 var _DOMUtils = __webpack_require__(40);
 
@@ -20307,7 +20547,31 @@ var HashPathCoders = {
 var createHashHistory = function createHashHistory() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
+<<<<<<< HEAD
   !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Hash history needs a DOM') : (0, _invariant2.default)(false) : void 0;
+=======
+	var searchJourney = exports.searchJourney = function searchJourney(data) {
+	    var to = data.to,
+	        from = data.from,
+	        date = data.date;
+
+	    var member_id = _reactCookie2.default.load('member').data.member_id;
+
+	    var token = _reactCookie2.default.load('token');
+	    return function (dispatch) {
+	        _axios2.default.post('/api/journey/' + member_id + '/' + from + '/' + to + '/' + date, { token: token }).then(function (response) {
+	            console.log('success', response);
+	            dispatch({ type: _types.LOG_IN, payload: decoded });
+	        }).catch(function (response) {
+	            console.log('error', response);
+	        });
+	    };
+	};
+	var reloadUser = exports.reloadUser = function reloadUser(user) {
+	    console.log(user);
+	    return { type: _types.LOG_IN, payload: user };
+	};
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
   var queryKey = options.queryKey,
       hashType = options.hashType;
@@ -34118,7 +34382,110 @@ function getNextDebugID() {
   return nextDebugID++;
 }
 
+<<<<<<< HEAD
 module.exports = getNextDebugID;
+=======
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(243);
+
+	var _reactRouter = __webpack_require__(182);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Details = function (_Component) {
+	    _inherits(Details, _Component);
+
+	    function Details() {
+	        _classCallCheck(this, Details);
+
+	        return _possibleConstructorReturn(this, (Details.__proto__ || Object.getPrototypeOf(Details)).call(this));
+	    }
+
+	    _createClass(Details, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var signed = this.props.DB.signed;
+
+	            if (!signed) {
+	                _reactRouter.hashHistory.push('/');
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props$DB = this.props.DB,
+	                country_code = _props$DB.country_code,
+	                family_name = _props$DB.family_name,
+	                given_names = _props$DB.given_names,
+	                member_id = _props$DB.member_id,
+	                title = _props$DB.title,
+	                accommodation = _props$DB.accommodation;
+
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'details-container' },
+	                    _react2.default.createElement(
+	                        'h1',
+	                        null,
+	                        ' Details '
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'details-module' },
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            'Member ID: ',
+	                            member_id
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            'Name: ',
+	                            family_name
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            'Type: ',
+	                            member_id
+	                        ),
+	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            'Accomodation: ',
+	                            accommodation
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Details;
+	}(_react.Component);
+
+	var mapStateToProps = function mapStateToProps(_ref) {
+	    var DB = _ref.DB;
+	    return { DB: DB };
+	};
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, {})(Details);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 /***/ }),
 /* 314 */
@@ -34608,17 +34975,235 @@ module.exports = function (str) {
 	});
 };
 
+<<<<<<< HEAD
 
 /***/ }),
 /* 320 */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(243);
+
+	var _actions = __webpack_require__(279);
+
+	var _reactCookie = __webpack_require__(313);
+
+	var _reactCookie2 = _interopRequireDefault(_reactCookie);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Journey = function (_Component) {
+	    _inherits(Journey, _Component);
+
+	    function Journey() {
+	        _classCallCheck(this, Journey);
+
+	        var _this = _possibleConstructorReturn(this, (Journey.__proto__ || Object.getPrototypeOf(Journey)).call(this));
+
+	        _this.state = {
+	            from: null,
+	            to: null,
+	            date: null
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Journey, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'journeys' },
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement(
+	                    'form',
+	                    null,
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' From: '
+	                    ),
+	                    _react2.default.createElement('input', { className: 'field', placeholder: 'Stadium', type: 'text', required: '', onChange: function onChange(_ref) {
+	                            var target = _ref.target;
+	                            return _this2.setState({ from: target.value });
+	                        } }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' To: '
+	                    ),
+	                    _react2.default.createElement('input', { className: 'field', placeholder: 'Hotel', type: 'text', required: '', onChange: function onChange(_ref2) {
+	                            var target = _ref2.target;
+	                            return _this2.setState({ to: target.value });
+	                        } }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Date: '
+	                    ),
+	                    _react2.default.createElement('input', { className: 'field', type: 'date', required: '', onChange: function onChange(_ref3) {
+	                            var target = _ref3.target;
+	                            return _this2.setState({ date: target.value });
+	                        } }),
+	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onClick: function onClick() {
+	                            return _this2.props.searchJourney(_this2.state);
+	                        } })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Journey;
+	}(_react.Component);
+
+	var mapStateToProps = function mapStateToProps(_ref4) {
+	    var DB = _ref4.DB;
+	    return { DB: DB };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { searchJourney: _actions.searchJourney })(Journey);
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _axios = __webpack_require__(281);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Query = function (_Component) {
+	    _inherits(Query, _Component);
+
+	    function Query() {
+	        _classCallCheck(this, Query);
+
+	        var _this = _possibleConstructorReturn(this, (Query.__proto__ || Object.getPrototypeOf(Query)).call(this));
+
+	        _this.state = {
+	            query: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Query, [{
+	        key: 'submitQuery',
+	        value: function submitQuery() {
+	            _axios2.default.post('/api/Test', this.state).then(function (res) {
+	                return console.log(res);
+	            }).catch(function (err) {
+	                return console.log(err);
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'login-page' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'login-form' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            null,
+	                            ' Query '
+	                        ),
+	                        _react2.default.createElement('input', { type: 'text', placeholder: 'SELECT * FROM', onChange: function onChange(_ref) {
+	                                var target = _ref.target;
+	                                return _this2.setState({ query: target.value });
+	                            } }),
+	                        _react2.default.createElement(
+	                            'button',
+	                            { onClick: function onClick() {
+	                                    return _this2.submitQuery();
+	                                } },
+	                            'Submit Query'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Query;
+	}(_react.Component);
+
+	exports.default = Query;
+
+/***/ },
+/* 321 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch,
+	        getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 module.exports = __webpack_require__(321);
 
 
+<<<<<<< HEAD
 /***/ }),
 /* 321 */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, module) {
@@ -34629,13 +35214,18 @@ Object.defineProperty(exports, "__esModule", {
 
 var _ponyfill = __webpack_require__(322);
 
+<<<<<<< HEAD
 var _ponyfill2 = _interopRequireDefault(_ponyfill);
+=======
+	var _DBReducer = __webpack_require__(323);
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var root; /* global window */
 
 
+<<<<<<< HEAD
 if (typeof self !== 'undefined') {
   root = self;
 } else if (typeof window !== 'undefined') {
@@ -34647,6 +35237,11 @@ if (typeof self !== 'undefined') {
 } else {
   root = Function('return this')();
 }
+=======
+/***/ },
+/* 323 */
+/***/ function(module, exports, __webpack_require__) {
+>>>>>>> 2b92bca83c223ff61ee7aef49f139444a577cb15
 
 var result = (0, _ponyfill2['default'])(root);
 exports['default'] = result;
