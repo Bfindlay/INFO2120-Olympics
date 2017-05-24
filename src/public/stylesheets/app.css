@@ -4,6 +4,7 @@ html{
     width: 100%;
     position: fixed;
     font-family: 'Roboto', sans-serif;
+    background: #FBFBFF;
 }
 body{
     margin: 0;
@@ -13,8 +14,22 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex:1;
 }
+.app-body{
+    display:flex;
+}
+/*** Footer ***/
+.footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    background: #FBFBFF;
 
+}
 /** NAVBAR ***/
 
 .navbar{
@@ -23,11 +38,16 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #eee;
+    background: #FBFBFF;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
-
+.navbar li {
+    color: #FF934F;
+}
+.title h1 {
+    color: #FF934F;
+}
 .menu {
   display: flex;
   align-items: center;
@@ -58,11 +78,11 @@ body{
 
 
 .menu li:hover {
-    color:  #00e6e6
+    color:  #FF6100;
 }
 
-.title:hover {
-    color:  #00e6e6
+.title:hover h1 {
+    color:  #FF6100;
 }
 
 /*** USER DETAILS ****/
@@ -101,7 +121,7 @@ body{
   display: block;
   border: none;
   padding: 10px 0;
-  border-bottom: solid 1px #1abc9c;
+  border-bottom: solid 1px #00A7E1;
   transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
   background: 
     linear-gradient(to bottom,
@@ -124,7 +144,7 @@ body{
 }
 
 .field:focus::-webkit-input-placeholder {
-  color: #1abc9c;
+  color: #00A7E1;
   font-size: 11px;
   transform: translateY(-20px);
   visibility: visible !important;
@@ -135,8 +155,8 @@ body{
   margin: 25px auto;
   box-sizing: border-box;
   padding: 10px 30px;
-  background-color: #1abc9c;
-  border: 1px solid #1abc9c;
+  background-color: #00A7E1;
+  border: 1px solid #00A7E1;
   color: #FFF;
   border-radius: 3px;
   font-size: 14px;
@@ -146,7 +166,7 @@ body{
 
 .submit:hover {
   background-color: #FFF;
-  color: #1abc9c;
+  color: #00A7E1;
 }
 
 /*****************************/

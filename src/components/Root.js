@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cookie from 'react-cookie';
 import NavBar from './NavBar';
+import Footer from './Footer';
 import { reloadUser } from '../actions';
 
 class Root extends  Component{
@@ -20,7 +21,9 @@ class Root extends  Component{
         return(
             <div className='app-container'>
                 <NavBar />
-                {this.props.children}
+                <div className='app-body'>
+                    {this.props.children}
+                </div>
             </div>
         )
     }
