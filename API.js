@@ -48,10 +48,12 @@ Router.get('/bookings/:member_id', (req, res) =>{
         });
 });
 
-Router.get('/journey/:member_id', (req, res) => {
-    const { member_id } = req.params;
-    pool.query(`SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked, FROM olympics.Journey WHERE depart_time >= date.entered  
-                AND depart_time <= date.entered AND to_place = location.entered ORDER BY depart_time ASC;`, (err, response) => {
+Router.get('/journey/:id/:from/:to/:date', (req, res) =>{
+    const { id, from, to, date } = req.params;
+    const { token } = req.body;
+    console.log(date);
+    pool.query(`SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked, FROM olympics.Journey WHERE depart_time = ${date}  
+                 AND to_place = ${to} AND from_place = ${from} AND member_id = ${id} ORDER BY depart_time ASC;`, (err, response) => {
         if(err){
             console.log(err); //TODO ERROR HANDLING
             res.status(500).send("error in booking search");
@@ -60,7 +62,7 @@ Router.get('/journey/:member_id', (req, res) => {
         }
         
     });
-});
+})
 
 Router.post('/login', (req, res) => {
     const { auth } = req.body;
