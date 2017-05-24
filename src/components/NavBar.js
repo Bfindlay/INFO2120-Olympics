@@ -19,16 +19,16 @@ class NavBar extends Component {
                     <div className="menu">
                         <ul>
                             <li>
-                                <h3 href="#home">My Detail</h3>
+                                <a onClick={ ()=> hashHistory.push('/Details')}><h3>My Detail</h3></a>
                             </li>
                             <li>
-                                <h3 href="#about">Events</h3>
+                                <h3>Events</h3>
                             </li>
                             <li>
-                                <h3 href="#contact">My Bookings</h3>
+                                <h3>My Bookings</h3>
                             </li>
                             <li>
-                                <h3 href="#contact">Journey</h3>
+                                <a onClick= {() => hashHistory.push('/Journey')}><h3>Journey</h3></a>
                             </li>
                             <li>
                                 <a onClick= {() => this.props.logOut()}><h3 href="#contact">Log Out</h3></a>

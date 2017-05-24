@@ -70,15 +70,19 @@
 
 	var _Details2 = _interopRequireDefault(_Details);
 
-	var _Query = __webpack_require__(319);
+	var _Journey = __webpack_require__(319);
+
+	var _Journey2 = _interopRequireDefault(_Journey);
+
+	var _Query = __webpack_require__(320);
 
 	var _Query2 = _interopRequireDefault(_Query);
 
-	var _reduxThunk = __webpack_require__(320);
+	var _reduxThunk = __webpack_require__(321);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(321);
+	var _reducers = __webpack_require__(322);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -88,9 +92,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var container = document.getElementById('app');
 	//import { Router, Route, IndexRoute } from 'react-router';
 
-	var container = document.getElementById('app');
 	var store = (0, _redux.createStore)(_reducers2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 	(0, _reactDom.render)(_react2.default.createElement(
@@ -105,7 +109,8 @@
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _App2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'SignIn', component: _SignIn2.default }),
 	            _react2.default.createElement(_reactRouter.Route, { path: 'Query', component: _Query2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'Details', component: _Details2.default })
+	            _react2.default.createElement(_reactRouter.Route, { path: 'Details', component: _Details2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'Journey', component: _Journey2.default })
 	        )
 	    )
 	), container);
@@ -27883,9 +27888,15 @@
 	                                'li',
 	                                null,
 	                                _react2.default.createElement(
-	                                    'h3',
-	                                    { href: '#home' },
-	                                    'My Detail'
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _reactRouter.hashHistory.push('/Details');
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'My Detail'
+	                                    )
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -27893,7 +27904,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    'h3',
-	                                    { href: '#about' },
+	                                    null,
 	                                    'Events'
 	                                )
 	                            ),
@@ -27902,7 +27913,7 @@
 	                                null,
 	                                _react2.default.createElement(
 	                                    'h3',
-	                                    { href: '#contact' },
+	                                    null,
 	                                    'My Bookings'
 	                                )
 	                            ),
@@ -27910,9 +27921,15 @@
 	                                'li',
 	                                null,
 	                                _react2.default.createElement(
-	                                    'h3',
-	                                    { href: '#contact' },
-	                                    'Journey'
+	                                    'a',
+	                                    { onClick: function onClick() {
+	                                            return _reactRouter.hashHistory.push('/Journey');
+	                                        } },
+	                                    _react2.default.createElement(
+	                                        'h3',
+	                                        null,
+	                                        'Journey'
+	                                    )
 	                                )
 	                            ),
 	                            _react2.default.createElement(
@@ -30165,7 +30182,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.logOut = exports.reloadUser = exports.logIn = undefined;
+	exports.logOut = exports.reloadUser = exports.searchJourney = exports.logIn = undefined;
 
 	var _types = __webpack_require__(280);
 
@@ -30200,6 +30217,23 @@
 	    };
 	};
 
+	var searchJourney = exports.searchJourney = function searchJourney(data) {
+	    var to = data.to,
+	        from = data.from,
+	        date = data.date;
+
+	    var member_id = _reactCookie2.default.read('member');
+	    var token = _reactCookie2.default.read('token');
+
+	    return function (dispatch) {
+	        _axios2.default.post('/api/journey/' + member_id + '/' + from + '/' + to + '/' + date, { token: token }).then(function (response) {
+	            console.log('success', response);
+	            dispatch({ type: _types.LOG_IN, payload: decoded });
+	        }).catch(function (response) {
+	            console.log('error', response);
+	        });
+	    };
+	};
 	var reloadUser = exports.reloadUser = function reloadUser(user) {
 	    console.log(user);
 	    return { type: _types.LOG_IN, payload: user };
@@ -34460,6 +34494,8 @@
 
 	var _reactRedux = __webpack_require__(243);
 
+	var _reactRouter = __webpack_require__(182);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34478,6 +34514,15 @@
 	    }
 
 	    _createClass(Details, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var signed = this.props.DB.signed;
+
+	            if (!signed) {
+	                _reactRouter.hashHistory.push('/');
+	            }
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props$DB = this.props.DB,
@@ -34544,6 +34589,113 @@
 
 /***/ },
 /* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(243);
+
+	var _actions = __webpack_require__(279);
+
+	var _reactCookie = __webpack_require__(313);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Journey = function (_Component) {
+	    _inherits(Journey, _Component);
+
+	    function Journey() {
+	        _classCallCheck(this, Journey);
+
+	        var _this = _possibleConstructorReturn(this, (Journey.__proto__ || Object.getPrototypeOf(Journey)).call(this));
+
+	        _this.state = {
+	            token: _reactCookie.cookie.read('token'),
+	            from: null,
+	            to: null,
+	            date: null
+	        };
+	        return _this;
+	    }
+
+	    _createClass(Journey, [{
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            console.log(this.state);
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'journeys' },
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement(
+	                    'form',
+	                    null,
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' From: '
+	                    ),
+	                    _react2.default.createElement('input', { className: 'field', placeholder: 'Stadium', type: 'text', required: '', onChange: function onChange(_ref) {
+	                            var target = _ref.target;
+	                            return _this2.setState({ from: target.value });
+	                        } }),
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' To: '
+	                    ),
+	                    _react2.default.createElement('input', { className: 'field', placeholder: 'Hotel', type: 'text', required: '', onChange: function onChange(_ref2) {
+	                            var target = _ref2.target;
+	                            return _this2.setState({ to: target.value });
+	                        } }),
+	                    ' />',
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        ' Date: '
+	                    ),
+	                    _react2.default.createElement('input', { className: 'field', type: 'date', required: '', onChange: function onChange(_ref3) {
+	                            var target = _ref3.target;
+	                            return _this2.setState({ date: target.value });
+	                        } }),
+	                    ' />',
+	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onClick: function onClick() {
+	                            return _this2.props.searchJourney(_this2.state);
+	                        } })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Journey;
+	}(_react.Component);
+
+	var mapStateToProps = function mapStateToProps(_ref4) {
+	    var DB = _ref4.DB;
+	    return { DB: DB };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { searchJourney: _actions.searchJourney })(Journey);
+
+/***/ },
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34635,7 +34787,7 @@
 	exports.default = Query;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -34663,7 +34815,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34674,7 +34826,7 @@
 
 	var _redux = __webpack_require__(252);
 
-	var _DBReducer = __webpack_require__(322);
+	var _DBReducer = __webpack_require__(323);
 
 	var _DBReducer2 = _interopRequireDefault(_DBReducer);
 
@@ -34685,7 +34837,7 @@
 	});
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

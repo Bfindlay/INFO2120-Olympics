@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { hashHistory } from 'react-router';
 
 class Details extends Component {
 
     constructor(){
         super();
+    }
+
+    componentWillMount(){
+        const { signed } = this.props.DB;
+        if(!signed){
+            hashHistory.push('/');
+        }
     }
 
     render(){
