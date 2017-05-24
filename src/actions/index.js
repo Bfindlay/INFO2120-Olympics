@@ -26,9 +26,8 @@ export const logIn = auth => {
 
 export const searchJourney = data => {
     const { to, from, date } = data;
-    const member_id = cookie.read('member');
-    const token = cookie.read('token');
-
+    const { member_id } = cookie.load('member').data;
+    const token = cookie.load('token');
     return (dispatch) => {
         axios.post(`/api/journey/${member_id}/${from}/${to}/${date}`, { token })
             .then(response => {

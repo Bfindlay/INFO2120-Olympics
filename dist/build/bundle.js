@@ -30222,9 +30222,9 @@
 	        from = data.from,
 	        date = data.date;
 
-	    var member_id = _reactCookie2.default.read('member');
-	    var token = _reactCookie2.default.read('token');
+	    var member_id = _reactCookie2.default.load('member').data.member_id;
 
+	    var token = _reactCookie2.default.load('token');
 	    return function (dispatch) {
 	        _axios2.default.post('/api/journey/' + member_id + '/' + from + '/' + to + '/' + date, { token: token }).then(function (response) {
 	            console.log('success', response);
@@ -34609,6 +34609,8 @@
 
 	var _reactCookie = __webpack_require__(313);
 
+	var _reactCookie2 = _interopRequireDefault(_reactCookie);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34626,7 +34628,6 @@
 	        var _this = _possibleConstructorReturn(this, (Journey.__proto__ || Object.getPrototypeOf(Journey)).call(this));
 
 	        _this.state = {
-	            token: _reactCookie.cookie.read('token'),
 	            from: null,
 	            to: null,
 	            date: null
@@ -34639,7 +34640,6 @@
 	        value: function render() {
 	            var _this2 = this;
 
-	            console.log(this.state);
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'journeys' },
@@ -34665,7 +34665,6 @@
 	                            var target = _ref2.target;
 	                            return _this2.setState({ to: target.value });
 	                        } }),
-	                    ' />',
 	                    _react2.default.createElement(
 	                        'label',
 	                        null,
@@ -34675,7 +34674,6 @@
 	                            var target = _ref3.target;
 	                            return _this2.setState({ date: target.value });
 	                        } }),
-	                    ' />',
 	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onClick: function onClick() {
 	                            return _this2.props.searchJourney(_this2.state);
 	                        } })

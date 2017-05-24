@@ -48,7 +48,7 @@ Router.get('/bookings/:member_id', (req, res) =>{
         });
 });
 
-Router.get('/journey/:id/:from/:to/:date', (req, res) =>{
+Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
     const { id, from, to, date } = req.params;
     const { token } = req.body;
     console.log(date);
