@@ -4,7 +4,7 @@ html{
     width: 100%;
     position: fixed;
     font-family: 'Roboto', sans-serif;
-    background: #FBFBFF;
+    background: #F1F1F2;
 }
 body{
     margin: 0;
@@ -38,15 +38,15 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #FBFBFF;
+    background: #BCBABE;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
 .navbar li {
-    color: #FF934F;
+    color: #FFFFFF;
 }
 .title h1 {
-    color: #FF934F;
+    color: #FFFFFF;
 }
 .menu {
   display: flex;
@@ -78,11 +78,11 @@ body{
 
 
 .menu li:hover {
-    color:  #FF6100;
+    color:  #1995AD;
 }
 
 .title:hover h1 {
-    color:  #FF6100;
+    color:  #1995AD;
 }
 
 /*** USER DETAILS ****/
@@ -95,6 +95,7 @@ body{
 }
 .details-module {
     display: flex;
+    background: #FBFBFF;
     flex-direction: column;
     align-self: flex-start;
     justify-content: center;

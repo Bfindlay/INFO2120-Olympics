@@ -19,19 +19,19 @@ class NavBar extends Component {
                     <div className="menu">
                         <ul>
                             <li>
-                                <a onClick={ ()=> hashHistory.push('/Details')}><h3>My Detail</h3></a>
+                                <h3 href="#home">details</h3>
                             </li>
                             <li>
-                                <h3>Events</h3>
+                                <h3 href="#about">events</h3>
                             </li>
                             <li>
-                                <h3>My Bookings</h3>
+                                <h3 href="#contact">bookings</h3>
                             </li>
                             <li>
-                                <a onClick= {() => hashHistory.push('/Journey')}><h3>Journey</h3></a>
+                                <h3 href="#contact">search</h3>
                             </li>
                             <li>
-                                <a onClick= {() => this.props.logOut()}><h3 href="#contact">Log Out</h3></a>
+                                <a onClick= {() => this.props.logOut()}><h3 href="#contact">logoff</h3></a>
                             </li>
                         </ul>
                         </div>
@@ -46,10 +46,10 @@ class NavBar extends Component {
                     <div className="menu">
                         <ul>
                             <li>
-                                <a onClick={()=> hashHistory.push('/Register')}><h3>Register</h3></a>
+                                <a onClick={()=> hashHistory.push('/Register')}><h3>register</h3></a>
                             </li>
                             <li>
-                                <a onClick={()=> hashHistory.push('/SignIn')}><h3>Log In</h3></a>
+                                <a onClick={()=> hashHistory.push('/SignIn')}><h3>login</h3></a>
                             </li>
                         </ul>
                         </div>

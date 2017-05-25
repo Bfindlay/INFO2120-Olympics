@@ -24,7 +24,7 @@ pool.on('error', function (err, client) {
 
 Router.post('/Test', (req,res) =>{
     const { query } = req.body
-    
+    console.log('Hello World');
      pool.query(query, (err, res) => {
         if(err)
            return console.error(err);
@@ -35,10 +35,13 @@ Router.post('/Test', (req,res) =>{
 
 /****** API ENDPOINTS ************/
 
+
+//Returns Member Id, Place_name, number of bookings
+
 Router.get('/details/:member_id', (req, res) =>{
     const { member_id } = req.params;
-    pool.query(`SELECT M.member_id as member_id, accommodation as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B 
-        WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M WHERE M.member_id = '${member_id}'GROUP BY M.member_id;`, (err, response ) =>{
+    pool.query(`SELECT M.member_id as member_id, p.place_name, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B
+        WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id) WHERE M.member_id = 'A000021703' AND M.accommodation = P.place_id GROUP BY M.member_id, p.place_name;`, (err, response ) =>{
             if(err){
                 console.log(err);   //TODO handle errors
                 res.status(500).send("error");
@@ -46,6 +49,7 @@ Router.get('/details/:member_id', (req, res) =>{
             res.send(response.rows);
     });
 });
+
 
 Router.get('/bookings/:member_id', (req, res) =>{
     const { member_id } = req.params;
@@ -55,26 +59,35 @@ Router.get('/bookings/:member_id', (req, res) =>{
                 console.log(err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
             }else{
+                console.log(place_name);
                  res.send(response.rows);
             }
         });
 });
 
+/*
+
+Test Query
+
+SELECT depart_time, from_place, to_place, nbooked  
+FROM olympics.Booking B JOIN olympics.journey J USING (journey_id) 
+WHERE depart_time = '2017-05-11 00:00:00' AND to_place = 4 AND from_place = 2 AND B.booked_for = 'A000043404'
+
+*/
 Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
     const { id, from, to, date } = req.params;
     const newDate = new Date(date.replace(' ', 'T'));
     console.log('date is now', newDate);
     const { token } = req.body;
     console.log(date);
-    pool.query(`SELECT depart_time, from_place, to_place, nbooked  FROM olympics.Journey WHERE depart_time = ${date}  
-                 AND to_place = ${to} AND from_place = ${from} AND member_id = ${id} ORDER BY depart_time ASC;`, (err, response) => {
+    pool.query(`SELECT depart_time, from_place, to_place, nbooked  FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) WHERE depart_time = ${date}
+                 AND to_place = ${place_id} AND from_place = ${place_id2} AND B.booked_for = '${member_id}' ORDER BY depart_time ASC;`, (err, response) => {
         if(err){
             console.log(err); //TODO ERROR HANDLING
             res.status(500).send("error in journey search");
         }else{
             res.send(response.rows);
-        }
-        
+        } 
     });
 })
 
