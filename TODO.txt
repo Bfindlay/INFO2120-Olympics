@@ -4,3 +4,5 @@
     * Send messages to prompt the user of errors etc
 > Sanitize input
 > Lock routes when not signed in 
+> Prevent null searches
+> Redirect on login
