@@ -56,6 +56,7 @@ class Journey extends Component {
                             })
                         }
                    </select>
+                   <br />
                     <label> Date: </label>
                     <input className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
                     <input className="submit" type='button' value="Search Journeys" onClick={ ()=> this.props.searchJourney(this.state)} />
