@@ -3,7 +3,7 @@
 TODO
 
 Extras;
--Get type of person
+-Get type of person - done
 -Get get full country name, team and event under details
 -Retrive team details
 -List sportvenues and events that run in the,
@@ -25,6 +25,16 @@ FROM olympics.Member M
 WHERE M.memeber_id = 'login' AND M.password = 'password';
 
 --Get type of member
+--Returns Athelete, Staff or Offiial
+SELECT CASE WHEN (SELECT EXISTS(SELECT * FROM olympics.Athlete A WHERE M.member_id = A.member_id)) = 't' THEN 'Athlete'
+	    WHEN (SELECT EXISTS(SELECT * FROM olympics.official O WHERE M.member_id = O.member_id)) = 't' THEN 'Official'
+	    WHEN (SELECT EXISTS(SELECT * FROM olympics.Staff S WHERE M.member_id = S.member_id)) = 't' THEN 'Staff' ELSE 'Unknown' END
+FROM olympics.member M
+WHERE M.member_id = 'A000021704';
+
+--Get Team details
+
+
 
 --Browse Bookings
 --Shows full name raher than ID for booked_by and booked_for
