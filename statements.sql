@@ -1,15 +1,18 @@
-
 /*
-INSERT INTO olympics.Vehicle
-	VALUES('ABC', 10);
-	
-INSERT INTO olympics.Journey
-	VALUES(1, '2017-05-11 00:00:00',2,4, 'ABC', 1);
-	
-INSERT INTO olympics.Booking
-	VALUES('A000043404', 'A000021703', '2017-05-11 00:00:00', 1);
+
+TODO
+
+Extras;
+-Get type of person
+-Get get full country name, team and event under details
+-Retrive team details
+-List sportvenues and events that run in the,
+-List accommodation building and people inside it.
+-List of people that are running an event
+
 
 */
+
 
 -- Member Details
 --Get memeber_id, accomodation building name, number of bookings
@@ -46,15 +49,15 @@ WHERE depart_time >= '2017-04-01 10:20:36.031383'
     AND to_place = 356
 ORDER BY depart_time ASC;
 
---Make booking
 
---Trigger?
-
+/**
+Combine These together so when a event is expaned, then the results will show up.
+/*********************************************/
+*/
 
 --Browse Events, returns event name, gender, sport venue and start timestamp
 SELECT E.event_name, CASE WHEN E.event_gender = 'M' THEN 'Male'WHEN E.event_gender = 'F' THEN 'Female' ELSE 'Unknown' END, P.place_name, E.event_start
 FROM olympics.event E JOIN olympics.place P ON (E.sport_venue = P.place_id)
-
 
 --Browse Event results 
 SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event
@@ -63,6 +66,7 @@ FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member
                              JOIN olympics.member M ON (A.member_id = M.member_id)
 ORDER BY Medallist ASC;
 
+/*********************************************/
 --PAGED Results
 --USE LIMIT xxx, etc
 
