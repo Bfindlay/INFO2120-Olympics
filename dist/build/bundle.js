@@ -30225,7 +30225,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.logOut = exports.getPlaces = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
+	exports.logOut = exports.getPlaces = exports.searchJourney = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
 
 	var _types = __webpack_require__(280);
 
@@ -30277,6 +30277,15 @@
 	};
 	var reloadUser = exports.reloadUser = function reloadUser(user) {
 	    return { type: _types.LOG_IN, payload: user };
+	};
+
+	var searchJourney = exports.searchJourney = function searchJourney(search) {
+	    var _cookie$load = _reactCookie2.default.load('member'),
+	        member_id = _cookie$load.member_id;
+
+	    return function (dispatch) {
+	        _axios2.default.post('/api/');
+	    };
 	};
 
 	var getPlaces = exports.getPlaces = function getPlaces() {
@@ -34761,10 +34770,17 @@
 	            this.props.getPlaces();
 	        }
 	    }, {
-	        key: 'validate',
-	        value: function validate(callback) {
-	            console.log('validate');
-	            console.log(this.target);
+	        key: 'handleSubmit',
+	        value: function handleSubmit(e) {
+	            var from = e.target.fromSelected.value;
+	            var to = e.target.toSelected.value;
+	            var date = e.target.date.value;
+	            //Throw error
+	            if (to === from) {
+	                return console.log("Cant take journey from the same place");
+	            }
+	            this.props.searchJourney({ to: to, from: from, date: date });
+	            e.preventDefault();
 	        }
 	    }, {
 	        key: 'error',
@@ -34790,13 +34806,13 @@
 	                _react2.default.createElement('hr', null),
 	                _react2.default.createElement(
 	                    'form',
-	                    null,
+	                    { onSubmit: this.handleSubmit },
 	                    _react2.default.createElement(
 	                        'label',
 	                        null,
 	                        ' From: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '' }),
+	                    _react2.default.createElement('input', { id: 'fromSelected', className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '' }),
 	                    _react2.default.createElement(
 	                        'datalist',
 	                        { id: 'from' },
@@ -34806,7 +34822,7 @@
 
 	                            return _react2.default.createElement(
 	                                'option',
-	                                { key: place_id, value: place_id },
+	                                { key: place_id, value: place_name },
 	                                place_name
 	                            );
 	                        })
@@ -34817,7 +34833,7 @@
 	                        null,
 	                        ' To: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', list: 'To', placeholder: 'Hotel', type: 'text', required: '' }),
+	                    _react2.default.createElement('input', { id: 'toSelected', className: 'field', list: 'To', placeholder: 'Hotel', type: 'text', required: '' }),
 	                    _react2.default.createElement(
 	                        'datalist',
 	                        { id: 'To' },
@@ -34827,7 +34843,7 @@
 
 	                            return _react2.default.createElement(
 	                                'option',
-	                                { key: place_id, value: place_id },
+	                                { key: place_id, value: place_name },
 	                                place_name
 	                            );
 	                        })
@@ -34838,13 +34854,15 @@
 	                        null,
 	                        ' Date: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', type: 'date', required: '', onChange: function onChange(_ref) {
+	                    _react2.default.createElement('input', { id: 'date', className: 'field', type: 'date', required: '', onChange: function onChange(_ref) {
 	                            var target = _ref.target;
 	                            return _this2.setState({ date: target.value });
 	                        } }),
-	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onSubmit: function onSubmit() {
-	                            return _this2.validate(_this2.props.searchJourney).bind(_this2);
-	                        } })
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'submit' },
+	                        ' Search Journey '
+	                    )
 	                )
 	            );
 	        }

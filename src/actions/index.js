@@ -46,6 +46,19 @@ export const reloadUser = user => {
     return {type: LOG_IN, payload: user};
 }
 
+export const searchJourney = search => {
+    const { member_id } = cookie.load('member');
+    const { token } = cookie.load('token');
+    const { from, to, date } = search;
+    return(dispatch) => {
+        axios.post(`/api/journey/${member_id}/${from}/${to}/${date}`, {token: token})
+            .then(response => {
+                
+            })
+            .catch(err => console.log(err));
+    }
+}
+
 export const getPlaces = () => {
     return(dispatch) => {
         axios.get('/api/places')

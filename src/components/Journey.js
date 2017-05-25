@@ -21,9 +21,16 @@ class Journey extends Component {
         this.props.getPlaces();
     }
 
-    validate(callback){
-        console.log('validate');
-        console.log(this.target);
+    handleSubmit(e){
+        let from = e.target.fromSelected.value;
+        let to = e.target.toSelected.value;
+        let date = e.target.date.value;
+        //Throw error
+        if(to === from){
+            return console.log("Cant take journey from the same place");
+        }
+        this.props.searchJourney({ to: to, from: from, date: date });
+        e.preventDefault();
     }
     error(){
         //cant travel from the same place to the same place
@@ -34,32 +41,32 @@ class Journey extends Component {
         return(
             <div className='journeys'>
                 <hr />
-                <form>
+                <form onSubmit={ this.handleSubmit }>
                     <label> From: </label>
-                    <input className="field" list="from" placeholder="Stadium" type="text" required="" />
+                    <input id="fromSelected" className="field" list="from" placeholder="Stadium" type="text" required="" />
                     <datalist id="from">
                         {
                             places.map( place => {
                                 const {place_id, place_name } = place;
-                                return  <option key={place_id} value={place_id}>{place_name}</option>
+                                return  <option key={place_id} value={place_name}>{place_name}</option>
                             })
                         }
                    </datalist>
                    <br/>
                     <label> To: </label>
-                    <input className="field" list="To" placeholder="Hotel" type="text" required=""/>
+                    <input id="toSelected" className="field" list="To" placeholder="Hotel" type="text" required=""/>
                     <datalist id="To">
                         {
                             places.map( place => {
                                 const {place_id, place_name } = place; 
-                                    return  <option key={place_id} value={place_id}>{place_name}</option>
+                                    return  <option key={place_id} value={place_name}>{place_name}</option>
                             })
                         }
                    </datalist>
                    <br />
                     <label> Date: </label>
-                    <input className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
-                    <input className="submit" type='button' value="Search Journeys" onSubmit={ ()=> this.validate(this.props.searchJourney).bind(this)} />
+                    <input id='date' className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
+                    <button className="submit"> Search Journey </button>
                 </form>
             </div>
         )
