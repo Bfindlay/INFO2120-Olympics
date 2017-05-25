@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-
+import { memberDetails } from '../actions';
+import cookie from 'react-cookie';
+import { hashHistory } from 'react-router';
 class Details extends Component {
 
     constructor(){
@@ -10,6 +11,7 @@ class Details extends Component {
 
     render(){
         const{ country_code, family_name, given_names, member_id, title, accommodation } = this.props.DB;
+        console.log(accommodation);
         return(
             <div>
                  <div className="details-container">
@@ -27,4 +29,4 @@ class Details extends Component {
 }
 
 const mapStateToProps = ({ DB }) => ({DB});
-export default connect(mapStateToProps, {})(Details);
+export default connect(mapStateToProps, {memberDetails})(Details);

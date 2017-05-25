@@ -8,6 +8,8 @@ import App from './components/App';
 import SignIn from './components/SignIn';
 import Root from './components/Root';
 import Details from './components/Details';
+import Journey from './components/Journey';
+import Register from './components/Register';
 import Query from './components/Query';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -24,6 +26,8 @@ render(
             <Route path ='/' component={Root}>
               <IndexRoute component={App} />
               <Route path="SignIn" component={SignIn} />
+              <Route path="Journey" component={Journey} />
+              <Route path='Register' component={Register} />
               <Route path="Query" component={Query} />
               <Route path="Details" component={Details} />
             </Route>

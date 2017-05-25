@@ -11,7 +11,6 @@ class Footer extends Component {
             return(
                 <div className='footer'>
                     <hr />
-                    <p> Powered by Pied Piper </p>
                 </div>
             )
     }

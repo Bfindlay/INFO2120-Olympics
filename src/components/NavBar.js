@@ -18,21 +18,24 @@ class NavBar extends Component {
                     </div>
                     <div className="menu">
                         <ul>
-                            <li>
-                                <h3 href="#home">details</h3>
-                            </li>
-                            <li>
-                                <h3 href="#about">events</h3>
-                            </li>
-                            <li>
-                                <h3 href="#contact">bookings</h3>
-                            </li>
-                            <li>
-                                <h3 href="#contact">search</h3>
-                            </li>
-                            <li>
-                                <a onClick= {() => this.props.logOut()}><h3 href="#contact">logoff</h3></a>
-                            </li>
+                             <a onClick={ () => hashHistory.push('/Details')}><li>
+                               <h3>Details</h3>
+                            </li></a>
+                            <a onClick={ () => hashHistory.push('/Events')}><li>
+                                <h3>Events</h3>
+                            </li></a>
+                            <a onClick={ () => hashHistory.push('/Bookings')}><li>
+                                <h3>Bookings</h3>
+                            </li></a>
+                            <a onClick={ () => hashHistory.push('/Journey')}><li>
+                                <h3>Journeys</h3>
+                            </li></a>
+                            <a onClick={ () => hashHistory.push('/Search')}><li>
+                                <h3>Search</h3>
+                            </li></a>
+                           <a onClick= {() => this.props.logOut()}><li>
+                                <h3 href="#contact">Log Out</h3>
+                            </li></a>
                         </ul>
                         </div>
                 </div>
@@ -46,10 +49,10 @@ class NavBar extends Component {
                     <div className="menu">
                         <ul>
                             <li>
-                                <a onClick={()=> hashHistory.push('/Register')}><h3>register</h3></a>
+                                <a onClick={()=> hashHistory.push('/Register')}><h3>Register</h3></a>
                             </li>
                             <li>
-                                <a onClick={()=> hashHistory.push('/SignIn')}><h3>login</h3></a>
+                                <a onClick={()=> hashHistory.push('/SignIn')}><h3>Login</h3></a>
                             </li>
                         </ul>
                         </div>

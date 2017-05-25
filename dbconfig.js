@@ -2,9 +2,9 @@
 const config = {
     host: 'localhost',
     port: '5432',
-    user: 'postgres',
-    database: 'postgres',
-    password: 'info2120',
+    user: 'Brett',
+    database: 'Brett',
+    password: '',
     max: 1,
     idleTimeoutMillis: 3000
 };
