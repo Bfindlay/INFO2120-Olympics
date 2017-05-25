@@ -22,8 +22,8 @@ class Journey extends Component {
     }
 
     validate(callback){
-        const { toSelected, fromSelected } = this.state;
-        return (toSelected === fromSelected) ? error() : callback(this.state);
+        console.log('validate');
+        console.log(this.target);
     }
     error(){
         //cant travel from the same place to the same place
@@ -47,7 +47,7 @@ class Journey extends Component {
                    </datalist>
                    <br/>
                     <label> To: </label>
-                    <input className="field" list="to" placeholder="Hotel" type="text" required=""/>
+                    <input className="field" list="To" placeholder="Hotel" type="text" required=""/>
                     <datalist id="To">
                         {
                             places.map( place => {
@@ -59,7 +59,7 @@ class Journey extends Component {
                    <br />
                     <label> Date: </label>
                     <input className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
-                    <input className="submit" type='button' value="Search Journeys" onClick={ ()=> this.validate(this.props.searchJourney)} />
+                    <input className="submit" type='button' value="Search Journeys" onSubmit={ ()=> this.validate(this.props.searchJourney).bind(this)} />
                 </form>
             </div>
         )

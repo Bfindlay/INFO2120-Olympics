@@ -34763,11 +34763,8 @@
 	    }, {
 	        key: 'validate',
 	        value: function validate(callback) {
-	            var _state = this.state,
-	                toSelected = _state.toSelected,
-	                fromSelected = _state.fromSelected;
-
-	            return toSelected === fromSelected ? error() : callback(this.state);
+	            console.log('validate');
+	            console.log(this.target);
 	        }
 	    }, {
 	        key: 'error',
@@ -34780,12 +34777,12 @@
 	            var _this2 = this;
 
 	            var places = this.props.DB.places;
-	            var _state2 = this.state,
-	                to = _state2.to,
-	                from = _state2.from,
-	                date = _state2.date,
-	                fromSelected = _state2.fromSelected,
-	                toSelected = _state2.toSelected;
+	            var _state = this.state,
+	                to = _state.to,
+	                from = _state.from,
+	                date = _state.date,
+	                fromSelected = _state.fromSelected,
+	                toSelected = _state.toSelected;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -34820,7 +34817,7 @@
 	                        null,
 	                        ' To: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', list: 'to', placeholder: 'Hotel', type: 'text', required: '' }),
+	                    _react2.default.createElement('input', { className: 'field', list: 'To', placeholder: 'Hotel', type: 'text', required: '' }),
 	                    _react2.default.createElement(
 	                        'datalist',
 	                        { id: 'To' },
@@ -34845,8 +34842,8 @@
 	                            var target = _ref.target;
 	                            return _this2.setState({ date: target.value });
 	                        } }),
-	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onClick: function onClick() {
-	                            return _this2.validate(_this2.props.searchJourney);
+	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onSubmit: function onSubmit() {
+	                            return _this2.validate(_this2.props.searchJourney).bind(_this2);
 	                        } })
 	                )
 	            );
