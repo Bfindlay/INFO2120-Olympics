@@ -34,19 +34,21 @@ Router.post('/Test', (req,res) =>{
 })
 
 /****** API ENDPOINTS ************/
-
+//TODO VERIFY USING TOKEN IN REQ BODY
 
 //Returns Member Id, Place_name, number of bookings
 
-Router.get('/details/:member_id', (req, res) =>{
+Router.post('/details/:member_id', (req, res) =>{
     const { member_id } = req.params;
+    console.log(member_id);
     pool.query(`SELECT M.member_id as member_id, p.place_name, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B
-        WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id) WHERE M.member_id = 'A000021703' AND M.accommodation = P.place_id GROUP BY M.member_id, p.place_name;`, (err, response ) =>{
+        WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id) WHERE M.member_id = '${member_id}' AND M.accommodation = P.place_id GROUP BY M.member_id, p.place_name;`, (err, response ) =>{
             if(err){
                 console.log(err);   //TODO handle errors
                 res.status(500).send("error");
             }
-            res.send(response.rows);
+            console.log('details', response.rows);
+            res.send(response.rows[0]);
     });
 });
 
@@ -95,9 +97,9 @@ Router.post('/login', (req, res) => {
     const { auth } = req.body;
     const { id, password } = auth;
     console.log('login request', id, password);
-
     attemptLogin(auth).then( result => {
         //successfull login, send auth token to user
+        console.log(result);
         const { title, member_id, family_name, given_names, country_code, accommodation } = result;
         let token = generateToken({ title, member_id, family_name, given_names, country_code, accommodation });
         res.send({token});
@@ -158,20 +160,21 @@ let hashPassword = (password_plain_text) => {
 const attemptLogin = auth => {
     return new Promise( (resolve, reject ) => {
         const{ id, password } = auth;
-        pool.query(`SELECT * FROM olympics.Member WHERE member_id = '${id}'`, (err, res) => {
-            const { pass_word, rowCount } = res.rows[0];
-            if( rowCount == 0){
-                // User doesnt exist, reject login request
-                 reject('User Doesnt Exist!');
-            }else{
+        pool.query(`SELECT * FROM olympics.member WHERE member_id = '${id}'`, (err, res) => {
+            const { rowCount } = res;
+            if(rowCount <= 0 ){
+                return reject('User does not exist');
+            }
+
+            const { pass_word  } = res.rows[0];
+            
                 // User exists check password hash
                 // bcrypt.compare(password, pass_word, (err,res) => {
 				//     if (err) 
                 //         reject(err);
 				//     return (res) ? resolve(res) : reject('Wrong Password');
 			    // });
-                return ( password == pass_word) ? resolve(res.rows[0]) : reject("Wrong Password");
-            }
+            return ( password == pass_word) ? resolve(res.rows[0]) : reject("Wrong Password");
         });
     })
 }
