@@ -26,9 +26,9 @@ class SignIn extends Component{
                 <div className="form">
                     <div className="login-form">
                     <label> Member ID </label>
-                    <input type="text" placeholder="1244223" onChange={({ target }) => this.setState({id: target.value}) }/>
+                    <input type="text" placeholder="A123456789" onChange={({ target }) => this.setState({id: target.value}) }/>
                     <label> Password</label>
-                    <input type="password" placeholder="*********" onChange={({ target }) => this.setState({password: target.value}) }/>
+                    <input type="password" onChange={({ target }) => this.setState({password: target.value}) }/>
                         <button onClick={() => this.props.logIn(this.state) }>login</button>
                     <p className="message">Not registered? <a href="#">Create an account</a></p>
                     </div>

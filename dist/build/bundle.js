@@ -9546,7 +9546,7 @@ var NavBar = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { href: '#home' },
-                                    'My Detail'
+                                    'details'
                                 )
                             ),
                             _react2.default.createElement(
@@ -9555,7 +9555,7 @@ var NavBar = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { href: '#about' },
-                                    'Events'
+                                    'events'
                                 )
                             ),
                             _react2.default.createElement(
@@ -9564,7 +9564,7 @@ var NavBar = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { href: '#contact' },
-                                    'My Bookings'
+                                    'bookings'
                                 )
                             ),
                             _react2.default.createElement(
@@ -9573,7 +9573,7 @@ var NavBar = function (_Component) {
                                 _react2.default.createElement(
                                     'h3',
                                     { href: '#contact' },
-                                    'Journey'
+                                    'search'
                                 )
                             ),
                             _react2.default.createElement(
@@ -9587,7 +9587,7 @@ var NavBar = function (_Component) {
                                     _react2.default.createElement(
                                         'h3',
                                         { href: '#contact' },
-                                        'Log Out'
+                                        'logoff'
                                     )
                                 )
                             )
@@ -9626,7 +9626,7 @@ var NavBar = function (_Component) {
                                     _react2.default.createElement(
                                         'h3',
                                         null,
-                                        'Register'
+                                        'register'
                                     )
                                 )
                             ),
@@ -9641,7 +9641,7 @@ var NavBar = function (_Component) {
                                     _react2.default.createElement(
                                         'h3',
                                         null,
-                                        'Log In'
+                                        'login'
                                     )
                                 )
                             )
@@ -15227,7 +15227,7 @@ var SignIn = function (_Component) {
                             null,
                             ' Member ID '
                         ),
-                        _react2.default.createElement('input', { type: 'text', placeholder: '1244223', onChange: function onChange(_ref) {
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'A123456789', onChange: function onChange(_ref) {
                                 var target = _ref.target;
                                 return _this2.setState({ id: target.value });
                             } }),
@@ -15236,7 +15236,7 @@ var SignIn = function (_Component) {
                             null,
                             ' Password'
                         ),
-                        _react2.default.createElement('input', { type: 'password', placeholder: '*********', onChange: function onChange(_ref2) {
+                        _react2.default.createElement('input', { type: 'password', onChange: function onChange(_ref2) {
                                 var target = _ref2.target;
                                 return _this2.setState({ password: target.value });
                             } }),
