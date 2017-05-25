@@ -34799,10 +34799,7 @@
 	                        null,
 	                        ' From: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '', onChange: function onChange(_ref) {
-	                            var target = _ref.target;
-	                            return _this2.setState({ from: target.value });
-	                        } }),
+	                    _react2.default.createElement('input', { className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '' }),
 	                    _react2.default.createElement(
 	                        'datalist',
 	                        { id: 'from' },
@@ -34810,15 +34807,11 @@
 	                            var place_id = place.place_id,
 	                                place_name = place.place_name;
 
-	                            var matcher = new RegExp(".+" + from + ".+$", "g");
-	                            var matches = matcher.test(place_name);
-	                            if (matches) {
-	                                return _react2.default.createElement(
-	                                    'option',
-	                                    { key: place_id, value: place_id },
-	                                    place_name
-	                                );
-	                            }
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { key: place_id, value: place_id },
+	                                place_name
+	                            );
 	                        })
 	                    ),
 	                    _react2.default.createElement('br', null),
@@ -34827,10 +34820,7 @@
 	                        null,
 	                        ' To: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', list: 'to', placeholder: 'Hotel', type: 'text', required: '', onChange: function onChange(_ref2) {
-	                            var target = _ref2.target;
-	                            return _this2.setState({ to: target.value });
-	                        } }),
+	                    _react2.default.createElement('input', { className: 'field', list: 'to', placeholder: 'Hotel', type: 'text', required: '' }),
 	                    _react2.default.createElement(
 	                        'datalist',
 	                        { id: 'To' },
@@ -34838,15 +34828,11 @@
 	                            var place_id = place.place_id,
 	                                place_name = place.place_name;
 
-	                            var matcher = new RegExp(".*" + from + ".*", "g");
-	                            var matches = matcher.test(place_name);
-	                            if (matches) {
-	                                return _react2.default.createElement(
-	                                    'option',
-	                                    { key: place_id, value: place_id },
-	                                    place_name
-	                                );
-	                            }
+	                            return _react2.default.createElement(
+	                                'option',
+	                                { key: place_id, value: place_id },
+	                                place_name
+	                            );
 	                        })
 	                    ),
 	                    _react2.default.createElement('br', null),
@@ -34855,8 +34841,8 @@
 	                        null,
 	                        ' Date: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', type: 'date', required: '', onChange: function onChange(_ref3) {
-	                            var target = _ref3.target;
+	                    _react2.default.createElement('input', { className: 'field', type: 'date', required: '', onChange: function onChange(_ref) {
+	                            var target = _ref.target;
 	                            return _this2.setState({ date: target.value });
 	                        } }),
 	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onClick: function onClick() {
@@ -34870,8 +34856,8 @@
 	    return Journey;
 	}(_react.Component);
 
-	var mapStateToProps = function mapStateToProps(_ref4) {
-	    var DB = _ref4.DB;
+	var mapStateToProps = function mapStateToProps(_ref2) {
+	    var DB = _ref2.DB;
 	    return { DB: DB };
 	};
 

@@ -36,31 +36,23 @@ class Journey extends Component {
                 <hr />
                 <form>
                     <label> From: </label>
-                    <input className="field" list="from" placeholder="Stadium" type="text" required="" onChange={({target}) => this.setState({from: target.value})}/>
+                    <input className="field" list="from" placeholder="Stadium" type="text" required="" />
                     <datalist id="from">
                         {
                             places.map( place => {
                                 const {place_id, place_name } = place;
-                                let matcher = new RegExp(".+" + from + ".+$", "g");
-                                let matches = matcher.test(place_name);
-                                if (matches) {
-                                    return  <option key={place_id} value={place_id}>{place_name}</option>
-                                }
+                                return  <option key={place_id} value={place_id}>{place_name}</option>
                             })
                         }
                    </datalist>
                    <br/>
                     <label> To: </label>
-                    <input className="field" list="to" placeholder="Hotel" type="text" required=""onChange={({target}) => this.setState({to: target.value})}/>
+                    <input className="field" list="to" placeholder="Hotel" type="text" required=""/>
                     <datalist id="To">
                         {
                             places.map( place => {
-                                const {place_id, place_name } = place;
-                                var matcher = new RegExp(".*" + from + ".*", "g");
-                                let matches = matcher.test(place_name);
-                                if (matches) {
+                                const {place_id, place_name } = place; 
                                     return  <option key={place_id} value={place_id}>{place_name}</option>
-                                }
                             })
                         }
                    </datalist>
