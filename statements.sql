@@ -42,9 +42,10 @@ ORDER BY depart_time ASC;
 --Trigger?
 
 
---Browse Events
-SELECT *
-From Event;
+--Browse Events, returns event name, gender, sport venue and start timestamp
+SELECT E.event_name, CASE WHEN E.event_gender = 'M' THEN 'Male'WHEN E.event_gender = 'F' THEN 'Female' ELSE 'Unknown' END, P.place_name, E.event_start
+FROM olympics.event E JOIN olympics.place P ON (E.sport_venue = P.place_id)
+
 
 --Browse Event results 
 SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event
