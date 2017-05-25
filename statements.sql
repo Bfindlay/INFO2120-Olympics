@@ -28,7 +28,8 @@ WHERE M.memeber_id = 'login' AND M.password = 'password';
 --Shows full name for origin and destination
 
 SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time
-FROM olympics.booking B JOIN olympics.journey J USING (journey_id) 
+FROM olympics.booking B 
+            JOIN olympics.journey J USING (journey_id) 
 			JOIN olympics.member M ON (B.booked_for = M.member_id) 
 			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
 			JOIN olympics.place P ON (J.from_place = P.place_id)
@@ -36,11 +37,13 @@ FROM olympics.booking B JOIN olympics.journey J USING (journey_id)
 WHERE M.member_id = 'A000032115'
 
 --Search Journeys
-SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked,
-FROM olympics.Journey
-WHERE depart_time >= date.entered 
-    AND depart_time <= date.entered 
-    AND to_place = location.entered
+--Returns the departing time, the origin location, destination, number booked and space remaining (boolean)
+
+SELECT depart_time AS Departing, P.place_name AS From, PP.place_name AS To, J.nbooked AS Booked, (SELECT EXISTS(SELECT capacity FROM olympics.vehicle V WHERE J.vehicle_code = V.vehicle_code AND J.nbooked <= V.capacity)) AS space_avail
+FROM olympics.Journey J JOIN olympics.place P ON (J.from_place = P.place_id) JOIN olympics.place PP ON (J.to_place = PP.place_id)
+WHERE depart_time >= '2017-04-01 10:20:36.031383'
+    AND depart_time <= '2017-06-01 22:52:28.647764'
+    AND to_place = 356
 ORDER BY depart_time ASC;
 
 --Make booking
