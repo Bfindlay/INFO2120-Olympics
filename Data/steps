@@ -1,0 +1,23 @@
+1. olympics_ddl_dml
+2. 
+
+DELETE FROM Staff
+WHERE member_id IN (SELECT member_id FROM Athlete);
+
+BEGIN;
+CREATE TEMP TABLE newoffs ON COMMIT DROP AS
+  SELECT member_id FROM Staff WHERE random()<0.2; -- Choose about 20%
+INSERT INTO Official (member_id)
+  SELECT member_id FROM newoffs;
+DELETE FROM Staff WHERE member_id IN (
+  SELECT member_id FROM newoffs);
+COMMIT;
+
+
+3. populate vehicle
+4.populate Journey
+4. update vehicle
+5. populate run
+6. medals
+
+Vehicle Journey Booking update vehicle cpaacity populate events

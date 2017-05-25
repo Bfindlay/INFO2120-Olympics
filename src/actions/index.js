@@ -24,21 +24,6 @@ export const logIn = auth => {
     }
 }
 
-export const searchJourney = data => {
-    const { to, from, date } = data;
-    const { member_id } = cookie.load('member').data;
-    const token = cookie.load('token');
-    return (dispatch) => {
-        axios.post(`/api/journey/${member_id}/${from}/${to}/${date}`, { token })
-            .then(response => {
-                console.log('success', response);
-                dispatch({type: LOG_IN, payload: decoded});
-            })
-            .catch( response => {
-                console.log('error', response);
-            });
-    }
-}
 export const reloadUser = user => {
     console.log(user);
     return {type: LOG_IN, payload: user};
