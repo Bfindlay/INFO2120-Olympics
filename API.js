@@ -45,7 +45,6 @@ Router.post('/details/:member_id', (req, res) =>{
                 console.log(err);   //TODO handle errors
                 res.status(500).send("error");
             }
-            console.log('details', response.rows);
             res.send(response.rows[0]);
     });
 });
@@ -59,11 +58,21 @@ Router.get('/bookings/:member_id', (req, res) =>{
                 console.log(err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
             }else{
-                console.log(place_name);
                  res.send(response.rows);
             }
         });
 });
+
+Router.get('/places', (req, res) => {
+    pool.query('select place_id, place_name FROM olympics.place ORDER BY place_name ASC;', (err, response) => {
+        if(err){
+            return res.status(500).send(err);
+        }else if( response.rowCount <= 0){
+            return res.status(500).send("Error in query format");
+        }
+        res.send(response.rows);
+    })
+})
 
 /*
 
@@ -84,7 +93,7 @@ Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
                  AND to_place = ${place_id} AND from_place = ${place_id2} AND B.booked_for = '${member_id}' ORDER BY depart_time ASC;`, (err, response) => {
         if(err){
             console.log(err); //TODO ERROR HANDLING
-            res.status(500).send("error in journey search");
+            return res.status(500).send("error in journey search");
         }else{
             res.send(response.rows);
         } 
@@ -97,11 +106,17 @@ Router.post('/login', (req, res) => {
     console.log('login request', id, password);
     attemptLogin(auth).then( result => {
         //successfull login, send auth token to user
-        console.log(result);
         const { title, member_id, family_name, given_names, country_code, accommodation } = result;
-        let token = generateToken({ title, member_id, family_name, given_names, country_code, accommodation });
-        res.send({token});
-
+        pool.query(`SELECT CASE WHEN (SELECT EXISTS(SELECT * FROM olympics.Athlete A WHERE M.member_id = A.member_id)) = 't' THEN 'Athlete'
+	            WHEN (SELECT EXISTS(SELECT * FROM olympics.official O WHERE M.member_id = O.member_id)) = 't' THEN 'Official'
+	            WHEN (SELECT EXISTS(SELECT * FROM olympics.Staff S WHERE M.member_id = S.member_id)) = 't' THEN 'Staff' ELSE 'Unknown' END FROM olympics.member M WHERE M.member_id = '${member_id}';`, (err, response) =>{
+            if(err => console.log(err));
+            if(response.rowCount <= 0)
+                return console.log('error with type check');
+            const type = response.rows[0].case;
+            let token = generateToken({ title, member_id, family_name, given_names, country_code, accommodation, type: type });
+            res.send({token});
+        })
     }).catch(err => {
         //login failed
         console.log(err);

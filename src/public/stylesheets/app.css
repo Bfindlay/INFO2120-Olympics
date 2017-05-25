@@ -4,7 +4,7 @@ html{
     width: 100%;
     position: fixed;
     font-family: 'Roboto', sans-serif;
-    background: #F1F1F2;
+    background: #FBFBFF;
 }
 body{
     margin: 0;
@@ -14,10 +14,10 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex:1;
 }
 .app-body{
     display:flex;
+    height: 80vh;
 }
 /*** Footer ***/
 .footer{
@@ -38,15 +38,15 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #BCBABE;
+    background: #FBFBFF;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
 .navbar li {
-    color: #FFFFFF;
+    color: #FF934F;
 }
 .title h1 {
-    color: #FFFFFF;
+    color: #FF934F;
 }
 .menu {
   display: flex;
@@ -78,11 +78,11 @@ body{
 
 
 .menu li:hover {
-    color:  #1995AD;
+    color:  #FF6100;
 }
 
 .title:hover h1 {
-    color:  #1995AD;
+    color:  #FF6100;
 }
 
 /*** USER DETAILS ****/
@@ -95,7 +95,6 @@ body{
 }
 .details-module {
     display: flex;
-    background: #FBFBFF;
     flex-direction: column;
     align-self: flex-start;
     justify-content: center;

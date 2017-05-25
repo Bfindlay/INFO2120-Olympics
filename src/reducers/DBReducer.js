@@ -6,27 +6,32 @@ const INITIAL_STATE = {
     given_names: null, 
     member_id: null, 
     title: null,
+    type: null,
     signed: false,
+    places: []
 }
 import { hashHistory } from 'react-router';
 export default (state = INITIAL_STATE, action) => {
     
     switch(action.type){
         case 'LOG_IN': {
-            const { accomodation, country_code, family_name, given_names, member_id, title } = action.payload.data;
+            const { accomodation, country_code, family_name, given_names, member_id, title, type } = action.payload.data;
             hashHistory.push('/Details');
             return { ...state, signed: true, 
                     accomodation:accomodation, 
                     country_code: country_code, 
                     family_name: family_name, 
                     given_names: given_names, member_id: member_id, 
-                    title: title 
+                    title: title,
+                    type: type
                  }
         }
         case 'MEMBER_DETAILS' : {
             const { place_name } = action.payload.data;
-            console.log('place name', place_name);
             return { ...state, accommodation: place_name };
+        }
+        case 'PLACES' : {
+            return { ...state, places: action.payload };
         }
         case 'LOG_OUT': {
             hashHistory.push('/');

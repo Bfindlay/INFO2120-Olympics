@@ -30225,7 +30225,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.logOut = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
+	exports.logOut = exports.getPlaces = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
 
 	var _types = __webpack_require__(280);
 
@@ -30254,8 +30254,6 @@
 	            _reactCookie2.default.save('token', token, { path: '/', maxAge: 600 });
 	            _reactCookie2.default.save('member', decoded, { path: '/', maxAge: 600 });
 	            _axios2.default.post('api/details/' + decoded.data.member_id, { token: token }).then(function (response) {
-	                console.log('return was ', decoded);
-	                console.log('details 1', response);
 	                dispatch({ type: _types.MEMBER_DETAILS, payload: response });
 	                dispatch({ type: _types.LOG_IN, payload: decoded });
 	            }).catch(function (err) {
@@ -30278,10 +30276,18 @@
 	    };
 	};
 	var reloadUser = exports.reloadUser = function reloadUser(user) {
-	    console.log(user);
 	    return { type: _types.LOG_IN, payload: user };
 	};
 
+	var getPlaces = exports.getPlaces = function getPlaces() {
+	    return function (dispatch) {
+	        _axios2.default.get('/api/places').then(function (res) {
+	            return dispatch({ type: _types.PLACES, payload: res.data });
+	        }).catch(function (err) {
+	            return console.log(err);
+	        });
+	    };
+	};
 	var logOut = exports.logOut = function logOut() {
 	    _reactCookie2.default.remove('member');
 	    _reactCookie2.default.remove('token');
@@ -30301,6 +30307,7 @@
 	var LOG_IN = exports.LOG_IN = 'LOG_IN';
 	var LOG_OUT = exports.LOG_OUT = 'LOG_OUT';
 	var MEMBER_DETAILS = exports.MEMBER_DETAILS = 'MEMBER_DETAILS';
+	var PLACES = exports.PLACES = 'PLACES';
 
 /***/ },
 /* 281 */
@@ -34635,7 +34642,8 @@
 	                given_names = _props$DB.given_names,
 	                member_id = _props$DB.member_id,
 	                title = _props$DB.title,
-	                accommodation = _props$DB.accommodation;
+	                accommodation = _props$DB.accommodation,
+	                type = _props$DB.type;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -34671,7 +34679,7 @@
 	                            'h3',
 	                            null,
 	                            'Type: ',
-	                            member_id,
+	                            type,
 	                            ' for ',
 	                            country_code
 	                        ),
@@ -34737,17 +34745,29 @@
 	        var _this = _possibleConstructorReturn(this, (Journey.__proto__ || Object.getPrototypeOf(Journey)).call(this));
 
 	        _this.state = {
-	            from: null,
-	            to: null,
-	            date: null
+	            from: '',
+	            to: '',
+	            date: null,
+	            places: []
 	        };
 	        return _this;
 	    }
 
 	    _createClass(Journey, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this.props.getPlaces();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
+
+	            var places = this.props.DB.places;
+	            var _state = this.state,
+	                to = _state.to,
+	                from = _state.from,
+	                date = _state.date;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -34766,6 +34786,25 @@
 	                            return _this2.setState({ from: target.value });
 	                        } }),
 	                    _react2.default.createElement(
+	                        'select',
+	                        { name: 'From' },
+	                        places.map(function (place) {
+	                            var place_id = place.place_id,
+	                                place_name = place.place_name;
+
+	                            var matcher = new RegExp(".+" + from + ".+$", "g");
+	                            var matches = matcher.test(place_name);
+	                            if (matches) {
+	                                return _react2.default.createElement(
+	                                    'option',
+	                                    { key: place_id, value: place_id },
+	                                    place_name
+	                                );
+	                            }
+	                        })
+	                    ),
+	                    _react2.default.createElement('br', null),
+	                    _react2.default.createElement(
 	                        'label',
 	                        null,
 	                        ' To: '
@@ -34774,6 +34813,24 @@
 	                            var target = _ref2.target;
 	                            return _this2.setState({ to: target.value });
 	                        } }),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { name: 'To' },
+	                        places.map(function (place) {
+	                            var place_id = place.place_id,
+	                                place_name = place.place_name;
+
+	                            var matcher = new RegExp(".*" + from + ".*", "g");
+	                            var matches = matcher.test(place_name);
+	                            if (matches) {
+	                                return _react2.default.createElement(
+	                                    'option',
+	                                    { key: place_id, value: place_id },
+	                                    place_name
+	                                );
+	                            }
+	                        })
+	                    ),
 	                    _react2.default.createElement(
 	                        'label',
 	                        null,
@@ -34799,7 +34856,7 @@
 	    return { DB: DB };
 	};
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { searchJourney: _actions.searchJourney })(Journey);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { searchJourney: _actions.searchJourney, getPlaces: _actions.getPlaces })(Journey);
 
 /***/ },
 /* 321 */
@@ -35149,7 +35206,9 @@
 	    given_names: null,
 	    member_id: null,
 	    title: null,
-	    signed: false
+	    type: null,
+	    signed: false,
+	    places: []
 	};
 
 	exports.default = function () {
@@ -35166,7 +35225,8 @@
 	                    family_name = _action$payload$data.family_name,
 	                    given_names = _action$payload$data.given_names,
 	                    member_id = _action$payload$data.member_id,
-	                    title = _action$payload$data.title;
+	                    title = _action$payload$data.title,
+	                    type = _action$payload$data.type;
 
 	                _reactRouter.hashHistory.push('/Details');
 	                return _extends({}, state, { signed: true,
@@ -35174,15 +35234,19 @@
 	                    country_code: country_code,
 	                    family_name: family_name,
 	                    given_names: given_names, member_id: member_id,
-	                    title: title
+	                    title: title,
+	                    type: type
 	                });
 	            }
 	        case 'MEMBER_DETAILS':
 	            {
 	                var place_name = action.payload.data.place_name;
 
-	                console.log('place name', place_name);
 	                return _extends({}, state, { accommodation: place_name });
+	            }
+	        case 'PLACES':
+	            {
+	                return _extends({}, state, { places: action.payload });
 	            }
 	        case 'LOG_OUT':
 	            {

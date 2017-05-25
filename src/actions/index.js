@@ -1,7 +1,8 @@
 import {
     LOG_IN,
     LOG_OUT,
-    MEMBER_DETAILS
+    MEMBER_DETAILS,
+    PLACES
 } from './types';
 
 import axios from 'axios';
@@ -19,8 +20,6 @@ export const logIn = auth => {
                 cookie.save('member', decoded, {path: '/', maxAge: 600 } );
                 axios.post(`api/details/${decoded.data.member_id}`, {token: token})
                     .then(response => {
-                        console.log('return was ', decoded);
-                        console.log('details 1', response);
                         dispatch({type: MEMBER_DETAILS, payload: response})
                         dispatch({type: LOG_IN, payload: decoded});
                     }).catch( err => console.log(err));
@@ -44,10 +43,18 @@ export const memberDetails = id => {
     }
 }
 export const reloadUser = user => {
-    console.log(user);
     return {type: LOG_IN, payload: user};
 }
 
+export const getPlaces = () => {
+    return(dispatch) => {
+        axios.get('/api/places')
+            .then( res => {
+                 return dispatch({type: PLACES, payload: res.data });
+            })
+            .catch(err => console.log(err));
+    }
+}
 export const logOut = () => {
     cookie.remove('member');
     cookie.remove('token');
