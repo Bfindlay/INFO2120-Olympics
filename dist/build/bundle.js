@@ -34748,6 +34748,8 @@
 	            from: '',
 	            to: '',
 	            date: null,
+	            fromSelected: '',
+	            toSelected: '',
 	            places: []
 	        };
 	        return _this;
@@ -34759,15 +34761,31 @@
 	            this.props.getPlaces();
 	        }
 	    }, {
+	        key: 'validate',
+	        value: function validate(callback) {
+	            var _state = this.state,
+	                toSelected = _state.toSelected,
+	                fromSelected = _state.fromSelected;
+
+	            return toSelected === fromSelected ? error() : callback(this.state);
+	        }
+	    }, {
+	        key: 'error',
+	        value: function error() {
+	            //cant travel from the same place to the same place
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this2 = this;
 
 	            var places = this.props.DB.places;
-	            var _state = this.state,
-	                to = _state.to,
-	                from = _state.from,
-	                date = _state.date;
+	            var _state2 = this.state,
+	                to = _state2.to,
+	                from = _state2.from,
+	                date = _state2.date,
+	                fromSelected = _state2.fromSelected,
+	                toSelected = _state2.toSelected;
 
 	            return _react2.default.createElement(
 	                'div',
@@ -34781,13 +34799,13 @@
 	                        null,
 	                        ' From: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', placeholder: 'Stadium', type: 'text', required: '', onChange: function onChange(_ref) {
+	                    _react2.default.createElement('input', { className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '', onChange: function onChange(_ref) {
 	                            var target = _ref.target;
 	                            return _this2.setState({ from: target.value });
 	                        } }),
 	                    _react2.default.createElement(
-	                        'select',
-	                        { name: 'From' },
+	                        'datalist',
+	                        { id: 'from' },
 	                        places.map(function (place) {
 	                            var place_id = place.place_id,
 	                                place_name = place.place_name;
@@ -34809,13 +34827,13 @@
 	                        null,
 	                        ' To: '
 	                    ),
-	                    _react2.default.createElement('input', { className: 'field', placeholder: 'Hotel', type: 'text', required: '', onChange: function onChange(_ref2) {
+	                    _react2.default.createElement('input', { className: 'field', list: 'to', placeholder: 'Hotel', type: 'text', required: '', onChange: function onChange(_ref2) {
 	                            var target = _ref2.target;
 	                            return _this2.setState({ to: target.value });
 	                        } }),
 	                    _react2.default.createElement(
-	                        'select',
-	                        { name: 'To' },
+	                        'datalist',
+	                        { id: 'To' },
 	                        places.map(function (place) {
 	                            var place_id = place.place_id,
 	                                place_name = place.place_name;
@@ -34842,7 +34860,7 @@
 	                            return _this2.setState({ date: target.value });
 	                        } }),
 	                    _react2.default.createElement('input', { className: 'submit', type: 'button', value: 'Search Journeys', onClick: function onClick() {
-	                            return _this2.props.searchJourney(_this2.state);
+	                            return _this2.validate(_this2.props.searchJourney);
 	                        } })
 	                )
 	            );
