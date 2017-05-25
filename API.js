@@ -189,3 +189,15 @@ let generateToken = user => {
 
 
 module.exports = Router;
+
+
+
+/**
+Check Staff is a valid tuple in olympics.staff
+Returns true for existing, false for not existing
+
+SELECT EXISTS(SELECT 1 FROM Olympics.staff S WHERE S.member_id = 'A000021703');
+
+
+
+ */
