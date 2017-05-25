@@ -16,8 +16,9 @@ COMMIT;
 
 3. populate vehicle
 4.populate Journey
-4. update vehicle
-5. populate run
-6. medals
+5. update booking
+6. update vehicle
+7. populate run
+8. medals
 
-Vehicle Journey Booking update vehicle cpaacity populate events
+Vehicle Journey Booking update vehicle cpaacity populate events medals
