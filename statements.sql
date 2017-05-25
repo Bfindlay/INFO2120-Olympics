@@ -46,14 +46,45 @@ ORDER BY depart_time ASC;
 SELECT *
 From Event;
 
---Browse Event results (Dunno if it works)
-SELECT M.given_name || m.famiy_name AS Medallist, medal AS Medal, E.event_name AS Event
-FROM olympics.participates P JOIN olympics.Athelete A ON (P.athelete_id = A.member_id) 
+--Browse Event results 
+SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event
+FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                              JOIN olympics.event E ON (P.event_id = E.event_id) 
-                             JOIN olympics.member M ON (A.athelete_id = M.member_id)
+                             JOIN olympics.member M ON (A.member_id = M.member_id)
 ORDER BY Medallist ASC;
 
 --PAGED Results
 --USE LIMIT xxx, etc
+
+
+/**
+Check Staff is a valid tuple in olympics.staff
+Returns true for existing, false for not existing
+
+SELECT EXISTS(SELECT 1 FROM Olympics.staff S WHERE S.member_id = 'A000021703');
+
+
+//UNTESTED
+
+BEGIN TRANSACTION
+--Check member does not exist in the booking to update
+
+IF SELECT EXISTS(SELECT 1 FROM olympics.booking  B WHERE B.booked_for = '${memeber_id}) THEN
+    ROLLBACK;
+ELSE
+--Check Journey nbooked capcacity, If exceeded rollback
+IF SELECT COUNT(nbooked) FROM olympics.Journey J JOIN olympics.vehicle V USING (vehicle_code) WHERE J.nbooked < V.capacity > 1
+--Add new Booking Entry
+INSERT INTO olympics.bookings
+    SET('${member_id}, '${member_id}', ${date}, ${journey_id});
+
+--Update nbooked
+UPDATE olympics.journey
+    SET(nbooked = nbooked + 1);
+COMMIT;
+
+ELSE
+ROLLBACK;
+ */
 
 
