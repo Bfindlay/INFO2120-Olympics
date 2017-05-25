@@ -9,13 +9,11 @@ Extras;
 -List sportvenues and events that run in the,
 -List accommodation building and people inside it.
 -List of people that are running an event
-
-
 */
 
 
 -- Member Details
---Get memeber_id, accomodation building name, number of bookings
+--Get member_id, accomodation building name, number of bookings
 SELECT M.member_id as member_id, P.place_name as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B WHERE booked_for = 'A000043404')) as bookings
 FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id)
 WHERE M.member_id = 'A000043404'
@@ -25,6 +23,8 @@ GROUP BY M.member_id, P.place_name;
 SELECT * --Login status?
 FROM olympics.Member M
 WHERE M.memeber_id = 'login' AND M.password = 'password';
+
+--Get type of member
 
 --Browse Bookings
 --Shows full name raher than ID for booked_by and booked_for
@@ -72,7 +72,7 @@ ORDER BY Medallist ASC;
 
 
 /**
-Check Staff is a valid tuple in olympics.staff
+TO DOCheck Staff is a valid tuple in olympics.staff
 Returns true for existing, false for not existing
 
 SELECT EXISTS(SELECT 1 FROM Olympics.staff S WHERE S.member_id = 'A000021703');
