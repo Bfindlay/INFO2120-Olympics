@@ -66,7 +66,7 @@ Combine These together so when a event is expaned, then the results will show up
 */
 
 --Browse Events, returns event name, gender, sport venue and start timestamp
-SELECT E.event_name, CASE WHEN E.event_gender = 'M' THEN 'Male'WHEN E.event_gender = 'F' THEN 'Female' ELSE 'Unknown' END, P.place_name, E.event_start
+SELECT E.event_name, CASE WHEN E.event_gender = 'M' THEN 'Male'WHEN E.event_gender = 'W' THEN 'Woman' ELSE 'Unknown' END, P.place_name, E.event_start
 FROM olympics.event E JOIN olympics.place P ON (E.sport_venue = P.place_id)
 
 --Browse Event results 
