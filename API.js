@@ -10,7 +10,6 @@ const SECRET_TOKEN = 'x1ODH27zt4sMUMW882iwCp3T6cvWBf38';
 Router.use(bodyParser.json()); // support json encoded bodies
 Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-/**** TESTING **** */
 
 /**** DATABASE CONNECTION *****/
 console.log('-----CONNECTING TO DATABASE ------');
@@ -40,7 +39,6 @@ Router.post('/Test', (req,res) =>{
 
 Router.post('/details/:member_id', (req, res) =>{
     const { member_id } = req.params;
-    console.log(member_id);
     pool.query(`SELECT M.member_id as member_id, p.place_name, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B
         WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id) WHERE M.member_id = '${member_id}' AND M.accommodation = P.place_id GROUP BY M.member_id, p.place_name;`, (err, response ) =>{
             if(err){

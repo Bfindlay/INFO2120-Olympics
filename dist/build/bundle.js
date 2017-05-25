@@ -34637,7 +34637,6 @@
 	                title = _props$DB.title,
 	                accommodation = _props$DB.accommodation;
 
-	            console.log(accommodation);
 	            return _react2.default.createElement(
 	                'div',
 	                null,

@@ -11,7 +11,6 @@ class Details extends Component {
 
     render(){
         const{ country_code, family_name, given_names, member_id, title, accommodation } = this.props.DB;
-        console.log(accommodation);
         return(
             <div>
                  <div className="details-container">
