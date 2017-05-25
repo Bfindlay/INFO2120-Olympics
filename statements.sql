@@ -12,11 +12,11 @@ INSERT INTO olympics.Booking
 */
 
 -- Member Details
---WHERE clause should match the member_id from login screen.	
-SELECT M.member_id as member_id, accommodation as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B WHERE booked_for = 'A000043404')) as bookings
-FROM olympics.Member M
+--Get memeber_id, accomodation building name, number of bookings
+SELECT M.member_id as member_id, P.place_name as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B WHERE booked_for = 'A000043404')) as bookings
+FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id)
 WHERE M.member_id = 'A000043404'
-GROUP BY M.member_id;
+GROUP BY M.member_id, P.place_name;
 
 --Member Login
 SELECT * --Login status?
@@ -24,10 +24,16 @@ FROM olympics.Member M
 WHERE M.memeber_id = 'login' AND M.password = 'password';
 
 --Browse Bookings
-SELECT B.booked_for, B.booked_by, J.depart_time
-FROM olympics.booking B JOIN olympics.journey J ON (J.journey_id = B.journey_id)
-WHERE booked_for = login.member_id //'login member_id'
-ORDER by J.depart_time ASC;
+--Shows full name raher than ID for booked_by and booked_for
+--Shows full name for origin and destination
+
+SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time
+FROM olympics.booking B JOIN olympics.journey J USING (journey_id) 
+			JOIN olympics.member M ON (B.booked_for = M.member_id) 
+			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
+			JOIN olympics.place P ON (J.from_place = P.place_id)
+			JOIn olympics.place PP ON (J.to_place = PP.place_id)
+WHERE M.member_id = 'A000032115'
 
 --Search Journeys
 SELECT depart_time AS Departing, from_place AS From, to_place AS To, nbooked AS Booked,
