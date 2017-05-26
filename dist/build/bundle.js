@@ -15399,7 +15399,7 @@ var Register = function (_Component) {
                             null,
                             ' Member ID '
                         ),
-                        _react2.default.createElement('input', { type: 'text', placeholder: '1244223', onChange: function onChange(_ref) {
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'A123456789', onChange: function onChange(_ref) {
                                 var target = _ref.target;
                                 return _this2.setState({ id: target.value });
                             } }),
@@ -15408,7 +15408,7 @@ var Register = function (_Component) {
                             null,
                             ' Password '
                         ),
-                        _react2.default.createElement('input', { type: 'password', placeholder: '1244223', onChange: function onChange(_ref2) {
+                        _react2.default.createElement('input', { type: 'password', onChange: function onChange(_ref2) {
                                 var target = _ref2.target;
                                 return _this2.setState({ id: target.value });
                             } }),
@@ -15417,7 +15417,7 @@ var Register = function (_Component) {
                             null,
                             ' Re-Enter Password '
                         ),
-                        _react2.default.createElement('input', { type: 'password', placeholder: '1244223', onChange: function onChange(_ref3) {
+                        _react2.default.createElement('input', { type: 'password', onChange: function onChange(_ref3) {
                                 var target = _ref3.target;
                                 return _this2.setState({ id: target.value });
                             } }),
@@ -15450,6 +15450,8 @@ var Register = function (_Component) {
                                 'Dr'
                             )
                         ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement('br', null),
                         _react2.default.createElement(
                             'label',
                             null,
@@ -15476,17 +15478,7 @@ var Register = function (_Component) {
                         _react2.default.createElement('input', { type: 'text', placeholder: '123', onChange: function onChange(_ref6) {
                                 var target = _ref6.target;
                                 return _this2.setState({ password: target.value });
-                            } }),
-                        _react2.default.createElement(
-                            'p',
-                            { className: 'message' },
-                            'Not registered? ',
-                            _react2.default.createElement(
-                                'a',
-                                { href: '#' },
-                                'Create an account'
-                            )
-                        )
+                            } })
                     )
                 )
             );
@@ -15616,6 +15608,8 @@ var _actions = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -15639,6 +15633,13 @@ var SignIn = function (_Component) {
     }
 
     _createClass(SignIn, [{
+        key: 'hello',
+        value: function hello(e) {
+            if (key.keyCode == 13) {
+                console.log("Enter key");
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -15677,10 +15678,12 @@ var SignIn = function (_Component) {
                             null,
                             ' Password'
                         ),
-                        _react2.default.createElement('input', { type: 'password', onChange: function onChange(_ref2) {
+                        _react2.default.createElement('input', _defineProperty({ type: 'password', onChange: function onChange(_ref2) {
                                 var target = _ref2.target;
                                 return _this2.setState({ password: target.value });
-                            } }),
+                            } }, 'onChange', function onChange() {
+                            _this2.hello(e);
+                        })),
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {
@@ -15694,7 +15697,7 @@ var SignIn = function (_Component) {
                             'Not registered? ',
                             _react2.default.createElement(
                                 'a',
-                                { href: '#' },
+                                { href: '#/register' },
                                 'Create an account'
                             )
                         )

@@ -27,11 +27,11 @@ class Register extends Component{
                 <div className="form">
                     <div className="login-form">
                     <label> Member ID </label>
-                    <input type="text" placeholder="1244223" onChange={({ target }) => this.setState({id: target.value}) }/>
+                    <input type="text" placeholder="A123456789" onChange={({ target }) => this.setState({id: target.value}) }/>
                     <label> Password </label>
-                    <input type="password" placeholder="1244223" onChange={({ target }) => this.setState({id: target.value}) }/>
+                    <input type="password" onChange={({ target }) => this.setState({id: target.value}) }/>
                     <label> Re-Enter Password </label>
-                    <input type="password" placeholder="1244223" onChange={({ target }) => this.setState({id: target.value}) }/>
+                    <input type="password" onChange={({ target }) => this.setState({id: target.value}) }/>
                     <label> Title </label>
                     <select>
                         <option value="Mr">Mr</option>
@@ -39,13 +39,19 @@ class Register extends Component{
                         <option value="Miss">Miss</option>
                         <option value="Dr">Dr</option>
                     </select>
+
+                    <br/>
+                    <br/>
                     <label>First Name</label>
                     <input type="text" placeholder="John" onChange={({ target }) => this.setState({password: target.value}) }/>
+                    
+                    
+                    
                     <label>Last Name</label>
                     <input type="text" placeholder="Smith" onChange={({ target }) => this.setState({password: target.value}) }/>
+                    
                     <label> Accomodation</label>
                     <input type="text" placeholder="123" onChange={({ target }) => this.setState({password: target.value}) }/>
-                    <p className="message">Not registered? <a href="#">Create an account</a></p>
                     </div>
                 </div>
             </div>

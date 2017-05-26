@@ -40,7 +40,7 @@ WHERE M.member_id = 'A000021704';
 --Shows full name raher than ID for booked_by and booked_for
 --Shows full name for origin and destination
 
-SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time
+SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time
 FROM olympics.booking B 
             JOIN olympics.journey J USING (journey_id) 
 			JOIN olympics.member M ON (B.booked_for = M.member_id) 
