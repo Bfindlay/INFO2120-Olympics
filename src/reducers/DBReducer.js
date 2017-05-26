@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     title: null,
     type: null,
     signed: false,
+    bookings: [],
     places: []
 }
 import { hashHistory } from 'react-router';
@@ -36,6 +37,10 @@ export default (state = INITIAL_STATE, action) => {
         case 'LOG_OUT': {
             hashHistory.push('/');
             return { ...state, member_id: null, name: null, type: null, signed: false}
+        }
+        case 'BOOKINGS' : {
+            console.log('bookings', action.payload);
+            return { ...state, bookings: action.payload };
         }
         default:
             return {... state }

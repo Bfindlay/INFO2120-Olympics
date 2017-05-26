@@ -2,7 +2,8 @@ import {
     LOG_IN,
     LOG_OUT,
     MEMBER_DETAILS,
-    PLACES
+    PLACES,
+    BOOKINGS
 } from './types';
 
 import axios from 'axios';
@@ -20,8 +21,16 @@ export const logIn = auth => {
                 cookie.save('member', decoded, {path: '/', maxAge: 600 } );
                 axios.post(`api/details/${decoded.data.member_id}`, {token: token})
                     .then(response => {
-                        dispatch({type: MEMBER_DETAILS, payload: response})
-                        dispatch({type: LOG_IN, payload: decoded});
+                       axios.post(`/api/bookings/${decoded.data.member_id}`, {token : cookie.load('token')})
+                        .then( response => {
+                            console.log('details', response);
+                            dispatch({type: MEMBER_DETAILS, payload: response});
+                            dispatch({ type: MEMBER_DETAILS, payload: response });
+                            dispatch({type: LOG_IN, payload: decoded});
+                        })
+                        .catch( err => {
+                            console.log(err);
+                        })
                     }).catch( err => console.log(err));
             })
             .catch( response => {
@@ -35,7 +44,7 @@ export const memberDetails = id => {
         axios.post(`/api/details/${id}`, {token : cookie.load('token')})
             .then( response => {
                 console.log('details', response);
-                return dispatch({ type: MEMBER_DETAILS, payload: response });
+               dispatch({ type: MEMBER_DETAILS, payload: response });
             })
             .catch( err => {
                 console.log(err);
@@ -66,6 +75,15 @@ export const getPlaces = () => {
                  return dispatch({type: PLACES, payload: res.data });
             })
             .catch(err => console.log(err));
+    }
+}
+
+export const getBookings = member_id => {
+    const { token } = cookie.load('token');
+    return(dispatch) => {
+        axios.post(`/api/bookings/${member_id}`, {token: token})
+            .then( res => dispatch({type: BOOKINGS, payload: res}))
+            .catch(err => console.log(err))
     }
 }
 export const logOut = () => {

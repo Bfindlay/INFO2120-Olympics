@@ -30210,7 +30210,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.logOut = exports.getPlaces = exports.searchJourney = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
+	exports.logOut = exports.getBookings = exports.getPlaces = exports.searchJourney = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
 
 	var _types = __webpack_require__(280);
 
@@ -30239,8 +30239,14 @@
 	            _reactCookie2.default.save('token', token, { path: '/', maxAge: 600 });
 	            _reactCookie2.default.save('member', decoded, { path: '/', maxAge: 600 });
 	            _axios2.default.post('api/details/' + decoded.data.member_id, { token: token }).then(function (response) {
-	                dispatch({ type: _types.MEMBER_DETAILS, payload: response });
-	                dispatch({ type: _types.LOG_IN, payload: decoded });
+	                _axios2.default.post('/api/bookings/' + decoded.data.member_id, { token: _reactCookie2.default.load('token') }).then(function (response) {
+	                    console.log('details', response);
+	                    dispatch({ type: _types.MEMBER_DETAILS, payload: response });
+	                    dispatch({ type: _types.MEMBER_DETAILS, payload: response });
+	                    dispatch({ type: _types.LOG_IN, payload: decoded });
+	                }).catch(function (err) {
+	                    console.log(err);
+	                });
 	            }).catch(function (err) {
 	                return console.log(err);
 	            });
@@ -30254,7 +30260,7 @@
 	    return function (dispatch) {
 	        _axios2.default.post('/api/details/' + id, { token: _reactCookie2.default.load('token') }).then(function (response) {
 	            console.log('details', response);
-	            return dispatch({ type: _types.MEMBER_DETAILS, payload: response });
+	            dispatch({ type: _types.MEMBER_DETAILS, payload: response });
 	        }).catch(function (err) {
 	            console.log(err);
 	        });
@@ -30290,6 +30296,19 @@
 	        });
 	    };
 	};
+
+	var getBookings = exports.getBookings = function getBookings(member_id) {
+	    var _cookie$load2 = _reactCookie2.default.load('token'),
+	        token = _cookie$load2.token;
+
+	    return function (dispatch) {
+	        _axios2.default.post('/api/bookings/' + member_id, { token: token }).then(function (res) {
+	            return dispatch({ type: _types.BOOKINGS, payload: res });
+	        }).catch(function (err) {
+	            return console.log(err);
+	        });
+	    };
+	};
 	var logOut = exports.logOut = function logOut() {
 	    _reactCookie2.default.remove('member');
 	    _reactCookie2.default.remove('token');
@@ -30310,6 +30329,7 @@
 	var LOG_OUT = exports.LOG_OUT = 'LOG_OUT';
 	var MEMBER_DETAILS = exports.MEMBER_DETAILS = 'MEMBER_DETAILS';
 	var PLACES = exports.PLACES = 'PLACES';
+	var BOOKINGS = exports.BOOKINGS = 'BOOKINGS';
 
 /***/ },
 /* 281 */
@@ -35244,6 +35264,7 @@
 	    title: null,
 	    type: null,
 	    signed: false,
+	    bookings: [],
 	    places: []
 	};
 
@@ -35288,6 +35309,11 @@
 	            {
 	                _reactRouter.hashHistory.push('/');
 	                return _extends({}, state, { member_id: null, name: null, type: null, signed: false });
+	            }
+	        case 'BOOKINGS':
+	            {
+	                console.log('bookings', action.payload);
+	                return _extends({}, state, { bookings: action.payload });
 	            }
 	        default:
 	            return _extends({}, state);
