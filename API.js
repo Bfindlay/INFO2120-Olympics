@@ -85,21 +85,22 @@ WHERE depart_time = '2017-05-11 00:00:00' AND to_place = 4 AND from_place = 2 AN
 */
 Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
     const { id, from, to, date } = req.params;
-    const newDate = new Date(date.replace(' ', 'T'));
-    console.log('date is now', newDate);
     const { token } = req.body;
-    console.log(date);
-    pool.query(`SELECT depart_time, from_place, to_place, nbooked  FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) WHERE depart_time = ${date}
-                 AND to_place = ${place_id} AND from_place = ${place_id2} AND B.booked_for = '${member_id}' ORDER BY depart_time ASC;`, (err, response) => {
+    pool.query(`SELECT depart_time, from_place, to_place, nbooked  FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) WHERE depart_time >= '${date}'
+                 AND to_place = ${to} AND from_place = ${from} AND B.booked_for = '${id}' ORDER BY depart_time ASC;`, (err, response) => {
         if(err){
-            console.log(err); //TODO ERROR HANDLING
+            console.log('error', err); //TODO ERROR HANDLING
             return res.status(500).send("error in journey search");
         }else{
+            console.log(response.rows);
             res.send(response.rows);
         } 
     });
 })
 
+//A000022211 
+//139 Ultimo - Mountain Street
+//558 Sydney Olympic Park, Race Walks Course
 Router.post('/login', (req, res) => {
     const { auth } = req.body;
     const { id, password } = auth;

@@ -47,11 +47,11 @@ export const reloadUser = user => {
 }
 
 export const searchJourney = search => {
-    const { member_id } = cookie.load('member');
+    const { member_id } = cookie.load('member').data;
     const { token } = cookie.load('token');
     const { from, to, date } = search;
     return(dispatch) => {
-        axios.post(`/api/journey/${member_id}/${from}/${to}/${date}`, {token: token})
+        axios.post(`/api/journey/${member_id}/${from.place_id}/${to.place_id}/${date}`, {token: token})
             .then(response => {
                 
             })

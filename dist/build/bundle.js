@@ -27963,21 +27963,6 @@
 	                            _react2.default.createElement(
 	                                'a',
 	                                { onClick: function onClick() {
-	                                        return _reactRouter.hashHistory.push('/Search');
-	                                    } },
-	                                _react2.default.createElement(
-	                                    'li',
-	                                    null,
-	                                    _react2.default.createElement(
-	                                        'h3',
-	                                        null,
-	                                        'Search'
-	                                    )
-	                                )
-	                            ),
-	                            _react2.default.createElement(
-	                                'a',
-	                                { onClick: function onClick() {
 	                                        return _this2.props.logOut();
 	                                    } },
 	                                _react2.default.createElement(
@@ -28015,13 +28000,13 @@
 	                            'ul',
 	                            null,
 	                            _react2.default.createElement(
-	                                'li',
-	                                null,
+	                                'a',
+	                                { onClick: function onClick() {
+	                                        return _reactRouter.hashHistory.push('/Register');
+	                                    } },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { onClick: function onClick() {
-	                                            return _reactRouter.hashHistory.push('/Register');
-	                                        } },
+	                                    'li',
+	                                    null,
 	                                    _react2.default.createElement(
 	                                        'h3',
 	                                        null,
@@ -28030,13 +28015,13 @@
 	                                )
 	                            ),
 	                            _react2.default.createElement(
-	                                'li',
-	                                null,
+	                                'a',
+	                                { onClick: function onClick() {
+	                                        return _reactRouter.hashHistory.push('/SignIn');
+	                                    } },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { onClick: function onClick() {
-	                                            return _reactRouter.hashHistory.push('/SignIn');
-	                                        } },
+	                                    'li',
+	                                    null,
 	                                    _react2.default.createElement(
 	                                        'h3',
 	                                        null,
@@ -30280,18 +30265,17 @@
 	};
 
 	var searchJourney = exports.searchJourney = function searchJourney(search) {
-	    var _cookie$load = _reactCookie2.default.load('member'),
-	        member_id = _cookie$load.member_id;
+	    var member_id = _reactCookie2.default.load('member').data.member_id;
 
-	    var _cookie$load2 = _reactCookie2.default.load('token'),
-	        token = _cookie$load2.token;
+	    var _cookie$load = _reactCookie2.default.load('token'),
+	        token = _cookie$load.token;
 
 	    var from = search.from,
 	        to = search.to,
 	        date = search.date;
 
 	    return function (dispatch) {
-	        _axios2.default.post('/api/journey/' + member_id + '/' + from + '/' + to + '/' + date, { token: token }).then(function (response) {}).catch(function (err) {
+	        _axios2.default.post('/api/journey/' + member_id + '/' + from.place_id + '/' + to.place_id + '/' + date, { token: token }).then(function (response) {}).catch(function (err) {
 	            return console.log(err);
 	        });
 	    };
@@ -34740,6 +34724,8 @@
 
 	var _reactRedux = __webpack_require__(243);
 
+	var _reactRouter = __webpack_require__(182);
+
 	var _actions = __webpack_require__(279);
 
 	var _reactCookie = __webpack_require__(313);
@@ -34776,11 +34762,18 @@
 	    _createClass(Journey, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
+	            var signed = this.props.DB.signed;
+
+	            if (!signed) {
+	                return _reactRouter.hashHistory.push('/');
+	            }
 	            this.props.getPlaces();
 	        }
 	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(e) {
+	            var places = this.props.DB.places;
+
 	            var from = e.target.fromSelected.value;
 	            var to = e.target.toSelected.value;
 	            var date = e.target.date.value;
@@ -34788,7 +34781,17 @@
 	            if (to === from) {
 	                return console.log("Cant take journey from the same place");
 	            }
-	            this.props.searchJourney({ to: to, from: from, date: date });
+	            var toID = places.filter(function (place) {
+	                if (place.place_name === to) {
+	                    return place;
+	                }
+	            })[0];
+	            var fromID = places.filter(function (place) {
+	                if (place.place_name === from) {
+	                    return place;
+	                }
+	            })[0];
+	            this.props.searchJourney({ to: toID, from: fromID, date: date });
 	            e.preventDefault();
 	        }
 	    }, {
@@ -34818,7 +34821,7 @@
 	                    _react2.default.createElement('hr', null),
 	                    _react2.default.createElement(
 	                        'form',
-	                        { onSubmit: this.handleSubmit },
+	                        { onSubmit: this.handleSubmit.bind(this) },
 	                        _react2.default.createElement(
 	                            'label',
 	                            null,
