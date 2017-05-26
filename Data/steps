@@ -1,15 +1,15 @@
 1. olympics_ddl_dml
 2. 
 
-DELETE FROM Staff
-WHERE member_id IN (SELECT member_id FROM Athlete);
+DELETE FROM olympics.Staff
+WHERE member_id IN (SELECT member_id FROM olympics.Athlete);
 
 BEGIN;
 CREATE TEMP TABLE newoffs ON COMMIT DROP AS
-  SELECT member_id FROM Staff WHERE random()<0.2; -- Choose about 20%
-INSERT INTO Official (member_id)
+  SELECT member_id FROM olympics.Staff WHERE random()<0.2; -- Choose about 20%
+INSERT INTO olympics.Official (member_id)
   SELECT member_id FROM newoffs;
-DELETE FROM Staff WHERE member_id IN (
+DELETE FROM olympics.Staff WHERE member_id IN (
   SELECT member_id FROM newoffs);
 COMMIT;
 
@@ -21,4 +21,13 @@ COMMIT;
 7. populate run
 8. medals
 
-Vehicle Journey Booking update vehicle cpaacity populate events medals
+9. Add arrival time to journey
+ALTER TABLE olympics.Journey
+ADD COLUMN arrive_time timestamp without time zone,
+ADD CONSTRAINT no_time_travel CHECK (arrive_time>= depart_time);
+
+10. Add data into arrival time
+
+UPDATE olympics.Journey
+SET arrive_time = depart_time + random()*4*INTERVAL '1 hour'
+WHERE depart_time IS NOT NULL;
