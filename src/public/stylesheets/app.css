@@ -4,7 +4,7 @@ html{
     width: 100%;
     position: fixed;
     font-family: 'Roboto', sans-serif;
-    background: #FBFBFF;
+    background: #2988BC;
 }
 body{
     margin: 0;
@@ -27,7 +27,7 @@ body{
     align-items: center;
     width: 100%;
     bottom: 0;
-    background: #FBFBFF;
+    background: #2F496E;
 
 }
 /** NAVBAR ***/
@@ -38,15 +38,15 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background: #FBFBFF;
+    background: #2F496E;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
 }
 .navbar li {
-    color: #FF934F;
+    color: #FFFFFF;
 }
 .title h1 {
-    color: #FF934F;
+    color: #FFFFFF;
 }
 .menu {
   display: flex;
@@ -78,23 +78,28 @@ body{
 
 
 .menu li:hover {
-    color:  #FF6100;
+    color:  #ED8C72;
 }
 
 .title:hover h1 {
-    color:  #FF6100;
+    color:  #ED8C72;
 }
 
 /*** USER DETAILS ****/
 
 .details-container {
     display: flex;
+    margin-top: 50px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    top: 5px;
+    background:  rgba(255,255,255, 0.2);
+    box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .details-module {
     display: flex;
+    background: #F4EADE;
     flex-direction: column;
     align-self: flex-start;
     justify-content: center;
@@ -102,7 +107,7 @@ body{
     align-items: flex-start;
     text-align: left;
     padding: 40px;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 /********** Journeys ***********/
@@ -113,6 +118,8 @@ body{
     justify-content: center;
     margin: auto;
     padding: 4em;
+    background: #F4EADE;
+    
 }
 
 .field {
@@ -194,36 +201,46 @@ select:focus {
 }
 
 label{
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 1);
 }
 .form {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: #F4EADE;
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 90px 0 rgba(0, 0, 0, 0.4), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #f2f2f2;
+  background: none;
   width: 100%;
   border: 0;
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.form input:focus {
+    border: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom-color: rgb(33, 134, 189, 1);
+    border-bottom-width: 1px;
 }
 
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #00b3b3;
+  background: #2988BC;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -237,12 +254,12 @@ label{
 .form button:hover,
 .form button:active,
 .form button:focus {
-  background: #00e6e6
+  background: #ED8C72;
 }
 
 .form .message {
   margin: 15px 0 0;
-  color: #b3b3b3;
+  color: #000000;
   font-size: 12px;
 }
 
