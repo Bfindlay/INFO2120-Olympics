@@ -861,7 +861,7 @@ module.exports = invariant;
 
 
 
-var _prodInvariant = __webpack_require__(25);
+var _prodInvariant = __webpack_require__(26);
 
 var ReactCurrentOwner = __webpack_require__(15);
 
@@ -1635,7 +1635,7 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
 var CallbackQueue = __webpack_require__(101);
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 var ReactFeatureFlags = __webpack_require__(106);
 var ReactReconciler = __webpack_require__(32);
 var Transaction = __webpack_require__(46);
@@ -1975,7 +1975,7 @@ module.exports = factory(
 
 var _assign = __webpack_require__(4);
 
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 
 var emptyFunction = __webpack_require__(11);
 var warning = __webpack_require__(2);
@@ -2711,6 +2711,95 @@ module.exports = warning;
 
 /***/ }),
 /* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Router__ = __webpack_require__(294);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_0__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Link__ = __webpack_require__(125);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_1__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__IndexLink__ = __webpack_require__(290);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexLink", function() { return __WEBPACK_IMPORTED_MODULE_2__IndexLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__withRouter__ = __webpack_require__(305);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__withRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__ = __webpack_require__(291);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRedirect", function() { return __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__IndexRoute__ = __webpack_require__(292);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRoute", function() { return __WEBPACK_IMPORTED_MODULE_5__IndexRoute__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(127);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(293);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__RouteUtils__ = __webpack_require__(21);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createRoutes", function() { return __WEBPACK_IMPORTED_MODULE_8__RouteUtils__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__RouterContext__ = __webpack_require__(79);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "RouterContext", function() { return __WEBPACK_IMPORTED_MODULE_9__RouterContext__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__PropTypes__ = __webpack_require__(78);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "locationShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "routerShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["b"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__match__ = __webpack_require__(303);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "match", function() { return __WEBPACK_IMPORTED_MODULE_11__match__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__ = __webpack_require__(132);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "useRouterHistory", function() { return __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__PatternUtils__ = __webpack_require__(33);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatPattern", function() { return __WEBPACK_IMPORTED_MODULE_13__PatternUtils__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__ = __webpack_require__(296);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyRouterMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__browserHistory__ = __webpack_require__(297);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "browserHistory", function() { return __WEBPACK_IMPORTED_MODULE_15__browserHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__hashHistory__ = __webpack_require__(301);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "hashHistory", function() { return __WEBPACK_IMPORTED_MODULE_16__hashHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__ = __webpack_require__(129);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createMemoryHistory", function() { return __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__["a"]; });
+/* components */
+
+
+
+
+
+
+
+
+
+/* components (configuration) */
+
+
+
+
+
+
+
+
+
+
+/* utils */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* histories */
+
+
+
+
+
+
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2828,7 +2917,7 @@ module.exports = PooledClass;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3175,7 +3264,7 @@ module.exports = ReactElement;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3219,95 +3308,6 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Router__ = __webpack_require__(294);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_0__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Link__ = __webpack_require__(125);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_1__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__IndexLink__ = __webpack_require__(290);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexLink", function() { return __WEBPACK_IMPORTED_MODULE_2__IndexLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__withRouter__ = __webpack_require__(305);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__withRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__ = __webpack_require__(291);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRedirect", function() { return __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__IndexRoute__ = __webpack_require__(292);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRoute", function() { return __WEBPACK_IMPORTED_MODULE_5__IndexRoute__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(127);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(293);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__RouteUtils__ = __webpack_require__(21);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createRoutes", function() { return __WEBPACK_IMPORTED_MODULE_8__RouteUtils__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__RouterContext__ = __webpack_require__(79);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "RouterContext", function() { return __WEBPACK_IMPORTED_MODULE_9__RouterContext__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__PropTypes__ = __webpack_require__(78);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "locationShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "routerShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__match__ = __webpack_require__(303);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "match", function() { return __WEBPACK_IMPORTED_MODULE_11__match__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__ = __webpack_require__(132);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "useRouterHistory", function() { return __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__PatternUtils__ = __webpack_require__(33);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatPattern", function() { return __WEBPACK_IMPORTED_MODULE_13__PatternUtils__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__ = __webpack_require__(296);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyRouterMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__browserHistory__ = __webpack_require__(297);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "browserHistory", function() { return __WEBPACK_IMPORTED_MODULE_15__browserHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__hashHistory__ = __webpack_require__(301);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "hashHistory", function() { return __WEBPACK_IMPORTED_MODULE_16__hashHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__ = __webpack_require__(129);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createMemoryHistory", function() { return __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__["a"]; });
-/* components */
-
-
-
-
-
-
-
-
-
-/* components (configuration) */
-
-
-
-
-
-
-
-
-
-
-/* utils */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* histories */
-
-
-
-
-
-
-
-
-/***/ }),
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3333,7 +3333,7 @@ var _reactCookie = __webpack_require__(30);
 
 var _reactCookie2 = _interopRequireDefault(_reactCookie);
 
-var _reactRouter = __webpack_require__(26);
+var _reactRouter = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3372,18 +3372,17 @@ var reloadUser = exports.reloadUser = function reloadUser(user) {
 };
 
 var searchJourney = exports.searchJourney = function searchJourney(search) {
-    var _cookie$load = _reactCookie2.default.load('member'),
-        member_id = _cookie$load.member_id;
+    var member_id = _reactCookie2.default.load('member').data.member_id;
 
-    var _cookie$load2 = _reactCookie2.default.load('token'),
-        token = _cookie$load2.token;
+    var _cookie$load = _reactCookie2.default.load('token'),
+        token = _cookie$load.token;
 
     var from = search.from,
         to = search.to,
         date = search.date;
 
     return function (dispatch) {
-        _axios2.default.post('/api/journey/' + member_id + '/' + from + '/' + to + '/' + date, { token: token }).then(function (response) {}).catch(function (err) {
+        _axios2.default.post('/api/journey/' + member_id + '/' + from.place_id + '/' + to.place_id + '/' + date, { token: token }).then(function (response) {}).catch(function (err) {
             return console.log(err);
         });
     };
@@ -4299,7 +4298,7 @@ var ReactComponent = __webpack_require__(80);
 var ReactPureComponent = __webpack_require__(313);
 var ReactClass = __webpack_require__(309);
 var ReactDOMFactories = __webpack_require__(310);
-var ReactElement = __webpack_require__(24);
+var ReactElement = __webpack_require__(25);
 var ReactPropTypes = __webpack_require__(311);
 var ReactVersion = __webpack_require__(314);
 
@@ -9037,7 +9036,7 @@ var RouterContext = __WEBPACK_IMPORTED_MODULE_2_create_react_class___default()({
 
 
 
-var _prodInvariant = __webpack_require__(25);
+var _prodInvariant = __webpack_require__(26);
 
 var ReactNoopUpdateQueue = __webpack_require__(81);
 
@@ -9565,7 +9564,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(26);
+var _reactRouter = __webpack_require__(23);
 
 var _actions = __webpack_require__(27);
 
@@ -9677,21 +9676,6 @@ var NavBar = function (_Component) {
                             _react2.default.createElement(
                                 'a',
                                 { onClick: function onClick() {
-                                        return _reactRouter.hashHistory.push('/Search');
-                                    } },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    _react2.default.createElement(
-                                        'h3',
-                                        null,
-                                        'Search'
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'a',
-                                { onClick: function onClick() {
                                         return _this2.props.logOut();
                                     } },
                                 _react2.default.createElement(
@@ -9729,13 +9713,13 @@ var NavBar = function (_Component) {
                             'ul',
                             null,
                             _react2.default.createElement(
-                                'li',
-                                null,
+                                'a',
+                                { onClick: function onClick() {
+                                        return _reactRouter.hashHistory.push('/Register');
+                                    } },
                                 _react2.default.createElement(
-                                    'a',
-                                    { onClick: function onClick() {
-                                            return _reactRouter.hashHistory.push('/Register');
-                                        } },
+                                    'li',
+                                    null,
                                     _react2.default.createElement(
                                         'h3',
                                         null,
@@ -9744,13 +9728,13 @@ var NavBar = function (_Component) {
                                 )
                             ),
                             _react2.default.createElement(
-                                'li',
-                                null,
+                                'a',
+                                { onClick: function onClick() {
+                                        return _reactRouter.hashHistory.push('/SignIn');
+                                    } },
                                 _react2.default.createElement(
-                                    'a',
-                                    { onClick: function onClick() {
-                                            return _reactRouter.hashHistory.push('/SignIn');
-                                        } },
+                                    'li',
+                                    null,
                                     _react2.default.createElement(
                                         'h3',
                                         null,
@@ -11068,7 +11052,7 @@ var _prodInvariant = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 
 var invariant = __webpack_require__(1);
 
@@ -14235,7 +14219,7 @@ module.exports = REACT_ELEMENT_TYPE;
 
 var ReactCurrentOwner = __webpack_require__(15);
 var ReactComponentTreeHook = __webpack_require__(9);
-var ReactElement = __webpack_require__(24);
+var ReactElement = __webpack_require__(25);
 
 var checkReactTypeSpec = __webpack_require__(315);
 
@@ -14896,7 +14880,7 @@ var _NavBar2 = _interopRequireDefault(_NavBar);
 
 var _reactRedux = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(26);
+var _reactRouter = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14967,7 +14951,7 @@ var _reactCookie = __webpack_require__(30);
 
 var _reactCookie2 = _interopRequireDefault(_reactCookie);
 
-var _reactRouter = __webpack_require__(26);
+var _reactRouter = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15076,6 +15060,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(16);
 
+var _reactRouter = __webpack_require__(23);
+
 var _actions = __webpack_require__(27);
 
 var _reactCookie = __webpack_require__(30);
@@ -15112,11 +15098,18 @@ var Journey = function (_Component) {
     _createClass(Journey, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
+            var signed = this.props.DB.signed;
+
+            if (!signed) {
+                return _reactRouter.hashHistory.push('/');
+            }
             this.props.getPlaces();
         }
     }, {
         key: 'handleSubmit',
         value: function handleSubmit(e) {
+            var places = this.props.DB.places;
+
             var from = e.target.fromSelected.value;
             var to = e.target.toSelected.value;
             var date = e.target.date.value;
@@ -15124,7 +15117,17 @@ var Journey = function (_Component) {
             if (to === from) {
                 return console.log("Cant take journey from the same place");
             }
-            this.props.searchJourney({ to: to, from: from, date: date });
+            var toID = places.filter(function (place) {
+                if (place.place_name === to) {
+                    return place;
+                }
+            })[0];
+            var fromID = places.filter(function (place) {
+                if (place.place_name === from) {
+                    return place;
+                }
+            })[0];
+            this.props.searchJourney({ to: toID, from: fromID, date: date });
             e.preventDefault();
         }
     }, {
@@ -15148,65 +15151,69 @@ var Journey = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'journeys' },
-                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
-                    'form',
-                    { onSubmit: this.handleSubmit },
+                    'div',
+                    { className: 'form-container' },
+                    _react2.default.createElement('hr', null),
                     _react2.default.createElement(
-                        'label',
-                        null,
-                        ' From: '
-                    ),
-                    _react2.default.createElement('input', { id: 'fromSelected', className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '' }),
-                    _react2.default.createElement(
-                        'datalist',
-                        { id: 'from' },
-                        places.map(function (place) {
-                            var place_id = place.place_id,
-                                place_name = place.place_name;
+                        'form',
+                        { onSubmit: this.handleSubmit.bind(this) },
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            ' From: '
+                        ),
+                        _react2.default.createElement('input', { id: 'fromSelected', className: 'field', list: 'from', placeholder: 'Stadium', type: 'text', required: '' }),
+                        _react2.default.createElement(
+                            'datalist',
+                            { id: 'from' },
+                            places.map(function (place) {
+                                var place_id = place.place_id,
+                                    place_name = place.place_name;
 
-                            return _react2.default.createElement(
-                                'option',
-                                { key: place_id, value: place_name },
-                                place_name
-                            );
-                        })
-                    ),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement(
-                        'label',
-                        null,
-                        ' To: '
-                    ),
-                    _react2.default.createElement('input', { id: 'toSelected', className: 'field', list: 'To', placeholder: 'Hotel', type: 'text', required: '' }),
-                    _react2.default.createElement(
-                        'datalist',
-                        { id: 'To' },
-                        places.map(function (place) {
-                            var place_id = place.place_id,
-                                place_name = place.place_name;
+                                return _react2.default.createElement(
+                                    'option',
+                                    { key: place_id, value: place_name },
+                                    place_name
+                                );
+                            })
+                        ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            ' To: '
+                        ),
+                        _react2.default.createElement('input', { id: 'toSelected', className: 'field', list: 'To', placeholder: 'Hotel', type: 'text', required: '' }),
+                        _react2.default.createElement(
+                            'datalist',
+                            { id: 'To' },
+                            places.map(function (place) {
+                                var place_id = place.place_id,
+                                    place_name = place.place_name;
 
-                            return _react2.default.createElement(
-                                'option',
-                                { key: place_id, value: place_name },
-                                place_name
-                            );
-                        })
-                    ),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement(
-                        'label',
-                        null,
-                        ' Date: '
-                    ),
-                    _react2.default.createElement('input', { id: 'date', className: 'field', type: 'date', required: '', onChange: function onChange(_ref) {
-                            var target = _ref.target;
-                            return _this2.setState({ date: target.value });
-                        } }),
-                    _react2.default.createElement(
-                        'button',
-                        { className: 'submit' },
-                        ' Search Journey '
+                                return _react2.default.createElement(
+                                    'option',
+                                    { key: place_id, value: place_name },
+                                    place_name
+                                );
+                            })
+                        ),
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            ' Date: '
+                        ),
+                        _react2.default.createElement('input', { id: 'date', className: 'field', type: 'date', required: '', onChange: function onChange(_ref) {
+                                var target = _ref.target;
+                                return _this2.setState({ date: target.value });
+                            } }),
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'submit' },
+                            ' Search Journey '
+                        )
                     )
                 )
             );
@@ -16698,7 +16705,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(148);
 
-var _reactRouter = __webpack_require__(26);
+var _reactRouter = __webpack_require__(23);
 
 var _App = __webpack_require__(140);
 
@@ -16779,7 +16786,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reactRouter = __webpack_require__(26);
+var _reactRouter = __webpack_require__(23);
 
 var INITIAL_STATE = {
     accommodation: null,
@@ -23118,7 +23125,7 @@ module.exports = EnterLeaveEventPlugin;
 
 var _assign = __webpack_require__(4);
 
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 
 var getTextContentAccessor = __webpack_require__(116);
 
@@ -27828,7 +27835,7 @@ var _assign = __webpack_require__(4);
 
 var EventListener = __webpack_require__(90);
 var ExecutionEnvironment = __webpack_require__(7);
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 var ReactDOMComponentTree = __webpack_require__(6);
 var ReactUpdates = __webpack_require__(14);
 
@@ -28750,7 +28757,7 @@ module.exports = ReactPropTypeLocationNames;
 var _assign = __webpack_require__(4);
 
 var CallbackQueue = __webpack_require__(101);
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 var ReactBrowserEventEmitter = __webpack_require__(44);
 var ReactInputSelection = __webpack_require__(108);
 var ReactInstrumentation = __webpack_require__(13);
@@ -29027,7 +29034,7 @@ module.exports = ReactRef;
 
 var _assign = __webpack_require__(4);
 
-var PooledClass = __webpack_require__(23);
+var PooledClass = __webpack_require__(24);
 var Transaction = __webpack_require__(46);
 var ReactInstrumentation = __webpack_require__(13);
 var ReactServerUpdateQueue = __webpack_require__(255);
@@ -33236,7 +33243,7 @@ module.exports = KeyEscapeUtils;
 
 
 
-var _prodInvariant = __webpack_require__(25);
+var _prodInvariant = __webpack_require__(26);
 
 var invariant = __webpack_require__(1);
 
@@ -33354,7 +33361,7 @@ module.exports = PooledClass;
 
 
 var PooledClass = __webpack_require__(307);
-var ReactElement = __webpack_require__(24);
+var ReactElement = __webpack_require__(25);
 
 var emptyFunction = __webpack_require__(11);
 var traverseAllChildren = __webpack_require__(318);
@@ -33549,11 +33556,11 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(25),
+var _prodInvariant = __webpack_require__(26),
     _assign = __webpack_require__(4);
 
 var ReactComponent = __webpack_require__(80);
-var ReactElement = __webpack_require__(24);
+var ReactElement = __webpack_require__(25);
 var ReactPropTypeLocationNames = __webpack_require__(135);
 var ReactNoopUpdateQueue = __webpack_require__(81);
 
@@ -34278,7 +34285,7 @@ module.exports = ReactClass;
 
 
 
-var ReactElement = __webpack_require__(24);
+var ReactElement = __webpack_require__(25);
 
 /**
  * Create a factory that creates HTML tag elements.
@@ -34454,7 +34461,7 @@ module.exports = ReactDOMFactories;
 
 
 
-var _require = __webpack_require__(24),
+var _require = __webpack_require__(25),
     isValidElement = _require.isValidElement;
 
 var factory = __webpack_require__(98);
@@ -34566,7 +34573,7 @@ module.exports = '15.5.4';
 
 
 
-var _prodInvariant = __webpack_require__(25);
+var _prodInvariant = __webpack_require__(26);
 
 var ReactPropTypeLocationNames = __webpack_require__(135);
 var ReactPropTypesSecret = __webpack_require__(312);
@@ -34684,9 +34691,9 @@ module.exports = getNextDebugID;
  */
 
 
-var _prodInvariant = __webpack_require__(25);
+var _prodInvariant = __webpack_require__(26);
 
-var ReactElement = __webpack_require__(24);
+var ReactElement = __webpack_require__(25);
 
 var invariant = __webpack_require__(1);
 
@@ -34729,7 +34736,7 @@ module.exports = onlyChild;
 
 
 
-var _prodInvariant = __webpack_require__(25);
+var _prodInvariant = __webpack_require__(26);
 
 var ReactCurrentOwner = __webpack_require__(15);
 var REACT_ELEMENT_TYPE = __webpack_require__(133);

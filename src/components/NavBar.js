@@ -30,9 +30,6 @@ class NavBar extends Component {
                             <a onClick={ () => hashHistory.push('/Journey')}><li>
                                 <h3>Journeys</h3>
                             </li></a>
-                            <a onClick={ () => hashHistory.push('/Search')}><li>
-                                <h3>Search</h3>
-                            </li></a>
                            <a onClick= {() => this.props.logOut()}><li>
                                 <h3 href="#contact">Log Out</h3>
                             </li></a>
@@ -48,12 +45,12 @@ class NavBar extends Component {
                     </div>
                     <div className="menu">
                         <ul>
-                            <li>
-                                <a onClick={()=> hashHistory.push('/Register')}><h3>Register</h3></a>
-                            </li>
-                            <li>
-                                <a onClick={()=> hashHistory.push('/SignIn')}><h3>Login</h3></a>
-                            </li>
+                           <a onClick={()=> hashHistory.push('/Register')}><li>
+                                <h3>Register</h3>
+                            </li></a>
+                            <a onClick={()=> hashHistory.push('/SignIn')}><li>
+                                <h3>Login</h3>
+                            </li></a>
                         </ul>
                         </div>
                 </div>

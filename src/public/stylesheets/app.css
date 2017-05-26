@@ -120,7 +120,15 @@ body{
     margin: auto;
     padding: 4em;
     background: #F4EADE;
+    width: 60vw;
 
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }
 
 .field {
