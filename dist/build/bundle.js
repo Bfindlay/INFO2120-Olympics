@@ -15608,8 +15608,6 @@ var _actions = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -15635,10 +15633,12 @@ var SignIn = function (_Component) {
     _createClass(SignIn, [{
         key: 'hello',
         value: function hello(e) {
-            if (key.keyCode == 13) {
+            if (e.keyCode == 13) {
                 console.log("Enter key");
             }
         }
+        // onKeyPress={ () => { this.hello(e)}}
+
     }, {
         key: 'render',
         value: function render() {
@@ -15678,12 +15678,10 @@ var SignIn = function (_Component) {
                             null,
                             ' Password'
                         ),
-                        _react2.default.createElement('input', _defineProperty({ type: 'password', onChange: function onChange(_ref2) {
+                        _react2.default.createElement('input', { type: 'password', onChange: function onChange(_ref2) {
                                 var target = _ref2.target;
                                 return _this2.setState({ password: target.value });
-                            } }, 'onChange', function onChange() {
-                            _this2.hello(e);
-                        })),
+                            } }),
                         _react2.default.createElement(
                             'button',
                             { onClick: function onClick() {

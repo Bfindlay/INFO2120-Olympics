@@ -15,10 +15,11 @@ class SignIn extends Component {
     }
     
     hello(e) {
-        if(key.keyCode == 13) {
+        if(e.keyCode == 13) {
             console.log("Enter key");
         }
     }
+    // onKeyPress={ () => { this.hello(e)}}
 
     render() {
 
@@ -35,7 +36,7 @@ class SignIn extends Component {
                         <label> Member ID </label>
                         <input type="text" placeholder="A123456789" onChange={({ target }) => this.setState({ id: target.value })} />
                         <label> Password</label>
-                        <input type="password" onChange={({ target }) => this.setState({ password: target.value })} onChange={ () => { this.hello(e)}} />
+                        <input type="password" onChange={({ target }) => this.setState({ password: target.value })} />
                         <button onClick={() => this.props.logIn(this.state)}>login</button>
                         <p className="message">Not registered? <a href="#/register">Create an account</a></p>
                     </div>
