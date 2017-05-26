@@ -6,3 +6,4 @@
 > Lock routes when not signed in 
 > Prevent null searches
 > Redirect on login
+> Store accom in a cookie

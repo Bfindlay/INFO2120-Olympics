@@ -40,34 +40,36 @@ class Journey extends Component {
         const { to, from, date, fromSelected, toSelected } = this.state;
         return(
             <div className='journeys'>
-                <hr />
-                <form onSubmit={ this.handleSubmit }>
-                    <label> From: </label>
-                    <input id="fromSelected" className="field" list="from" placeholder="Stadium" type="text" required="" />
-                    <datalist id="from">
-                        {
-                            places.map( place => {
-                                const {place_id, place_name } = place;
-                                return  <option key={place_id} value={place_name}>{place_name}</option>
-                            })
-                        }
-                   </datalist>
-                   <br/>
-                    <label> To: </label>
-                    <input id="toSelected" className="field" list="To" placeholder="Hotel" type="text" required=""/>
-                    <datalist id="To">
-                        {
-                            places.map( place => {
-                                const {place_id, place_name } = place; 
-                                    return  <option key={place_id} value={place_name}>{place_name}</option>
-                            })
-                        }
-                   </datalist>
-                   <br />
-                    <label> Date: </label>
-                    <input id='date' className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
-                    <button className="submit"> Search Journey </button>
-                </form>
+                <div className='form-container'>
+                        <hr />
+                        <form onSubmit={ this.handleSubmit }>
+                            <label> From: </label>
+                            <input id="fromSelected" className="field" list="from" placeholder="Stadium" type="text" required="" />
+                            <datalist id="from">
+                                {
+                                    places.map( place => {
+                                        const {place_id, place_name } = place;
+                                        return  <option key={place_id} value={place_name}>{place_name}</option>
+                                    })
+                                }
+                        </datalist>
+                        <br/>
+                            <label> To: </label>
+                            <input id="toSelected" className="field" list="To" placeholder="Hotel" type="text" required=""/>
+                            <datalist id="To">
+                                {
+                                    places.map( place => {
+                                        const {place_id, place_name } = place; 
+                                            return  <option key={place_id} value={place_name}>{place_name}</option>
+                                    })
+                                }
+                        </datalist>
+                        <br />
+                            <label> Date: </label>
+                            <input id='date' className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
+                            <button className="submit"> Search Journey </button>
+                        </form>
+                    </div>
             </div>
         )
     }
