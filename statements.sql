@@ -76,6 +76,12 @@ FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member
                              JOIN olympics.member M ON (A.member_id = M.member_id)
 ORDER BY Medallist ASC;
 
+--Get Event details (Event name, first last name of officials, roles)
+SELECT E.event_name , M.given_names || ' ' || M.family_name AS name, role
+FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
+WHERE RE.event_id = 3;
+
+
 /*********************************************/
 --PAGED Results
 --USE LIMIT xxx, etc
