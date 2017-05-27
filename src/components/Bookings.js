@@ -22,7 +22,6 @@ class Bookings extends Component {
     render(){
         const { bookings } = this.props.DB;
         const error = (bookings.length === 0) ? <div className='error'><h3 id='error'> No Bookings found </h3></div> : null;
-        console.log(bookings)
         return(
             <div className="card">
                 <h2>My Bookings</h2>
@@ -48,6 +47,7 @@ class Bookings extends Component {
                                         <td>{booking.to_place}</td>
                                         <td>{booking.from_place}</td>
                                         <td>{booking.vehicle_code}</td>
+                                        <td><button className='button'>View Details</button></td>
                                     </tr>
                                 )
                             })
