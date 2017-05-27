@@ -9,7 +9,9 @@ class JourneyResult extends Component {
         super();
     }
     componentWillMount(){
-        
+        if(!this.props.DB.signed){
+            hashHistory.push('/');
+        }
     }
     componentWillUnmount(){
         //reset journeys;
@@ -19,11 +21,13 @@ class JourneyResult extends Component {
     render(){
         const { to, from, date } = this.props.params;
         const { journeys } = this.props.DB;
-        console.log(journeys);
+        const error = (journeys.length === 0) ? <div className='error'><h3 id='error'> No Journeys Found for search paramaters </h3></div> : null;
+
         return(
             <div className="card">
                 <h2>Journeys:</h2>
                 <h3>To: {to}  From: {from} on {date}</h3>
+                {error}
                 <table cellSpacing="0">
                     <tbody>
                         <tr id="header">
@@ -33,7 +37,8 @@ class JourneyResult extends Component {
                             <th>From</th>
                             <th>Vehicle</th>
                         </tr>
-                        { journeys.map( journey => {
+                        {  
+                            journeys.map( journey => {
                             let dt = journey.depart_time.replace(".000Z", "");
                             let date = dt.split('T')[0];
                             let time = dt.split('T')[1];

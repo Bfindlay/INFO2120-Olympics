@@ -52,7 +52,7 @@ class Journey extends Component {
                     <hr />
                     <form onSubmit={ this.handleSubmit.bind(this) }>
                         <label> From: </label>
-                        <input id="fromSelected" className="field" list="from" placeholder="Stadium" type="text" required="" />
+                        <input id="fromSelected" className="field" list="from" placeholder="Stadium" type="text" required="required" />
                         <datalist id="from">
                             { places.map( place => {
                                     const {place_id, place_name } = place;
@@ -62,7 +62,7 @@ class Journey extends Component {
                     </datalist>
                     <br/>
                         <label> To: </label>
-                        <input id="toSelected" className="field" list="To" placeholder="Hotel" type="text" required=""/>
+                        <input id="toSelected" className="field" list="To" placeholder="Hotel" type="text" required="required"/>
                         <datalist id="To">
                             { places.map( place => {
                                     const {place_id, place_name } = place; 
@@ -72,7 +72,7 @@ class Journey extends Component {
                     </datalist>
                     <br />
                         <label> Date: </label>
-                        <input id='date' className="field"  type="date" required=""onChange={({target}) => this.setState({date: target.value})}/>
+                        <input id='date' className="field"  type="date" required="required" onChange={({target}) => this.setState({date: target.value})}/>
                         <button className="submit"> Search Journey </button>
                     </form>
                 </div>
