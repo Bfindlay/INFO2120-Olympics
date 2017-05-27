@@ -3,7 +3,8 @@ import {
     LOG_OUT,
     MEMBER_DETAILS,
     PLACES,
-    BOOKINGS
+    BOOKINGS,
+    SET_JOURNEYS
 } from './types';
 
 import axios from 'axios';
@@ -76,6 +77,10 @@ export const getPlaces = () => {
             })
             .catch(err => console.log(err));
     }
+}
+
+export const setJourney = state => {
+    return { type: SET_JOURNEYS, payload: state}
 }
 
 export const getBookings = member_id => {

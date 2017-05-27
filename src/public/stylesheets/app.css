@@ -201,6 +201,70 @@ select:focus {
   outline: none;
 }
 
+
+.card {
+  height: auto;
+  width: 80%;
+  min-width: 802px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 5px -5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+table {
+  width: 100%;
+  margin-top: 15px;
+}
+
+th, tr, td, h2 {
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  padding: 12px 20px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px 20px 5px;
+  color: #404040;
+}
+
+th {
+  font-size: 12px;
+  font-weight: 500;
+  color: #757575;
+}
+
+td {
+  font-size: 13px;
+  font-weight: 400;
+  color: #292929;
+  border-top: 1px solid #d8d8d8;
+  border-collapse: collapse;
+  text-align: center;
+}
+td a {
+  text-decoration: none;
+  color: #2980b9;
+  transition: 100ms all ease-in-out;
+}
+td a:hover {
+  color: #55a5d9;
+}
+
+tr:not(#header) {
+  transition: 200ms all ease-in-out;
+}
+tr:not(#header):hover {
+  background: #eeeeee;
+}
+
 /*****************************/
 
 .login-page {

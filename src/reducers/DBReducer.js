@@ -9,7 +9,8 @@ const INITIAL_STATE = {
     type: null,
     signed: false,
     bookings: [],
-    places: []
+    places: [],
+    journeys: []
 }
 import { hashHistory } from 'react-router';
 import cookie from 'react-cookie';
@@ -36,6 +37,9 @@ export default (state = INITIAL_STATE, action) => {
         }
         case 'PLACES' : {
             return { ...state, places: action.payload };
+        }
+        case 'SET_JOURNEYS' : {
+            return { ...state, journeys: action.payload };
         }
         case 'LOG_OUT': {
             hashHistory.push('/');
