@@ -48,6 +48,14 @@ INSERT INTO olympics.Booking
 
 */
 
+--Get People in the current journey/booking
+INSERT INTO olympics.booking
+	VALUES('A000021704', 'A000021705', '2017-11-12 12:00:00' , 2);
+	
+SELECT given_names || ' ' || family_name AS Person
+FROM olympics.booking B JOIN olympics.Member M ON (B.booked_for = M.member_id) JOIN olympics.journey J ON (B.journey_id = J.journey_id)
+WHERE B.journey_id = 2;
+
 
 -- Member Details
 --Get member_id, accomodation building name, number of bookings
