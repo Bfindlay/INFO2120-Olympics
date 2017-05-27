@@ -11,6 +11,43 @@ Extras;
 -List of people that are running an event
 */
 
+/*
+
+Staff for journeys/booking
+A000026985
+cool
+
+Staff for booked_by
+A000021705
+chicago1
+
+	
+INSERT INTO olympics.Journey
+	VALUES(1, '2017-05-11 00:00:00',2, 4, 'LBII-402', 1, '2017-05-11 00:30:00');
+	
+INSERT INTO olympics.Journey
+	VALUES(2, '2017-05-12 00:00:00',4, 2, 'HRXN-121', 1, '2017-05-12 00:45:00');
+
+INSERT INTO olympics.Journey
+	VALUES(3, '2017-06-11 00:00:00',8, 10, 'DVOJ-135', 1, '2017-06-11 12:31:00');
+	
+INSERT INTO olympics.Journey
+	VALUES(4, '2017-06-12 00:00:00',10, 8, 'EEOV-129', 1, '2017-06-12 01:46:52');
+	
+INSERT INTO olympics.Booking
+	VALUES('A000026985', 'A000021705', '2016-04-11 00:00:00', 1);
+
+INSERT INTO olympics.Booking
+	VALUES('A000026985', 'A000021705', '2016-10-12 00:00:00', 2);
+	
+INSERT INTO olympics.Booking
+	VALUES('A000026985', 'A000021705', '2016-10-12 00:01:00', 3);
+
+INSERT INTO olympics.Booking
+	VALUES('A000026985', 'A000021705', '2016-10-12 00:02:00', 4);
+
+*/
+
 
 -- Member Details
 --Get member_id, accomodation building name, number of bookings
