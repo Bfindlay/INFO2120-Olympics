@@ -80,7 +80,7 @@ class BookingItem extends Component {
             </div>
         )
         }else{
-            return  <Loading type='spin' height='100' width='100' />
+            return  <Loading type={'spin'} color={'white'} height={100} width={100} />
         }
         
     }
