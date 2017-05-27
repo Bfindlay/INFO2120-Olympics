@@ -146,6 +146,7 @@ WHERE RE.event_id = 3;
 --"HRXN-121" Max of 2
 --Adding A000030765 to Journey 2
 
+
 DELETE FROM olympics.booking
 	WHERE journey_id = 2;
 	
@@ -158,6 +159,7 @@ CREATE FUNCTION Staff_Booking()
 	DECLARE
 		_count INTEGER;
 		_capacity INTEGER;
+		_staffBool bool;
 	BEGIN
 		SELECT nbooked INTO _count
 		FROM olympics.journey
@@ -167,14 +169,19 @@ CREATE FUNCTION Staff_Booking()
 		FROM olympics.journey J JOIN olympics.vehicle V USING (vehicle_code)
 		WHERE J.journey_id = NEW.journey_id;
 
+		SELECT EXISTS(SELECT * FROM olympics.Staff S JOIN olympics.member M USING (member_id) WHERE M.member_id = NEW.booked_by) INTO _staffBool;
+		
 		IF _count >= _capacity THEN
-			RAISE EXCEPTION 'Capcity Reached';
+			RAISE EXCEPTION 'Capacity Reached';
+		ELSIF  _staffBool = 'f' THEN
+			RAISE EXCEPTION 'Not a Staff Member';
 		END IF;
-
+		
 		UPDATE olympics.journey
 		SET nbooked = nbooked + 1
 		WHERE journey_id = NEW.journey_id;
 		RETURN NEW;
+
 	END;
 	$Staff_Booking$ LANGUAGE plpgsql;
 
@@ -195,6 +202,8 @@ INSERT INTO olympics.Booking
 INSERT INTO olympics.booking
 	VALUES('A000028995', 'A000021705', '2014-05-23 12:00:00', 2);
 SELECT * FROM olympics.journey WHERE journey_id = 2;
+
+
 
 
 
