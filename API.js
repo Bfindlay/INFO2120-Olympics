@@ -53,19 +53,18 @@ Router.post('/details/:member_id', (req, res) =>{
 Router.post('/bookings/:member_id', (req, res) =>{
     const { member_id } = req.params;
     console.log(member_id);
-    pool.query(`SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time, vehicle_code
+    pool.query(`SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time, vehicle_code, journey_id
 FROM olympics.booking B 
             JOIN olympics.journey J USING (journey_id) 
 			JOIN olympics.member M ON (B.booked_for = M.member_id) 
 			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
 			JOIN olympics.place P ON (J.from_place = P.place_id)
 			JOIn olympics.place PP ON (J.to_place = PP.place_id)
-WHERE M.member_id = '${member_id}'`, (err, response) => {
+            WHERE M.member_id = '${member_id}'`, (err, response) => {
             if(err){
                 console.log('err', err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
             }else{
-                console.log('result', response.rows);
                 res.send(response.rows);
             }
         });
@@ -85,13 +84,20 @@ Router.get('/places', (req, res) => {
 
 Router.get('/booking/:member_id/:journey_id', (req, res) => {
     const { journey_id , member_id} = req.params;
-    pool.query(`SELECT 
-            FROM olympics.booking B JOIN olympics.Member M ON (B.booked_for = M.member_id) JOIN olympics.journey J ON (B.journey_id = J.journey_id) WHERE B.journey_id = ${journey_id} AND m.member_id = '${member_id}';`, (err, response) => {
+    pool.query(`SELECT M.given_names || ' ' || M.family_name, vehicle_code, depart_time, date(J.depart_time), P.place_name As to, PP.place_name AS from, MM.given_names AS booked_by, when_booked
+            FROM olympics.booking B JOIN olympics.member M ON (B.booked_for = M.member_id) 
+			 JOIN olympics.member MM ON (B.booked_by = MM.member_id)
+			 JOIN olympics.journey J ON(B.journey_id = J.journey_id)
+			 JOIN olympics.place P ON (P.place_id = J.from_place)
+			 JOIN olympics.place PP ON (PP.place_id = J.to_place)
+			 JOIN olympics.vehicle V USING(vehicle_code)
+            WHERE booked_for = '${member_id}' AND J.journey_id = ${journey_id};`, (err, response) => {
         if(err){
             return res.status(500).send(err);
         }else if( response.rowCount <= 0){
             return res.status(500).send("Error in query format");
         }
+        console.log(response.rows);
         res.send(response.rows);
             
     })

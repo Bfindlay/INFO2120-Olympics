@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getBookings} from '../actions'
-import { hashHistory } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 
 class Bookings extends Component {
 
@@ -20,7 +20,7 @@ class Bookings extends Component {
     }
 
     render(){
-        const { bookings } = this.props.DB;
+        const { bookings, member_id } = this.props.DB;
         const error = (bookings.length === 0) ? <div className='error'><h3 id='error'> No Bookings found </h3></div> : null;
         return(
             <div className="card">
@@ -47,7 +47,7 @@ class Bookings extends Component {
                                         <td>{booking.to_place}</td>
                                         <td>{booking.from_place}</td>
                                         <td>{booking.vehicle_code}</td>
-                                        <td><button className='button'>View Details</button></td>
+                                        <td><Link to={`/Booking/${member_id}/${booking.journey_id}`}><button className='button'>View Details</button></Link></td>
                                     </tr>
                                 )
                             })
