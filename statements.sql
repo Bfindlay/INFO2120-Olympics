@@ -142,6 +142,65 @@ WHERE RE.event_id = 3;
 --USE LIMIT xxx, etc
 
 
+/******nbooked updated when booking is added ******/
+--"HRXN-121" Max of 2
+--Adding A000030765 to Journey 2
+
+DELETE FROM olympics.booking
+	WHERE journey_id = 2;
+	
+DELETE FROM olympics.journey
+	WHERE journey_id = 2;
+	
+CREATE FUNCTION Staff_Booking()
+	RETURNS TRIGGER AS
+		$Staff_Booking$
+	DECLARE
+		_count INTEGER;
+		_capacity INTEGER;
+	BEGIN
+		SELECT nbooked INTO _count
+		FROM olympics.journey
+		WHERE journey_id = NEW.journey_id;
+
+		SELECT capacity INTO _capacity
+		FROM olympics.journey J JOIN olympics.vehicle V USING (vehicle_code)
+		WHERE J.journey_id = NEW.journey_id;
+
+		IF _count >= _capacity THEN
+			RAISE EXCEPTION 'Capcity Reached';
+		END IF;
+
+		UPDATE olympics.journey
+		SET nbooked = nbooked + 1
+		WHERE journey_id = NEW.journey_id;
+		RETURN NEW;
+	END;
+	$Staff_Booking$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Staff_Booking BEFORE INSERT OR UPDATE ON olympics.booking
+FOR EACH ROW EXECUTE PROCEDURE Staff_Booking();
+
+SELECT * FROM olympics.journey WHERE journey_id = 2;
+
+INSERT INTO olympics.Journey
+	VALUES(2, '2017-05-12 00:00:00',4, 2, 'HRXN-121', 0, '2017-05-12 00:45:00');
+
+INSERT INTO olympics.booking
+	VALUES('A000028072', 'A000021705', '2014-05-23 12:00:00', 2);
+	
+INSERT INTO olympics.Booking
+	VALUES('A000026985', 'A000021705', '2016-10-12 00:00:00', 2);
+	
+INSERT INTO olympics.booking
+	VALUES('A000028995', 'A000021705', '2014-05-23 12:00:00', 2);
+SELECT * FROM olympics.journey WHERE journey_id = 2;
+
+
+
+/*********************
+
+
 /**
 TO DOCheck Staff is a valid tuple in olympics.staff
 Returns true for existing, false for not existing
