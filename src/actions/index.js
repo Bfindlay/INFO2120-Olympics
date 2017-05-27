@@ -22,10 +22,10 @@ export const logIn = auth => {
                 axios.post(`api/details/${decoded.data.member_id}`, {token: token})
                     .then(response => {
                        axios.post(`/api/bookings/${decoded.data.member_id}`, {token : cookie.load('token')})
-                        .then( response => {
+                        .then( res => {
                             console.log('details', response);
                             dispatch({type: MEMBER_DETAILS, payload: response});
-                            dispatch({ type: MEMBER_DETAILS, payload: response });
+                            dispatch({ type: BOOKINGS, payload: res });
                             dispatch({type: LOG_IN, payload: decoded});
                         })
                         .catch( err => {

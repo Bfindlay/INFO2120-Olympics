@@ -30239,10 +30239,10 @@
 	            _reactCookie2.default.save('token', token, { path: '/', maxAge: 600 });
 	            _reactCookie2.default.save('member', decoded, { path: '/', maxAge: 600 });
 	            _axios2.default.post('api/details/' + decoded.data.member_id, { token: token }).then(function (response) {
-	                _axios2.default.post('/api/bookings/' + decoded.data.member_id, { token: _reactCookie2.default.load('token') }).then(function (response) {
+	                _axios2.default.post('/api/bookings/' + decoded.data.member_id, { token: _reactCookie2.default.load('token') }).then(function (res) {
 	                    console.log('details', response);
 	                    dispatch({ type: _types.MEMBER_DETAILS, payload: response });
-	                    dispatch({ type: _types.MEMBER_DETAILS, payload: response });
+	                    dispatch({ type: _types.BOOKINGS, payload: res });
 	                    dispatch({ type: _types.LOG_IN, payload: decoded });
 	                }).catch(function (err) {
 	                    console.log(err);
@@ -35255,6 +35255,12 @@
 
 	var _reactRouter = __webpack_require__(182);
 
+	var _reactCookie = __webpack_require__(313);
+
+	var _reactCookie2 = _interopRequireDefault(_reactCookie);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var INITIAL_STATE = {
 	    accommodation: null,
 	    country_code: null,
@@ -35277,7 +35283,6 @@
 	        case 'LOG_IN':
 	            {
 	                var _action$payload$data = action.payload.data,
-	                    accomodation = _action$payload$data.accomodation,
 	                    country_code = _action$payload$data.country_code,
 	                    family_name = _action$payload$data.family_name,
 	                    given_names = _action$payload$data.given_names,
@@ -35285,9 +35290,11 @@
 	                    title = _action$payload$data.title,
 	                    type = _action$payload$data.type;
 
+	                var accommodation = _reactCookie2.default.load('accommodation');
+	                console.log('reload acomm', accommodation);
 	                _reactRouter.hashHistory.push('/Details');
 	                return _extends({}, state, { signed: true,
-	                    accomodation: accomodation,
+	                    accommodation: accommodation,
 	                    country_code: country_code,
 	                    family_name: family_name,
 	                    given_names: given_names, member_id: member_id,
@@ -35299,6 +35306,7 @@
 	            {
 	                var place_name = action.payload.data.place_name;
 
+	                _reactCookie2.default.save('accommodation', place_name, { path: '/', maxAge: 600 });
 	                return _extends({}, state, { accommodation: place_name });
 	            }
 	        case 'PLACES':

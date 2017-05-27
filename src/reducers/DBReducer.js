@@ -12,14 +12,17 @@ const INITIAL_STATE = {
     places: []
 }
 import { hashHistory } from 'react-router';
+import cookie from 'react-cookie';
 export default (state = INITIAL_STATE, action) => {
     
     switch(action.type){
         case 'LOG_IN': {
-            const { accomodation, country_code, family_name, given_names, member_id, title, type } = action.payload.data;
+            const {  country_code, family_name, given_names, member_id, title, type } = action.payload.data;
+            let accommodation = cookie.load('accommodation');
+            console.log('reload acomm', accommodation);
             hashHistory.push('/Details');
             return { ...state, signed: true, 
-                    accomodation:accomodation, 
+                    accommodation: accommodation, 
                     country_code: country_code, 
                     family_name: family_name, 
                     given_names: given_names, member_id: member_id, 
@@ -29,6 +32,7 @@ export default (state = INITIAL_STATE, action) => {
         }
         case 'MEMBER_DETAILS' : {
             const { place_name } = action.payload.data;
+            cookie.save('accommodation', place_name, {path: '/', maxAge: 600 })
             return { ...state, accommodation: place_name };
         }
         case 'PLACES' : {
