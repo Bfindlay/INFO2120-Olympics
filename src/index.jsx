@@ -12,6 +12,7 @@ import Journey from './components/Journey';
 import Register from './components/Register';
 import Query from './components/Query';
 import JourneyResult from './components/JourneyResult'
+import Bookings from './components/Bookings';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import { Provider } from 'react-redux'
@@ -28,6 +29,7 @@ render(
               <IndexRoute component={App} />
               <Route path="SignIn" component={SignIn} />
               <Route path="Journey" component={Journey} />
+              <Route path="Bookings" component={Bookings} />
               <Route path="Journey/Result/:to/:from/:date" component={JourneyResult} />
               <Route path='Register' component={Register} />
               <Route path="Query" component={Query} />

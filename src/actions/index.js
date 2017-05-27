@@ -87,7 +87,7 @@ export const getBookings = member_id => {
     const { token } = cookie.load('token');
     return(dispatch) => {
         axios.post(`/api/bookings/${member_id}`, {token: token})
-            .then( res => dispatch({type: BOOKINGS, payload: res}))
+            .then( res => dispatch({type: BOOKINGS, payload: res.data}))
             .catch(err => console.log(err))
     }
 }

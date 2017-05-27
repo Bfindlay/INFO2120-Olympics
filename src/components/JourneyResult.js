@@ -46,8 +46,8 @@ class JourneyResult extends Component {
                                 <tr key={Math.random()} className="dr">
                                     <td>{date}</td>
                                     <td>{time}</td>
-                                    <td>{journey.to_place}</td>
-                                    <td>{journey.from_place}</td>
+                                    <td>{to}</td>
+                                    <td>{from}</td>
                                     <td>{journey.vehicle_code}</td>
                                 </tr>
                             )

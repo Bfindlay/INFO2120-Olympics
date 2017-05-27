@@ -53,7 +53,7 @@ Router.post('/details/:member_id', (req, res) =>{
 Router.post('/bookings/:member_id', (req, res) =>{
     const { member_id } = req.params;
     console.log(member_id);
-    pool.query(`SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time
+    pool.query(`SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time, vehicle_code
 FROM olympics.booking B 
             JOIN olympics.journey J USING (journey_id) 
 			JOIN olympics.member M ON (B.booked_for = M.member_id) 
@@ -65,6 +65,7 @@ WHERE M.member_id = '${member_id}'`, (err, response) => {
                 console.log('err', err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
             }else{
+                console.log('result', response.rows);
                 res.send(response.rows);
             }
         });
