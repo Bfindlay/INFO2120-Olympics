@@ -19,7 +19,6 @@ export default (state = INITIAL_STATE, action) => {
         case 'LOG_IN': {
             const {  country_code, family_name, given_names, member_id, title, type } = action.payload.data;
             let accommodation = cookie.load('accommodation');
-            console.log('reload acomm', accommodation);
             hashHistory.push('/Details');
             return { ...state, signed: true, 
                     accommodation: accommodation, 

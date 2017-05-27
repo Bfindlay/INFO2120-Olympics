@@ -30281,7 +30281,9 @@
 	        date = search.date;
 
 	    return function (dispatch) {
-	        _axios2.default.post('/api/journey/' + member_id + '/' + from.place_id + '/' + to.place_id + '/' + date, { token: token }).then(function (response) {}).catch(function (err) {
+	        _axios2.default.post('/api/journey/' + member_id + '/' + from.place_id + '/' + to.place_id + '/' + date, { token: token }).then(function (response) {
+	            console.log('response', response);
+	        }).catch(function (err) {
 	            return console.log(err);
 	        });
 	    };
@@ -35291,7 +35293,6 @@
 	                    type = _action$payload$data.type;
 
 	                var accommodation = _reactCookie2.default.load('accommodation');
-	                console.log('reload acomm', accommodation);
 	                _reactRouter.hashHistory.push('/Details');
 	                return _extends({}, state, { signed: true,
 	                    accommodation: accommodation,
