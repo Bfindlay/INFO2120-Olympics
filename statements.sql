@@ -57,6 +57,16 @@ FROM olympics.booking B JOIN olympics.Member M ON (B.booked_for = M.member_id) J
 WHERE B.journey_id = 2;
 
 
+--Get detailed booking details
+SELECT M.given_names || ' ' || M.family_name, vehicle_code, depart_time, date(J.depart_time), P.place_name As to, PP.place_name AS from, MM.given_names AS booked_by, when_booked
+FROM olympics.booking B JOIN olympics.member M ON (B.booked_for = M.member_id) 
+			 JOIN olympics.member MM ON (B.booked_by = MM.member_id)
+			 JOIN olympics.journey J ON(B.journey_id = J.journey_id)
+			 JOIN olympics.place P ON (P.place_id = J.from_place)
+			 JOIN olympics.place PP ON (PP.place_id = J.to_place)
+			 JOIN olympics.vehicle V USING(vehicle_code)
+WHERE booked_for = 'A000026985';
+
 -- Member Details
 --Get member_id, accomodation building name, number of bookings
 SELECT M.member_id as member_id, P.place_name as Accomodation, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B WHERE booked_for = 'A000043404')) as bookings
