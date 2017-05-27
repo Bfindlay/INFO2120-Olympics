@@ -24,9 +24,8 @@ export const logIn = auth => {
                     .then(response => {
                        axios.post(`/api/bookings/${decoded.data.member_id}`, {token : cookie.load('token')})
                         .then( res => {
-                            console.log('details', response);
                             dispatch({type: MEMBER_DETAILS, payload: response});
-                            dispatch({ type: BOOKINGS, payload: res });
+                            dispatch({ type: BOOKINGS, payload: res.data });
                             dispatch({type: LOG_IN, payload: decoded});
                         })
                         .catch( err => {
@@ -95,5 +94,7 @@ export const getBookings = member_id => {
 export const logOut = () => {
     cookie.remove('member');
     cookie.remove('token');
+    cookie.remove('bookings');
+    cookie.remove('accommodation');
     return { type: LOG_OUT, payload: true };
 }

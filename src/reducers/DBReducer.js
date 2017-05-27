@@ -20,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
         case 'LOG_IN': {
             const {  country_code, family_name, given_names, member_id, title, type } = action.payload.data;
             let accommodation = cookie.load('accommodation');
+            let bookings = cookie.load('bookings');
             hashHistory.push('/Details');
             return { ...state, signed: true, 
                     accommodation: accommodation, 
@@ -27,7 +28,8 @@ export default (state = INITIAL_STATE, action) => {
                     family_name: family_name, 
                     given_names: given_names, member_id: member_id, 
                     title: title,
-                    type: type
+                    type: type,
+                    bookings: bookings
                  }
         }
         case 'MEMBER_DETAILS' : {
@@ -39,7 +41,6 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, places: action.payload };
         }
         case 'SET_JOURNEYS' : {
-            console.log(action.payload);
             return { ...state, journeys: action.payload};
         }
         case 'LOG_OUT': {
@@ -47,7 +48,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, member_id: null, name: null, type: null, signed: false}
         }
         case 'BOOKINGS' : {
-            console.log('bookings', action.payload);
+            cookie.save('bookings', action.payload, {path: '/', maxAge: 600 })
             return { ...state, bookings: action.payload };
         }
         default:

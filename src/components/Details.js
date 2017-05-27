@@ -10,7 +10,7 @@ class Details extends Component {
     }
 
     render(){
-        const{ country_code, family_name, given_names, member_id, title, accommodation, type } = this.props.DB;
+        const{ country_code, family_name, given_names, member_id, title, accommodation, type, bookings } = this.props.DB;
         return(
             <div>
                  <div className="details-container">
@@ -20,6 +20,7 @@ class Details extends Component {
                         <h3>Name: {title} {given_names} {family_name}</h3>
                         <h3>Type: {type} for {country_code}</h3>
                         <h3>Accommodation: {accommodation}</h3>
+                        <h3>Bookings: {bookings.length} </h3>
                     </div>
                 </div>
             </div>

@@ -2,9 +2,14 @@
 
 [] Error handling on API Requests
     [] Send messages to prompt the user of errors etc
+    [√] No jounrye exists error
 []Sanitize input
 []Lock routes when not signed in 
 []Prevent null searches
 [√]Redirect on login
 [√]Store accom in a cookie
 []Fix journey search date condition - displays 10th when searching 11th etc
+[√] DETAILS PAGE
+[] EVENTS PAGE
+[] BOOKINGS PAGE
+[] JOURNEYS PAGE
