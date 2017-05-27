@@ -23,7 +23,7 @@ class JourneyResult extends Component {
         return(
             <div className="card">
                 <h2>Journeys:</h2>
-                <h3>To: {to} -  From: {from} on {date}</h3>
+                <h3>To: {to}  From: {from} on {date}</h3>
                 <table cellSpacing="0">
                     <tbody>
                         <tr id="header">
