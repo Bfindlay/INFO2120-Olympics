@@ -170,18 +170,19 @@ CREATE FUNCTION Staff_Booking()
 		WHERE J.journey_id = NEW.journey_id;
 
 		SELECT EXISTS(SELECT * FROM olympics.Staff S JOIN olympics.member M USING (member_id) WHERE M.member_id = NEW.booked_by) INTO _staffBool;
-		
+	
 		IF _count >= _capacity THEN
 			RAISE EXCEPTION 'Capacity Reached';
+			ROLLBACK;
 		ELSIF  _staffBool = 'f' THEN
 			RAISE EXCEPTION 'Not a Staff Member';
+			ROLLBACK;
 		END IF;
-		
 		UPDATE olympics.journey
 		SET nbooked = nbooked + 1
 		WHERE journey_id = NEW.journey_id;
 		RETURN NEW;
-
+	COMMIT;
 	END;
 	$Staff_Booking$ LANGUAGE plpgsql;
 
@@ -202,42 +203,3 @@ INSERT INTO olympics.Booking
 INSERT INTO olympics.booking
 	VALUES('A000028995', 'A000021705', '2014-05-23 12:00:00', 2);
 SELECT * FROM olympics.journey WHERE journey_id = 2;
-
-
-
-
-
-/*********************
-
-
-/**
-TO DOCheck Staff is a valid tuple in olympics.staff
-Returns true for existing, false for not existing
-
-SELECT EXISTS(SELECT 1 FROM Olympics.staff S WHERE S.member_id = 'A000021703');
-
-
-//UNTESTED
-
-BEGIN TRANSACTION
---Check member does not exist in the booking to update
-
-IF SELECT EXISTS(SELECT 1 FROM olympics.booking  B WHERE B.booked_for = '${memeber_id}) THEN
-    ROLLBACK;
-ELSE
---Check Journey nbooked capcacity, If exceeded rollback
-IF SELECT COUNT(nbooked) FROM olympics.Journey J JOIN olympics.vehicle V USING (vehicle_code) WHERE J.nbooked < V.capacity > 1
---Add new Booking Entry
-INSERT INTO olympics.bookings
-    SET('${member_id}, '${member_id}', ${date}, ${journey_id});
-
---Update nbooked
-UPDATE olympics.journey
-    SET(nbooked = nbooked + 1);
-COMMIT;
-
-ELSE
-ROLLBACK;
- */
-
-
