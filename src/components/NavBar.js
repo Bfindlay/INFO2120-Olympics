@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { logOut } from '../actions';
+
 class NavBar extends Component {
 
     constructor(){

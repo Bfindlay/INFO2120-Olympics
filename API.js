@@ -50,15 +50,22 @@ Router.post('/details/:member_id', (req, res) =>{
 });
 
 
-Router.get('/bookings/:member_id', (req, res) =>{
+Router.post('/bookings/:member_id', (req, res) =>{
     const { member_id } = req.params;
-    pool.query(`SELECT B.booked_for, B.booked_by, J.depart_time FROM olympics.booking B JOIN olympics.journey J ON (J.journey_id = B.journey_id) 
-        WHERE booked_for = '${member_id}' ORDER by J.depart_time ASC;`, (err, response) => {
+    console.log(member_id);
+    pool.query(`SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time
+FROM olympics.booking B 
+            JOIN olympics.journey J USING (journey_id) 
+			JOIN olympics.member M ON (B.booked_for = M.member_id) 
+			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
+			JOIN olympics.place P ON (J.from_place = P.place_id)
+			JOIn olympics.place PP ON (J.to_place = PP.place_id)
+WHERE M.member_id = '${member_id}'`, (err, response) => {
             if(err){
-                console.log(err); //TODO ERROR HANDLING
+                console.log('err', err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
             }else{
-                 res.send(response.rows);
+                res.send(response.rows);
             }
         });
 });
@@ -97,7 +104,7 @@ Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
         } 
     });
 })
-
+//2017-06-15 13:33:33.291138
 //A000022211 
 //139 Ultimo - Mountain Street
 //558 Sydney Olympic Park, Race Walks Course

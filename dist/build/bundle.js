@@ -20714,7 +20714,14 @@ var _invariant2 = _interopRequireDefault(_invariant);
 
 var _ExecutionEnvironment = __webpack_require__(54);
 
+<<<<<<< HEAD
 var _BrowserProtocol = __webpack_require__(53);
+=======
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.logOut = exports.getBookings = exports.getPlaces = exports.searchJourney = exports.reloadUser = exports.memberDetails = exports.logIn = undefined;
+>>>>>>> 240aae5bd2a96c51c08886c31a1e8779b01a2a75
 
 var BrowserProtocol = _interopRequireWildcard(_BrowserProtocol);
 
@@ -20747,6 +20754,7 @@ var createBrowserHistory = function createBrowserHistory() {
 
   !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? (0, _invariant2.default)(false, 'Browser history needs a DOM') : (0, _invariant2.default)(false) : void 0;
 
+<<<<<<< HEAD
   var useRefresh = options.forceRefresh || !(0, _DOMUtils.supportsHistory)();
   var Protocol = useRefresh ? RefreshProtocol : BrowserProtocol;
 
@@ -20755,6 +20763,42 @@ var createBrowserHistory = function createBrowserHistory() {
       pushLocation = Protocol.pushLocation,
       replaceLocation = Protocol.replaceLocation,
       go = Protocol.go;
+=======
+	            var decoded = (0, _jwtDecode2.default)(token);
+	            _reactCookie2.default.save('token', token, { path: '/', maxAge: 600 });
+	            _reactCookie2.default.save('member', decoded, { path: '/', maxAge: 600 });
+	            _axios2.default.post('api/details/' + decoded.data.member_id, { token: token }).then(function (response) {
+	                _axios2.default.post('/api/bookings/' + decoded.data.member_id, { token: _reactCookie2.default.load('token') }).then(function (res) {
+	                    console.log('details', response);
+	                    dispatch({ type: _types.MEMBER_DETAILS, payload: response });
+	                    dispatch({ type: _types.BOOKINGS, payload: res });
+	                    dispatch({ type: _types.LOG_IN, payload: decoded });
+	                }).catch(function (err) {
+	                    console.log(err);
+	                });
+	            }).catch(function (err) {
+	                return console.log(err);
+	            });
+	        }).catch(function (response) {
+	            console.log('error', response);
+	        });
+	    };
+	};
+
+	var memberDetails = exports.memberDetails = function memberDetails(id) {
+	    return function (dispatch) {
+	        _axios2.default.post('/api/details/' + id, { token: _reactCookie2.default.load('token') }).then(function (response) {
+	            console.log('details', response);
+	            dispatch({ type: _types.MEMBER_DETAILS, payload: response });
+	        }).catch(function (err) {
+	            console.log(err);
+	        });
+	    };
+	};
+	var reloadUser = exports.reloadUser = function reloadUser(user) {
+	    return { type: _types.LOG_IN, payload: user };
+	};
+>>>>>>> 240aae5bd2a96c51c08886c31a1e8779b01a2a75
 
 
   var history = (0, _createHistory2.default)(_extends({
@@ -20771,7 +20815,37 @@ var createBrowserHistory = function createBrowserHistory() {
   var startListener = function startListener(listener, before) {
     if (++listenerCount === 1) stopListener = BrowserProtocol.startListener(history.transitionTo);
 
+<<<<<<< HEAD
     var unlisten = before ? history.listenBefore(listener) : history.listen(listener);
+=======
+	var getPlaces = exports.getPlaces = function getPlaces() {
+	    return function (dispatch) {
+	        _axios2.default.get('/api/places').then(function (res) {
+	            return dispatch({ type: _types.PLACES, payload: res.data });
+	        }).catch(function (err) {
+	            return console.log(err);
+	        });
+	    };
+	};
+
+	var getBookings = exports.getBookings = function getBookings(member_id) {
+	    var _cookie$load2 = _reactCookie2.default.load('token'),
+	        token = _cookie$load2.token;
+
+	    return function (dispatch) {
+	        _axios2.default.post('/api/bookings/' + member_id, { token: token }).then(function (res) {
+	            return dispatch({ type: _types.BOOKINGS, payload: res });
+	        }).catch(function (err) {
+	            return console.log(err);
+	        });
+	    };
+	};
+	var logOut = exports.logOut = function logOut() {
+	    _reactCookie2.default.remove('member');
+	    _reactCookie2.default.remove('token');
+	    return { type: _types.LOG_OUT, payload: true };
+	};
+>>>>>>> 240aae5bd2a96c51c08886c31a1e8779b01a2a75
 
     return function () {
       unlisten();
@@ -20780,9 +20854,21 @@ var createBrowserHistory = function createBrowserHistory() {
     };
   };
 
+<<<<<<< HEAD
   var listenBefore = function listenBefore(listener) {
     return startListener(listener, true);
   };
+=======
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var IS_LOGGED_IN = exports.IS_LOGGED_IN = 'IS_SIGNED_IN';
+	var LOG_IN = exports.LOG_IN = 'LOG_IN';
+	var LOG_OUT = exports.LOG_OUT = 'LOG_OUT';
+	var MEMBER_DETAILS = exports.MEMBER_DETAILS = 'MEMBER_DETAILS';
+	var PLACES = exports.PLACES = 'PLACES';
+	var BOOKINGS = exports.BOOKINGS = 'BOOKINGS';
+>>>>>>> 240aae5bd2a96c51c08886c31a1e8779b01a2a75
 
   var listen = function listen(listener) {
     return startListener(listener, false);
@@ -35214,6 +35300,7 @@ exports['default'] = result;
 "use strict";
 
 
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
@@ -35263,6 +35350,80 @@ module.exports = function(module) {
 	return module;
 };
 
+=======
+	var _reactCookie = __webpack_require__(313);
+
+	var _reactCookie2 = _interopRequireDefault(_reactCookie);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var INITIAL_STATE = {
+	    accommodation: null,
+	    country_code: null,
+	    family_name: null,
+	    given_names: null,
+	    member_id: null,
+	    title: null,
+	    type: null,
+	    signed: false,
+	    bookings: [],
+	    places: []
+	};
+
+	exports.default = function () {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
+	    var action = arguments[1];
+
+
+	    switch (action.type) {
+	        case 'LOG_IN':
+	            {
+	                var _action$payload$data = action.payload.data,
+	                    country_code = _action$payload$data.country_code,
+	                    family_name = _action$payload$data.family_name,
+	                    given_names = _action$payload$data.given_names,
+	                    member_id = _action$payload$data.member_id,
+	                    title = _action$payload$data.title,
+	                    type = _action$payload$data.type;
+
+	                var accommodation = _reactCookie2.default.load('accommodation');
+	                console.log('reload acomm', accommodation);
+	                _reactRouter.hashHistory.push('/Details');
+	                return _extends({}, state, { signed: true,
+	                    accommodation: accommodation,
+	                    country_code: country_code,
+	                    family_name: family_name,
+	                    given_names: given_names, member_id: member_id,
+	                    title: title,
+	                    type: type
+	                });
+	            }
+	        case 'MEMBER_DETAILS':
+	            {
+	                var place_name = action.payload.data.place_name;
+
+	                _reactCookie2.default.save('accommodation', place_name, { path: '/', maxAge: 600 });
+	                return _extends({}, state, { accommodation: place_name });
+	            }
+	        case 'PLACES':
+	            {
+	                return _extends({}, state, { places: action.payload });
+	            }
+	        case 'LOG_OUT':
+	            {
+	                _reactRouter.hashHistory.push('/');
+	                return _extends({}, state, { member_id: null, name: null, type: null, signed: false });
+	            }
+	        case 'BOOKINGS':
+	            {
+	                console.log('bookings', action.payload);
+	                return _extends({}, state, { bookings: action.payload });
+	            }
+	        default:
+	            return _extends({}, state);
+	    }
+	};
+>>>>>>> 240aae5bd2a96c51c08886c31a1e8779b01a2a75
 
 /***/ })
 /******/ ]);
