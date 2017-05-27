@@ -39,7 +39,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, places: action.payload };
         }
         case 'SET_JOURNEYS' : {
-            return { ...state, journeys: action.payload };
+            console.log(action.payload);
+            return { ...state, journeys: action.payload};
         }
         case 'LOG_OUT': {
             hashHistory.push('/');

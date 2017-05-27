@@ -23,7 +23,7 @@ chicago1
 
 	
 INSERT INTO olympics.Journey
-	VALUES(1, '2017-05-11 00:00:00',2, 4, 'LBII-402', 1, '2017-05-11 00:30:00');
+	VALUES(1, '2017-05-11 00:00:00',2, 4, 'LBII-402', 1, '2017-05-11 00:30:00');  (Erskineville - Erskineville Road) (Newtown - Camperdown Memorial Park)
 	
 INSERT INTO olympics.Journey
 	VALUES(2, '2017-05-12 00:00:00',4, 2, 'HRXN-121', 1, '2017-05-12 00:45:00');

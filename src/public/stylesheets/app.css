@@ -16,8 +16,11 @@ body{
     align-items: center;
 }
 .app-body{
-    display:flex;
+    display: flex;
     height: 80vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 /*** Footer ***/
 .footer{
@@ -209,10 +212,12 @@ select:focus {
   background: #fff;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 5px -5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding-bottom: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-self: center;
 }
 
 table {
@@ -228,11 +233,19 @@ th, tr, td, h2 {
   padding: 12px 20px;
 }
 
-h2 {
+.card h2 {
   font-size: 20px;
+  font-weight: 600;
+  padding: 20px 20px 5px;
+  color: #404040;
+}
+.card h3{
+
+  font-size: 14px;
   font-weight: 500;
   padding: 20px 20px 5px;
   color: #404040;
+
 }
 
 th {

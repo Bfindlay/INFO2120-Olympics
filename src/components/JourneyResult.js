@@ -9,9 +9,7 @@ class JourneyResult extends Component {
         super();
     }
     componentWillMount(){
-        if(this.props.DB.journey === []){
-           // hashHistory.push('Journey');
-        }
+        
     }
     componentWillUnmount(){
         //reset journeys;
@@ -20,9 +18,12 @@ class JourneyResult extends Component {
 
     render(){
         const { to, from, date } = this.props.params;
+        const { journeys } = this.props.DB;
+        console.log(journeys);
         return(
             <div className="card">
-                <h2>Journeys: {to} - {from} on {date}</h2>
+                <h2>Journeys:</h2>
+                <h3>To: {to} -  From: {from} on {date}</h3>
                 <table cellSpacing="0">
                     <tbody>
                         <tr id="header">
@@ -32,13 +33,21 @@ class JourneyResult extends Component {
                             <th>From</th>
                             <th>Vehicle</th>
                         </tr>
-                        <tr className="dr">
-                            <td> <a href="#">5795448</a></td>
-                            <td>9/6/2016</td>
-                            <td>Jon Snow</td>
-                            <td>HO</td>
-                            <td>9/6/2016</td>
-                        </tr>
+                        { journeys.map( journey => {
+                            let dt = journey.depart_time.replace(".000Z", "");
+                            let date = dt.split('T')[0];
+                            let time = dt.split('T')[1];
+                            return (
+                                <tr key={Math.random()} className="dr">
+                                    <td>{date}</td>
+                                    <td>{time}</td>
+                                    <td>{journey.to_place}</td>
+                                    <td>{journey.from_place}</td>
+                                    <td>{journey.vehicle_code}</td>
+                                </tr>
+                            )
+                        })
+                        }
                     </tbody>
                 </table>
             </div>

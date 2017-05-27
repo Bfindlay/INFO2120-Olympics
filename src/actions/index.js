@@ -63,7 +63,8 @@ export const searchJourney = search => {
     return(dispatch) => {
         axios.post(`/api/journey/${member_id}/${from.place_id}/${to.place_id}/${date}`, {token: token})
             .then(response => {
-                console.log('response', response)
+                dispatch({type:SET_JOURNEYS, payload: response.data});
+                return hashHistory.push(`/Journey/Result/${to.place_name}/${from.place_name}/${date}`)
             })
             .catch(err => console.log(err));
     }
