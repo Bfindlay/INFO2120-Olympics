@@ -9,6 +9,12 @@ class Details extends Component {
         super();
     }
 
+    componentWillMount(){
+        if(!this.props.DB.signed){
+            return hashHistory.push('/');
+        }
+    }
+
     render(){
         const{ country_code, family_name, given_names, member_id, title, accommodation, type, bookings } = this.props.DB;
         return(

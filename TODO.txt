@@ -13,3 +13,4 @@
 [] EVENTS PAGE
 [] BOOKINGS PAGE
 [] JOURNEYS PAGE
+[] If Staff, make a booking

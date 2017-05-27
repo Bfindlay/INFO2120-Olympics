@@ -27,6 +27,7 @@ export const logIn = auth => {
                             dispatch({type: MEMBER_DETAILS, payload: response});
                             dispatch({ type: BOOKINGS, payload: res.data });
                             dispatch({type: LOG_IN, payload: decoded});
+                            return hashHistory.push('/Details');
                         })
                         .catch( err => {
                             console.log(err);

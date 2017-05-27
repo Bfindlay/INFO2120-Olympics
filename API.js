@@ -82,6 +82,20 @@ Router.get('/places', (req, res) => {
     })
 })
 
+
+Router.get('/booking/:member_id/:journey_id', (req, res) => {
+    const { journey_id , member_id} = req.params;
+    pool.query(`SELECT 
+            FROM olympics.booking B JOIN olympics.Member M ON (B.booked_for = M.member_id) JOIN olympics.journey J ON (B.journey_id = J.journey_id) WHERE B.journey_id = ${journey_id} AND m.member_id = '${member_id}';`, (err, response) => {
+        if(err){
+            return res.status(500).send(err);
+        }else if( response.rowCount <= 0){
+            return res.status(500).send("Error in query format");
+        }
+        res.send(response.rows);
+            
+    })
+})
 /*
 
 Test Query
@@ -153,6 +167,8 @@ Router.post('/sign-up', function(req, res) {
 			});
 	});
 });
+
+
 
 
 
