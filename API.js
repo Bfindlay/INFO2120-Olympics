@@ -70,6 +70,23 @@ FROM olympics.booking B
         });
 });
 
+Router.get('/journeys', (req, res) =>{
+    pool.query(`SELECT DISTINCT P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time, journey_id
+    FROM olympics.booking B 
+            JOIN olympics.journey J USING (journey_id) 
+			JOIN olympics.member M ON (B.booked_for = M.member_id) 
+			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
+			JOIN olympics.place P ON (J.from_place = P.place_id)
+			JOIn olympics.place PP ON (J.to_place = PP.place_id) ORDER BY depart_time ASC`, (err, response) => {
+            if(err){
+                console.log('err', err); //TODO ERROR HANDLING
+                res.status(500).send("error in booking search");
+            }else{
+                res.send(response.rows);
+            }
+        });
+});
+
 Router.get('/places', (req, res) => {
     pool.query('select place_id, place_name FROM olympics.place ORDER BY place_name ASC;', (err, response) => {
         if(err){
