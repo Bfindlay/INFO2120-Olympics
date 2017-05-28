@@ -11,6 +11,7 @@ import Details from './components/Details';
 import Journey from './components/Journey';
 import Register from './components/Register';
 import BookingItem from './components/BookingItem';
+import Events from './components/Events';
 import Query from './components/Query';
 import JourneyResult from './components/JourneyResult'
 import Bookings from './components/Bookings';
@@ -31,6 +32,7 @@ render(
               <Route path="SignIn" component={SignIn} />
               <Route path="Journey" component={Journey} />
               <Route path="Bookings" component={Bookings} />
+              <Route path="Events" component={Events}/>
               <Route path="Booking/:member_id/:journey_id" component={BookingItem} />
               <Route path="Journey/Result/:to/:from/:date" component={JourneyResult} />
               <Route path='Register' component={Register} />

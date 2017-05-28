@@ -55,6 +55,7 @@ INSERT INTO olympics.booking
 SELECT given_names || ' ' || family_name AS Person
 FROM olympics.booking B JOIN olympics.Member M ON (B.booked_for = M.member_id) JOIN olympics.journey J ON (B.journey_id = J.journey_id)
 WHERE B.journey_id = 2;
+-----------------------------------------------
 
 
 --Get detailed booking details
@@ -66,6 +67,7 @@ FROM olympics.booking B JOIN olympics.member M ON (B.booked_for = M.member_id)
 			 JOIN olympics.place PP ON (PP.place_id = J.to_place)
 			 JOIN olympics.vehicle V USING(vehicle_code)
 WHERE booked_for = 'A000026985';
+-----------------------------------------------
 
 -- Member Details
 --Get member_id, accomodation building name, number of bookings
@@ -73,12 +75,12 @@ SELECT M.member_id as member_id, P.place_name as Accomodation, COUNT((SELECT COU
 FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id)
 WHERE M.member_id = 'A000043404'
 GROUP BY M.member_id, P.place_name;
-
+-----------------------------------------------
 --Member Login
 SELECT * --Login status?
 FROM olympics.Member M
 WHERE M.memeber_id = 'login' AND M.password = 'password';
-
+-----------------------------------------------
 --Get type of member
 --Returns Athelete, Staff or Offiial
 SELECT CASE WHEN (SELECT EXISTS(SELECT * FROM olympics.Athlete A WHERE M.member_id = A.member_id)) = 't' THEN 'Athlete'
@@ -86,11 +88,10 @@ SELECT CASE WHEN (SELECT EXISTS(SELECT * FROM olympics.Athlete A WHERE M.member_
 	    WHEN (SELECT EXISTS(SELECT * FROM olympics.Staff S WHERE M.member_id = S.member_id)) = 't' THEN 'Staff' ELSE 'Unknown' END
 FROM olympics.member M
 WHERE M.member_id = 'A000021704';
+-----------------------------------------------
 
 --Get Team details
-
-
-
+-----------------------------------------------
 --Browse Bookings
 --Shows full name raher than ID for booked_by and booked_for
 --Shows full name for origin and destination
@@ -103,7 +104,7 @@ FROM olympics.booking B
 			JOIN olympics.place P ON (J.from_place = P.place_id)
 			JOIn olympics.place PP ON (J.to_place = PP.place_id)
 WHERE M.member_id = 'A000032115'
-
+-----------------------------------------------
 --Search Journeys
 --Returns the departing time, the origin location, destination, number booked and space remaining (boolean)
 
@@ -113,13 +114,11 @@ WHERE depart_time >= '2017-04-01 10:20:36.031383'
     AND depart_time <= '2017-06-01 22:52:28.647764'
     AND to_place = 356
 ORDER BY depart_time ASC;
-
+-----------------------------------------------
 
 /**
 Combine These together so when a event is expaned, then the results will show up.
 /*********************************************/
-*/
-
 --Browse Events, returns event name, gender, sport venue and start timestamp
 SELECT E.event_name, CASE WHEN E.event_gender = 'M' THEN 'Male'WHEN E.event_gender = 'W' THEN 'Women' ELSE 'Unknown' END, P.place_name, E.event_start
 FROM olympics.event E JOIN olympics.place P ON (E.sport_venue = P.place_id)
@@ -130,16 +129,12 @@ FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member
                              JOIN olympics.event E ON (P.event_id = E.event_id) 
                              JOIN olympics.member M ON (A.member_id = M.member_id)
 ORDER BY Medallist ASC;
+-----------------------------------------------
 
 --Get Event details (Event name, first last name of officials, roles)
 SELECT E.event_name , M.given_names || ' ' || M.family_name AS name, role
 FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
 WHERE RE.event_id = 3;
-
-
-/*********************************************/
---PAGED Results
---USE LIMIT xxx, etc
 
 
 /******nbooked updated when booking is added ******/
@@ -203,3 +198,21 @@ INSERT INTO olympics.Booking
 INSERT INTO olympics.booking
 	VALUES('A000028995', 'A000021705', '2014-05-23 12:00:00', 2);
 SELECT * FROM olympics.journey WHERE journey_id = 2;
+
+-----------------------------------------------
+--Query for Player
+--Shows Event name medals and total number of medals.
+
+INSERT INTO olympics.participates
+	VALUES(23, 'A000031618', 'G');
+	
+INSERT INTO olympics.participates
+	VALUES(25 ,'A000031618', 'S');
+	
+SELECT E.event_name, P.medal, (SELECT COUNT(medal) FROM olympics.participates WHERE athlete_id ='A000031618') AS Total_Events
+FROM olympics.participates P JOIN olympics.event E USING (event_id)
+WHERE P.athlete_id = 'A000031618'
+GROUP BY event_name, medal;
+
+--Get team query
+
