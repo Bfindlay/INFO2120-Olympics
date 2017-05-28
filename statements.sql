@@ -124,11 +124,15 @@ SELECT E.event_name, CASE WHEN E.event_gender = 'M' THEN 'Male'WHEN E.event_gend
 FROM olympics.event E JOIN olympics.place P ON (E.sport_venue = P.place_id)
 
 --Browse Event results 
-SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event
+SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline
 FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                              JOIN olympics.event E ON (P.event_id = E.event_id) 
                              JOIN olympics.member M ON (A.member_id = M.member_id)
+                             JOIN olympics.sport S USING (sport_id)
 ORDER BY Medallist ASC;
+
+--Search for events
+SELECT * FROM olympics.Event WHERE Event_name LIKE '%';
 -----------------------------------------------
 
 --Get Event details (Event name, first last name of officials, roles)
