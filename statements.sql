@@ -221,3 +221,8 @@ GROUP BY event_name, medal;
 
 --Get team query
 
+
+--Get remaining vehicle capacity
+SELECT (V.capacity - J.nbooked) AS remaining, journey_id
+FROM Olympics.vehicle V JOIN olympics.journey J USING (vehicle_code)
+WHERE vehicle_code = 'HRXN-121';
