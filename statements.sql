@@ -129,6 +129,7 @@ FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member
                              JOIN olympics.event E ON (P.event_id = E.event_id) 
                              JOIN olympics.member M ON (A.member_id = M.member_id)
                              JOIN olympics.sport S USING (sport_id)
+WHERE medal IS NOT NULL
 ORDER BY Medallist ASC;
 
 --Search for events
@@ -220,3 +221,8 @@ GROUP BY event_name, medal;
 
 --Get team query
 
+
+--Get remaining vehicle capacity
+SELECT (V.capacity - J.nbooked) AS remaining, journey_id
+FROM Olympics.vehicle V JOIN olympics.journey J USING (vehicle_code)
+WHERE vehicle_code = 'HRXN-121';
