@@ -105,13 +105,12 @@ Router.get('/booking/:member_id/:journey_id', (req, res) => {
 
 
 Router.get('/events/:sport', (req, res) => {
-    console.log("hi");
     const { sport } = req.params;
-    console.log(sport);
-    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline
+    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name
                 FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                 JOIN olympics.event E ON (P.event_id = E.event_id) 
                 JOIN olympics.member M ON (A.member_id = M.member_id)
+                JOIN olympics.place PL ON (PL.place_id = E.sport_venue)
                 JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE '%${sport}%' ORDER BY Medallist ASC;`, (err, response) =>{
                 if(err){
                     console.log('error', err);
@@ -122,14 +121,13 @@ Router.get('/events/:sport', (req, res) => {
 })
 
 Router.get('/events', (req, res) => {
-    console.log("hi");
     const { sport } = req.params;
-    console.log(sport);
-    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline
+    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name
                 FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                 JOIN olympics.event E ON (P.event_id = E.event_id) 
                 JOIN olympics.member M ON (A.member_id = M.member_id)
-                JOIN olympics.sport S USING (sport_id)  ORDER BY Medallist ASC;`, (err, response) =>{
+                 JOIN olympics.place PL ON (PL.place_id = E.sport_venue)
+                JOIN olympics.sport S USING (sport_id) ORDER BY Medallist ASC;`, (err, response) =>{
                 if(err){
                     console.log('error', err);
                     return res.status(500).send(err);
