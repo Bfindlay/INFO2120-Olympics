@@ -106,7 +106,7 @@ Router.get('/booking/:member_id/:journey_id', (req, res) => {
 
 Router.get('/events/:sport', (req, res) => {
     const { sport } = req.params;
-    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name
+    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name, E.event_id
                 FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                 JOIN olympics.event E ON (P.event_id = E.event_id) 
                 JOIN olympics.member M ON (A.member_id = M.member_id)
@@ -122,7 +122,7 @@ Router.get('/events/:sport', (req, res) => {
 
 Router.get('/events', (req, res) => {
     const { sport } = req.params;
-    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name
+    pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name, event_id
                 FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                 JOIN olympics.event E ON (P.event_id = E.event_id) 
                 JOIN olympics.member M ON (A.member_id = M.member_id)
@@ -135,6 +135,19 @@ Router.get('/events', (req, res) => {
                 res.send(response.rows);
             })
 })
+
+Router.get(`/event/result/:id`, (req, res) => {
+    const { id } = req.params;
+    pool.query(`SELECT *
+                FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
+                WHERE RE.event_id = ${id};`, (err, response) => {
+                    if(err){
+                        console.log('error', err);
+                        return res.status(500).send(err);
+                    }
+                    res.send(response.rows);                 
+                });
+});
 /*
 
 Test Query

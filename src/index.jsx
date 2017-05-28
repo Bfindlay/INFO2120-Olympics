@@ -14,6 +14,7 @@ import BookingItem from './components/BookingItem';
 import Events from './components/Events';
 import Query from './components/Query';
 import JourneyResult from './components/JourneyResult'
+import EventResult from './components/EventResult';
 import Bookings from './components/Bookings';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -33,6 +34,7 @@ render(
               <Route path="Journey" component={Journey} />
               <Route path="Bookings" component={Bookings} />
               <Route path="Events" component={Events}/>
+              <Route path="Event/:id" component={EventResult} />
               <Route path="Booking/:member_id/:journey_id" component={BookingItem} />
               <Route path="Journey/Result/:to/:from/:date" component={JourneyResult} />
               <Route path='Register' component={Register} />

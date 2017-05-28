@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactDom from 'react-dom';
+import { Link } from 'react-router';
 import axios from 'axios';
 
 class Events extends Component{
@@ -15,11 +15,12 @@ class Events extends Component{
         }
     }
 
-    handleSubmit(){
+    handleSubmit(e){
         const { search } = this.state;
         axios.get(`api/events/${search}`)
             .then( res => this.setState({events : res.data}))
             .catch( err => console.log(err));
+        e.preventDefault();
     }
     loadMore(){
         //TODO array bounds check
@@ -44,11 +45,11 @@ class Events extends Component{
                         </thead>
                         <tbody>
                         { limited.map( e => {
-                            const { discipline, event, sport, event_start, place_name} = e;
+                            const { discipline, event, sport, event_start, place_name, event_id} = e;
                             let time = event_start.replace(":00.000Z", "").split('T')[1];
                             return(
                                 <tr key={Math.random()}>
-                                    <td><a href="/eventdetails/?eventname=200M+Freestyle">{event}</a></td>
+                                    <td><Link to={`/Event/${event_id}`}>{event}</Link></td>
                                     <td>{time}</td>
                                     <td>{discipline}</td>
                                     <td>{place_name}</td>
