@@ -21,7 +21,11 @@ class Events extends Component{
             .then( res => this.setState({events : res.data}))
             .catch( err => console.log(err));
     }
-
+    loadMore(){
+        //TODO array bounds check
+        this.setState({min: this.state.min+15});
+        this.setState({max: this.state.max+15});
+    }
     renderList(){
         const { events, search, min, max } = this.state;
         let limited = events.slice(min, max);
@@ -53,6 +57,9 @@ class Events extends Component{
                         })}
                         </tbody>
                     </table>
+                    <div className='load-button'>
+                         <button onClick={() => this.loadMore() }className='button'>Load More</button>
+                    </div>
                 </div>
         )
     }

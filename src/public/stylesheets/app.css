@@ -312,7 +312,9 @@ tr:not(#header):hover {
   
 
 /****** EVENTS ******/
-
+.load-button{
+  width: 150px;
+}
 .search-container {
   width: 500px;
   margin: 50px auto;
