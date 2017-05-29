@@ -120,6 +120,20 @@ Router.get('/booking/:member_id/:journey_id', (req, res) => {
     })
 })
 
+Router.post('/create/booking', (req, res) => {
+    const { bookedFor, journeyID, bookedBy } = req.body.booking;
+    console.log(req.body.booking);
+    pool.query(`INSERT INTO olympics.booking (booked_for, booked_by, when_booked, journey_id) VALUES('${bookedFor}', '${bookedBy}', clock_timestamp(), ${journeyID})`, (err, response) => {
+        if(err){
+            console.log("err", err);
+            return res.status(500).send(err);
+        }else if( response.rowCount <= 0){
+            return res.status(500).send("Error in query format");
+        }
+        console.log(response);
+        res.send(response.rows);
+    });
+});
 
 Router.get('/events/:sport', (req, res) => {
     const { sport } = req.params;

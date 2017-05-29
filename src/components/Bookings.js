@@ -23,6 +23,18 @@ class Bookings extends Component {
        
     }
 
+    handleBooking(e){
+        let forId = e.target.for_id.value;
+        let journey = e.target.jounrey_id.value;
+        let { member_id } = this.props.DB;
+        console.log(forId,journey);
+        let booking = { bookedFor: forId, journeyID: journey, bookedBy: member_id };
+        axios.post("/api/create/booking", {booking})
+            .then( res => console.log(res))
+            .catch( err => console.log(err));
+        e.preventDefault();
+    }
+
     renderBooking(){
         const { type } = this.props.DB;
         const { createBooking, journeys  } = this.state;
@@ -31,10 +43,10 @@ class Bookings extends Component {
                 .then(response => this.setState({journeys: response.data}))
                 .catch( err => console.log(err));
             return(
-                <form className="Search">
-                         <input className="field" placeholder="A000021705" type="text" required="required" />
+                <form className="Search" onSubmit={ this.handleBooking.bind(this) }>
+                         <input className="field" id="for_id" placeholder="A000021705" type="text" required="required" />
                          <br/>
-                         <input id="fromSelected" className="field" list="journey" placeholder="Search Journeys" type="text" required="required" />
+                         <input id="jounrey_id" className="field" list="journey" placeholder="Search Journeys" type="text" required="required" />
                         <datalist id="journey">
                             { journeys.map( journey => {
                                     const {to_place, from_place, journey_id } = journey;
@@ -44,7 +56,7 @@ class Bookings extends Component {
                     </datalist>
                     <br />
                     <div className='load-button'>
-                        <button onClick={() => this.setState({createBooking : true})} className='button'>Submit Booking</button>
+                        <button type="submit" className='button'>Submit Booking</button>
                     </div>
                     
                 </form>
