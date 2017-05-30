@@ -9,7 +9,9 @@ class Bookings extends Component {
         super();
         this.state = {
             createBooking : false,
-            jounreys: []
+            journeys: [],
+            success: null,
+            err: null
         }
     }
     componentWillMount(){
@@ -27,17 +29,21 @@ class Bookings extends Component {
         let forId = e.target.for_id.value;
         let journey = e.target.jounrey_id.value;
         let { member_id } = this.props.DB;
-        console.log(forId,journey);
+        this.setState({ err: null, success: null});
         let booking = { bookedFor: forId, journeyID: journey, bookedBy: member_id };
         axios.post("/api/create/booking", {booking})
-            .then( res => console.log(res))
-            .catch( err => console.log(err));
+            .then( res => {
+                this.setState({createBooking : false});
+                this.props.getBookings(member_id);
+                this.setState({ success : <p style={{ 'color': 'green', 'fontWeight': '600' }}> Booking Successfully Created</p>})
+            })
+            .catch( err => {this.setState({err: <p style={{ 'color': 'red', 'fontWeight': '600' }}> Failed to create booking </p>})});
         e.preventDefault();
     }
 
     renderBooking(){
         const { type } = this.props.DB;
-        const { createBooking, journeys  } = this.state;
+        const { createBooking, journeys } = this.state;
         if( type === 'Staff' && createBooking){
             axios.get('api/journeys')
                 .then(response => this.setState({journeys: response.data}))
@@ -55,7 +61,7 @@ class Bookings extends Component {
                             }
                     </datalist>
                     <br />
-                    <div className='load-button'>
+                    <div>
                         <button type="submit" className='button'>Submit Booking</button>
                     </div>
                     
@@ -67,6 +73,7 @@ class Bookings extends Component {
         const { bookings, member_id, type } = this.props.DB;
         const error = (bookings.length === 0) ? <div className='error'><h3 id='error'> No Bookings found </h3></div> : null;
         const booking = ( type === 'Staff' ) ? <button onClick={() => this.setState({createBooking : true})} className='button'>Make Booking</button> : null;
+        let { success, err} = this.state;
         return(
             <div>
             <div className="card">
@@ -101,6 +108,8 @@ class Bookings extends Component {
                     </tbody>
                 </table>
                     { this.renderBooking() }
+                    { success }
+                    { err }
                 </div>
                 { booking }
             

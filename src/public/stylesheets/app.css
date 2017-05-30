@@ -120,7 +120,7 @@ body{
 }
 .details-module {
     display: flex;
-    background: #F4EADE;
+    background: #FFF;
     flex-direction: column;
     align-self: flex-start;
     justify-content: center;
@@ -315,6 +315,9 @@ tr:not(#header):hover {
 .load-button{
   width: 150px;
 }
+#booking-btn{
+  width: 70px;
+}
 .search-container {
   width: 500px;
   margin: 50px auto;
@@ -323,6 +326,7 @@ tr:not(#header):hover {
 .Search {
   position: relative;
   display: flex;
+  flex-direction: column;
   font-weight: 300;
   font-size: 40px;
   color: #555;

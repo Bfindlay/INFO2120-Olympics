@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { memberDetails } from '../actions';
+import { memberDetails, getBookings } from '../actions';
 import cookie from 'react-cookie';
 import { hashHistory } from 'react-router';
 class Details extends Component {
@@ -10,9 +10,11 @@ class Details extends Component {
     }
 
     componentWillMount(){
-        if(!this.props.DB.signed){
+        const { signed, member_id } = this.props.DB;
+        if(!signed){
             return hashHistory.push('/');
         }
+        this.props.getBookings(member_id);
     }
 
     render(){
@@ -35,4 +37,4 @@ class Details extends Component {
 }
 
 const mapStateToProps = ({ DB }) => ({DB});
-export default connect(mapStateToProps, {memberDetails})(Details);
+export default connect(mapStateToProps, {memberDetails, getBookings})(Details);
