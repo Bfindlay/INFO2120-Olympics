@@ -10,7 +10,8 @@ const INITIAL_STATE = {
     signed: false,
     bookings: [],
     places: [],
-    journeys: []
+    journeys: [],
+    error: null
 }
 import { hashHistory } from 'react-router';
 import cookie from 'react-cookie';
@@ -29,7 +30,8 @@ export default (state = INITIAL_STATE, action) => {
                     given_names: given_names, member_id: member_id, 
                     title: title,
                     type: type,
-                    bookings: bookings
+                    bookings: bookings,
+                    error: null
                  }
         }
         case 'MEMBER_DETAILS' : {
@@ -50,6 +52,9 @@ export default (state = INITIAL_STATE, action) => {
         case 'BOOKINGS' : {
             cookie.save('bookings', action.payload, {path: '/', maxAge: 600 })
             return { ...state, bookings: action.payload };
+        }
+        case 'ERROR' : {
+            return { ...state, error: action.payload }
         }
         default:
             return {... state }

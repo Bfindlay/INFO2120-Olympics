@@ -5,3 +5,4 @@ export const MEMBER_DETAILS = 'MEMBER_DETAILS';
 export const PLACES = 'PLACES';
 export const BOOKINGS = 'BOOKINGS';
 export const SET_JOURNEYS = 'SET_JOURNEYS';
+export const ERROR = 'ERROR';

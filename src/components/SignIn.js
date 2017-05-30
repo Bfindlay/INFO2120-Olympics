@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cookie from 'react-cookie';
 import jwt from 'jwt-decode';
-import { logIn } from '../actions';
+import { logIn, error } from '../actions';
 class SignIn extends Component {
 
     constructor(props) {
@@ -14,19 +14,16 @@ class SignIn extends Component {
         }
     }
     
-    hello(e) {
-        if(e.keyCode == 13) {
-            console.log("Enter key");
-        }
+    componentWillUnmount(){
+        //this.props.error(null);
     }
-    // onKeyPress={ () => { this.hello(e)}}
 
     render() {
 
 
-        let error;
-        if (this.state.error !== null) {
-            error = <p style={{ 'color': 'red', 'fontWeight': '600' }}> {this.state.error} </p>
+        let { error } = this.props.DB;
+        if (error !== null) {
+            error = <p style={{ 'color': 'red', 'fontWeight': '600' }}> {error} </p>
         }
 
         return (
@@ -39,6 +36,7 @@ class SignIn extends Component {
                         <input type="password" onChange={({ target }) => this.setState({ password: target.value })} />
                         <button onClick={() => this.props.logIn(this.state)}>login</button>
                         <p className="message">Not registered? <a href="#/register">Create an account</a></p>
+                        { error }
                     </div>
                 </div>
             </div>
@@ -46,9 +44,7 @@ class SignIn extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { state }
-}
+const mapStateToProps = ({ DB }) => ({DB});
 
-export default connect(mapStateToProps, { logIn })(SignIn);
+export default connect(mapStateToProps, { logIn, error })(SignIn);
 

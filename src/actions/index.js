@@ -4,7 +4,8 @@ import {
     MEMBER_DETAILS,
     PLACES,
     BOOKINGS,
-    SET_JOURNEYS
+    SET_JOURNEYS,
+    ERROR,
 } from './types';
 
 import axios from 'axios';
@@ -34,8 +35,8 @@ export const logIn = auth => {
                         })
                     }).catch( err => console.log(err));
             })
-            .catch( response => {
-                console.log('error', response);
+            .catch( err=> {
+                return dispatch({ type: ERROR, payload: err.response.data});
             });
     }
 }
@@ -80,6 +81,7 @@ export const getPlaces = () => {
     }
 }
 
+export const error = err => ({type: ERROR, payload: err});
 export const setJourney = state => {
     return { type: SET_JOURNEYS, payload: state}
 }

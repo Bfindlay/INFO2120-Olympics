@@ -223,7 +223,8 @@ Router.post('/login', (req, res) => {
         })
     }).catch(err => {
         //login failed
-        console.log(err);
+        console.log('err', err);
+        res.status(401).send(err);
     });
 });
 
