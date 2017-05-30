@@ -174,13 +174,13 @@ SELECT * FROM olympics.participates RE JOIN olympics.event E USING (event_id) JO
 
 Router.get(`/event/result/:id`, (req, res) => {
     const { id } = req.params;
-    pool.query(`SELECT * FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
+    pool.query(`SELECT M.member_id, RE.role FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
                 WHERE RE.event_id = ${id};`, (err, officials) => {
         if(err){
             console.log('error', err);
             return res.status(500).send(err);
         }
-        pool.query(`SELECT event_name, member_id, medal, event_gender, event_start, title, family_name, given_names, country_name, place_name FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) JOIN olympics.country USING (country_code) JOIN olympics.place PL ON (E.sport_venue = PL.place_id) WHERE event_id = ${id}`, 
+        pool.query(`SELECT event_name, discipline, member_id, medal, event_gender, event_start, title, family_name, given_names, country_name, place_name FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) JOIN olympics.country USING (country_code) JOIN olympics.sport SP USING(sport_id) JOIN olympics.place PL ON (E.sport_venue = PL.place_id) WHERE event_id = ${id}`, 
         (err, athletes) => {
             if(err){
                 console.log('error', err);
