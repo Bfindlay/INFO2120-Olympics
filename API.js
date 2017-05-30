@@ -60,7 +60,7 @@ FROM olympics.booking B
 			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
 			JOIN olympics.place P ON (J.from_place = P.place_id)
 			JOIn olympics.place PP ON (J.to_place = PP.place_id)
-            WHERE M.member_id = '${member_id}'`, (err, response) => {
+            WHERE M.member_id = '${member_id}' ORDER BY depart_time ASC`, (err, response) => {
             if(err){
                 console.log('err', err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
@@ -167,17 +167,29 @@ Router.get('/events', (req, res) => {
             })
 })
 
+/*
+SELECT * FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
+SELECT * FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) WHERE event_id = 11          
+*/
+
 Router.get(`/event/result/:id`, (req, res) => {
     const { id } = req.params;
-    pool.query(`SELECT *
-                FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
-                WHERE RE.event_id = ${id};`, (err, response) => {
-                    if(err){
-                        console.log('error', err);
-                        return res.status(500).send(err);
-                    }
-                    res.send(response.rows);                 
-                });
+    pool.query(`SELECT * FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
+                WHERE RE.event_id = ${id};`, (err, officials) => {
+        if(err){
+            console.log('error', err);
+            return res.status(500).send(err);
+        }
+        pool.query(`SELECT event_name, member_id, medal, event_gender, event_start, title, family_name, given_names, country_name, place_name FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) JOIN olympics.country USING (country_code) JOIN olympics.place PL ON (E.sport_venue = PL.place_id) WHERE event_id = ${id}`, 
+        (err, athletes) => {
+            if(err){
+                console.log('error', err);
+                return res.status(500).send(err);
+            }
+            console.log(athletes.rows);
+            res.send({athletes: athletes.rows, officials: officials.rows});                 
+        });                
+    });
 });
 /*
 

@@ -223,7 +223,7 @@ select:focus {
 
 
 .card {
-  height: 60vh;
+  height: auto;
   overflow: scroll;
   min-width: 802px;
   background: #fff;
@@ -237,7 +237,6 @@ select:focus {
   align-self: center;
 }
 #booking-card{
-  height: 60vh;
   overflow: scroll;
 }
 

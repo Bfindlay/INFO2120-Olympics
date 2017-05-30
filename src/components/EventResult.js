@@ -9,76 +9,57 @@ class BookingItem extends Component {
     constructor(){
         super();
         this.state = {
-            booking: null
+         event: null
         }
     }
     componentWillMount(){
         const{ id } = this.props.params;
-        axios.get(`api/event/${id}`)
-            .then(res => this.setState({booking: res.data[0]}))
+        axios.get(`api/event/result/${id}`)
+            .then(res => this.setState({event: res.data}))
             .catch( err => console.log(err));
 
     }
-    componentWillUnmount(){
-        //reset journeys;
-    }
 
+    renderAthletes(){
+        const { event } = this.state;
+        if( event !== null){
+            const { athletes } = event;
+            return(
+                <table>
+                        <thead>
+                            <tr id="header">
+                                <th>Member ID</th>
+                                <th>Result</th>
+                                <th>Medal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                athletes.map( a => {
+                                    const { member_id, medal} = a;
+                                    return (
+                                        <tr key={Math.random()} className="dr">
+                                            <td>{member_id}</td>
+                                            <td>result ? </td>
+                                            <td>{medal}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+            )
+        }   
+    }
     render(){
-        const { booking } = this.state;
-        const { family_name, given_names, title } = this.props.DB;
-        if(booking !== null ){
-            const { booked_by, date, depart_time, from, to, vehicle_code, when_booked } = booking;
-            let dt = date.replace(".000Z", "");
-            let dat = dt.split('T')[0];
-            let time = dt.split('T')[1];
+      
+        console.log(this.state);
             return(
             <div className="card">
-                <h2>Booking for {title} {family_name} </h2>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td>Member Name</td>
-                        <td>{title} {given_names} {family_name} </td>
-                    </tr>
-                    <tr>
-                        <td>Vehicle Code</td>
-                        <td>{vehicle_code}</td>
-                    </tr>
-                    <tr>
-                        <td>Start Information</td>
-                        <td>{dat} @ {time}</td>
-                    </tr>
-                    <tr>
-                        <td>Date</td>
-                        <td>{dat}</td>
-                    </tr>
-                    <tr>
-                        <td>Time</td>
-                        <td>{time}</td>
-                    </tr>
-                    <tr>
-                        <td>To</td>
-                        <td>{to}</td>
-                    </tr>
-                    <tr>
-                        <td>From</td>
-                        <td>{from}</td>
-                    </tr>
-                    <tr>
-                        <td>Booked By</td>
-                        <td>{booked_by}</td>
-                    </tr>
-                    <tr>
-                        <td>Booked On</td>
-                        <td>{when_booked.split('T')[0]}</td>
-                    </tr>
-                    </tbody>
-                </table>
+             <h2>Results </h2>
+                {this.renderAthletes()}
             </div>
         )
-        }else{
-            return  <Loading type={'spin'} color={'white'} height={100} width={100} />
-        }
         
     }
 }
