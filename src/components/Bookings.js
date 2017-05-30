@@ -37,7 +37,10 @@ class Bookings extends Component {
                 this.props.getBookings(member_id);
                 this.setState({ success : <p style={{ 'color': 'green', 'fontWeight': '600' }}> Booking Successfully Created</p>})
             })
-            .catch( err => {this.setState({err: <p style={{ 'color': 'red', 'fontWeight': '600' }}> Failed to create booking </p>})});
+            .catch( err => {
+                this.setState({createBooking : false});
+                this.setState({err: <p style={{ 'color': 'red', 'fontWeight': '600' }}> Failed to create booking </p>})
+            });
         e.preventDefault();
     }
 
@@ -62,7 +65,7 @@ class Bookings extends Component {
                     </datalist>
                     <br />
                     <div>
-                        <button type="submit" className='button'>Submit Booking</button>
+                        <button id="submit-booking" type="submit" className='button'>Submit Booking</button>
                     </div>
                     
                 </form>
@@ -72,11 +75,11 @@ class Bookings extends Component {
     render(){
         const { bookings, member_id, type } = this.props.DB;
         const error = (bookings.length === 0) ? <div className='error'><h3 id='error'> No Bookings found </h3></div> : null;
-        const booking = ( type === 'Staff' ) ? <button onClick={() => this.setState({createBooking : true})} className='button'>Make Booking</button> : null;
+        const booking = ( type === 'Staff' ) ? <a href="#submit-booking"><button onClick={() => this.setState({createBooking : true})} className='button'>Make Booking</button></a> : null;
         let { success, err} = this.state;
         return(
             <div>
-            <div className="card">
+            <div className="card" id="booking-card">
                 <h2>My Bookings</h2>
                 {error}
                 <table cellSpacing="0">
