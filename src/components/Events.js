@@ -28,13 +28,15 @@ class Events extends Component{
         this.setState({max: this.state.max+15});
     }
     renderList(){
+        
         const { events, search, min, max } = this.state;
         let limited = events.slice(min, max);
         if(limited.length === 0)
             return null;
         return(
+            <div className="module-container">
             <div className="card">
-                    <table className="styled">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -61,16 +63,17 @@ class Events extends Component{
                     <div className='load-button'>
                          <button onClick={() => this.loadMore() }className='button'>Load More</button>
                     </div>
+                    </div>
                 </div>
         )
     }
     render(){
         return(
-            <div className="events">
+            <div>
                 <div className='search-container' onSubmit={this.handleSubmit.bind(this)}>
                     <form className="Search">
                         <input className="Search-box" onChange={({target}) => this.setState({search: target.value})} placeholder="Search Sport" type="search" id="Search-box" autoComplete="off" />
-                        <label className="Search-label" htmlFor="Search-box"><i className="fa fa-search"></i></label>
+                        <label className="Search-label" htmlFor="Search-box"></label>
                     </form>
                 </div>
                 { this.renderList() }

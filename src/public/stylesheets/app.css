@@ -1,8 +1,8 @@
 html{
-    overflow: hidden;
-    height:100%;
+    height: 100%;
     width: 100%;
-    position: fixed;
+    position: relative;
+    display:block;
     font-family: 'Roboto', sans-serif;
     background: #2988BC;
 }
@@ -21,6 +21,17 @@ body{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.module-container {
+    display: flex;
+    margin-top: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 510px;
+    padding-top: 10px;
+    box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 /*** ERRORS ***/
@@ -58,7 +69,7 @@ body{
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 50px;
+    height: 70px;
     background: #2F496E;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 
@@ -223,13 +234,14 @@ select:focus {
 
 
 .card {
-  height: auto;
   overflow: scroll;
   min-width: 802px;
+  min-height: 650px;
   background: #fff;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 5px -5px;
   padding-bottom: 2em;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -237,6 +249,7 @@ select:focus {
   align-self: center;
   margin: auto;
 }
+
 #booking-card{
   overflow: scroll;
 }
@@ -244,6 +257,7 @@ select:focus {
 table {
   width: 100%;
   margin-top: 15px;
+  margin: auto;
 }
 
 th, tr, td, h2 {
@@ -325,7 +339,7 @@ tr:not(#header):hover {
 }
 .search-container {
   width: 500px;
-  margin: 50px auto;
+  margin: 10px auto;
 }
 
 .Search {
@@ -340,11 +354,12 @@ tr:not(#header):hover {
 .Search-box {
   flex: 1 0 auto;
   margin: 0 12px;
-  padding: 8px 20px;
-  height: 80px;
+  padding: 8px 10px;
+  height: 50px;
   border: 0;
   box-shadow: 0 3px 12px -1px rgba(0, 0, 0, .3);
   transition: all .15s ease-in-out;
+  font-size: 16px;
 }
 
 .Search-box:focus {
@@ -353,17 +368,19 @@ tr:not(#header):hover {
   outline: 0;
 }
 
+/*
 .Search-label {
   position: absolute;
-  top: 14px;
-  right: 30px;
-  font-size: 40px;
+  top: 1px;
+  right: 40px;
+  opacity: 40%;
   transition: all .15s ease-in-out;
 }
 
 .Search-box:focus + .Search-label {
-  transform: translateX(12px);
+  transform: translateX(5px);
 }
+*/
 
 /*****************************/
 
