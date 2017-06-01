@@ -1,4 +1,3 @@
-
 const Express = require('express');
 const Router = Express.Router();
 const bodyParser = require('body-parser');
@@ -12,12 +11,11 @@ Router.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 /**** DATABASE CONNECTION *****/
-console.log('-----CONNECTING TO DATABASE ------');
 const pool = new pg.Pool(config);
 pool.on('error', function (err, client) {
   console.error('idle client error', err.message, err.stack);
 });
-
+console.log('----- DATABASE CONNECTION ESTABLISHED ------');
 
 /**** FOR TESTING  ******/
 
@@ -33,9 +31,7 @@ Router.post('/Test', (req,res) =>{
 })
 
 /****** API ENDPOINTS ************/
-//TODO VERIFY USING TOKEN IN REQ BODY
 
-//Returns Member Id, Place_name, number of bookings
 
 Router.post('/details/:member_id', (req, res) =>{
     const { member_id } = req.params;

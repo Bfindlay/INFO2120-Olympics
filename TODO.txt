@@ -13,4 +13,8 @@
 [] EVENTS PAGE
 [] BOOKINGS PAGE
 [] JOURNEYS PAGE
-[] If Staff, make a booking
+[√] If Staff, make a booking
+
+
+QUERIES TODO:
+- Return Event results in order by medal
