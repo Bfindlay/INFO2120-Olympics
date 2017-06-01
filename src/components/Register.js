@@ -23,7 +23,7 @@ class Register extends Component{
         }
         // member id, title, first name, last name, country code, accomdation, password
         return(
-            <div className="login-page">
+            <div className="login-page2">
                 <div className="form">
                     <div className="login-form">
                     <label> Member ID </label>
@@ -51,7 +51,7 @@ class Register extends Component{
                     <input type="text" placeholder="Smith" onChange={({ target }) => this.setState({password: target.value}) }/>
                     
                     <label> Accomodation</label>
-                    <input type="text" placeholder="123" onChange={({ target }) => this.setState({password: target.value}) }/>
+                    <input type="text" onChange={({ target }) => this.setState({password: target.value}) }/>
                     </div>
                 </div>
             </div>

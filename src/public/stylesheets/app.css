@@ -390,6 +390,12 @@ tr:not(#header):hover {
   margin: auto;
 }
 
+.login-page2 {
+  width: 1280px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
 label{
     color: rgba(0, 0, 0, 1);
 }
