@@ -226,3 +226,12 @@ GROUP BY event_name, medal;
 SELECT (V.capacity - J.nbooked) AS remaining, journey_id
 FROM Olympics.vehicle V JOIN olympics.journey J USING (vehicle_code)
 WHERE vehicle_code = 'HRXN-121';
+
+--QUery for countryname, name, number of medals and sport discipline
+
+SELECT	country_name, M.given_names || ' ' || M.family_name, COUNT((SELECT COUNT(medal) FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline
+FROM olympics.member M JOIN olympics.participates P ON (M.member_id = P.athlete_id)
+			JOIN olympics.country C USING (country_code)
+			JOIN olympics.event E USING (event_id)
+			JOIN olympics.sport S USING (sport_id)
+GROUP BY country_name, M.given_names, M.family_name, S.discipline;

@@ -345,7 +345,7 @@ tr:not(#header):hover {
 .Search {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-weight: 300;
   font-size: 40px;
   color: #555;

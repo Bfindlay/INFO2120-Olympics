@@ -52,6 +52,7 @@ class Register extends Component{
                     
                     <label> Accomodation</label>
                     <input type="text" onChange={({ target }) => this.setState({password: target.value}) }/>
+                    <button onClick={() => this.props.logIn(this.state)}>Register</button>
                     </div>
                 </div>
             </div>
