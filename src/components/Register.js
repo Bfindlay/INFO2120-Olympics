@@ -44,9 +44,6 @@ class Register extends Component{
                     <br/>
                     <label>First Name</label>
                     <input type="text" placeholder="John" onChange={({ target }) => this.setState({password: target.value}) }/>
-                    
-                    
-                    
                     <label>Last Name</label>
                     <input type="text" placeholder="Smith" onChange={({ target }) => this.setState({password: target.value}) }/>
                     
