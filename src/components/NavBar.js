@@ -25,6 +25,9 @@ class NavBar extends Component {
                             <a onClick={ () => hashHistory.push('/Events')}><li>
                                 <h3>Events</h3>
                             </li></a>
+                            <a onClick={ () => hashHistory.push('/LeaderBoard')}><li>
+                                <h3>LeaderBoard</h3>
+                            </li></a>
                             <a onClick={ () => hashHistory.push('/Bookings')}><li>
                                 <h3>Bookings</h3>
                             </li></a>

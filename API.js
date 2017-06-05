@@ -187,6 +187,29 @@ Router.get(`/event/result/:id`, (req, res) => {
         });                
     });
 });
+
+
+Router.get('/Leaderboard/:discipline', (req,res) => {
+    const { discipline } = req.params;
+    pool.query("SELECT iso_code, country_name, M.given_names || ' ' || M.family_name AS name, COUNT((SELECT COUNT(medal) FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline FROM olympics.member M JOIN olympics.participates P ON (M.member_id = P.athlete_id) JOIN olympics.country C USING (country_code) JOIN olympics.event E USING (event_id) JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE $1 GROUP BY country_name, C.iso_code, M.given_names, M.family_name, S.discipline", [`%${discipline}%`],
+     (err, results) => {
+          if(err){
+                console.log('error', err);
+                return res.status(500).send(err);
+            }
+            res.send(results.rows); 
+     });     
+})
+
+Router.get('/Sports', (req,res) => {
+    pool.query("SELECT discipline from Olympics.sport", (err, response) =>{
+        if(err){
+                console.log('error', err);
+                return res.status(500).send(err);
+            }
+            res.send(response.rows); 
+    });
+})
 /*
 
 Test Query
@@ -199,7 +222,7 @@ WHERE depart_time = '2017-05-11 00:00:00' AND to_place = 4 AND from_place = 2 AN
 Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
     const { id, from, to, date } = req.params;
     const { token } = req.body;
-    pool.query(`SELECT depart_time, from_place, to_place, nbooked, vehicle_code FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) WHERE depart_time >= '${date}'
+    pool.query(`SELECT depart_time, from_place, to_place, nbooked, vehicle_code FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) WHERE depart_time = '${date}'
                  AND to_place = ${to} AND from_place = ${from} AND B.booked_for = '${id}' ORDER BY depart_time ASC;`, (err, response) => {
         if(err){
             console.log('error', err); //TODO ERROR HANDLING

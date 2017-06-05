@@ -382,6 +382,55 @@ tr:not(#header):hover {
 }
 */
 
+
+
+/****** LEADERBOARD ********/
+.leaderboard {
+	width: 70vw;
+	box-shadow: 1px 1px 8px 0 #cccccc;
+	background: #ffffff;
+	color: #555555;
+}
+
+.leaderboard--header {
+	width: 100%;
+	height: 4rem;
+	font-size: 0.75rem;
+	background: #33333a;
+	color: #eef;
+}
+
+.leaderboard--item {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 100%;
+	align-items: center;
+	border-bottom: 1px solid #cccccf;
+}
+
+.leaderboard--item--cell {
+	box-sizing: border-box;
+	height: 100%;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+.leaderboard--item--cell__rank {
+	width: 12%;
+}
+
+.leaderboard--item--cell__user {
+	flex-grow: 1;
+}
+
+.leaderboard--item--cell__thirty {
+	width: 25%;
+}
+
+.leaderboard--item--cell__alltime {
+	width: 25%;
+}
 /*****************************/
 
 .login-page {
