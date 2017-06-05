@@ -11,7 +11,7 @@ class LeaderBoard extends Component{
         }
     }
 
-    componentWillMount(){
+    componentDidMount(){
         axios.get('/api/sports')
             .then(sports => this.setState({sports: sports.data}))
             .catch(err => console.error(err));
@@ -27,20 +27,16 @@ class LeaderBoard extends Component{
 
     renderLeaderBoard(){
         const { results } = this.state;
-        console.log(results);
         if(results.length > 0){
             return(
                 <div className="leaderboard">
                     <div className="leaderboard--header">
                         <div className="leaderboard--item">
-                            <div className="leaderboard--item--cell leaderboard--item--cell__rank">
-                                <span>Rank</span>
-                            </div>
                             <div className="leaderboard--item--cell leaderboard--item--cell__user">
                                 <span>Name</span>
                             </div>
                             <div className="leaderboard--item--cell leaderboard--item--cell__thirty">
-                                <span>Medal</span>
+                                <span>Medal Count</span>
                             </div>
                             <div className="leaderboard--item--cell leaderboard--item--cell__alltime">
                                 <span>Country</span>
@@ -50,22 +46,18 @@ class LeaderBoard extends Component{
                     {
                         results.map( result => {
                             let { count, country_name, discipline, iso_code, name } = result;
-                            let img = (iso_code == null) ? 'N/A' : <img src={`http://www.geonames.org/flags/x/${iso_code.toLowerCase()}.gif` } height="42" width="42"/>
-                            console.log(iso_code);
+                            let img = (iso_code == null) ? 'N/A' : <img src={`http://www.geonames.org/flags/x/${iso_code.toLowerCase()}.gif` } height="42" width="42" style={{margin: "20px"}}/>
                             return (
-                                <div className="leaderboard--list">
+                                <div key={Math.random()} className="leaderboard--list">
                                     <div className="leaderboard--item">
-                                        <div className="leaderboard--item--cell leaderboard--item--cell__rank">
-                                            { count }
-                                        </div>
                                         <div className="leaderboard--item--cell leaderboard--item--cell__user">
                                             { name }
                                         </div>
                                         <div className="leaderboard--item--cell leaderboard--item--cell__thirty">
-                                            46
+                                            { count }
                                         </div>
                                         <div className="leaderboard--item--cell leaderboard--item--cell__alltime">
-                                            { img }
+                                            { img } { country_name }
                                         </div>
                                     </div>
                                 </div>
