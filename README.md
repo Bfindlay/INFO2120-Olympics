@@ -32,6 +32,7 @@ npm install -g module-name
 npm install --save module-name
 npm install module-name
 npm build
+npm run build
 
 6. npm run start-dev | Used to rebuild modules after changes
 
