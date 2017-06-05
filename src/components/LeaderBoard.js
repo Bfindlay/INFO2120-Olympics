@@ -19,7 +19,8 @@ class LeaderBoard extends Component{
 
     handleSubmit(e){
        let sport = e.target.sport_select.value;
-        axios.get(`api/LeaderBoard/${sport}`)
+       let limit = e.target.limit.value;
+        axios.get(`api/LeaderBoard/${sport}/${limit}`)
             .then( res => this.setState({results : res.data}))
             .catch( err => console.log(err));
         e.preventDefault();
@@ -75,8 +76,14 @@ class LeaderBoard extends Component{
              <div>
                 <div className='search-container' onSubmit={this.handleSubmit.bind(this)}>
                     <form className="Search">
-                        <input className="Search-box" id="sport_select" list="sports" placeholder="Search Sport" type="search" autoComplete="off" />
+                        <select id="limit"> 
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
                         <label className="Search-label" htmlFor="Search-box"></label>
+                        <input className="Search-box" id="sport_select" list="sports" placeholder="Search Sport" type="search" autoComplete="off" />
                         <datalist id="sports">
                             { sports.map( sport => {
                                     const { discipline } = sport; 

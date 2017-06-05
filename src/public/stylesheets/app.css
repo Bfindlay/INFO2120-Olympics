@@ -385,6 +385,10 @@ tr:not(#header):hover {
 
 
 /****** LEADERBOARD ********/
+#limit{
+  width: 40px;
+  background-color: #fff;
+}
 .leader-container{
     display: flex;
     flex-direction: column;
