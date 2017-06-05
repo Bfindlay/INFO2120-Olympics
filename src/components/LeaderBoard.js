@@ -1,34 +1,45 @@
+/** Importing Dependencies **/
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // HTTP Client
 
 class LeaderBoard extends Component{
 
+
     constructor(){
         super();
+        /** Initialising initial state of the component */
         this.state = {
-            results: [],
-            sports: []
+            results: [], //Leaderboard results array
+            sports: []  // Array for sport Autofill
         }
     }
 
+    /** Life-cycle Method runs after the render method runs for the first time **/
     componentDidMount(){
+        //Component has loaded -> Populate the sport array using HTTP Get Request, and store the result in sport state
         axios.get('/api/sports')
             .then(sports => this.setState({sports: sports.data}))
             .catch(err => console.error(err));
     }
 
+    /** Handler to process Search Form */
     handleSubmit(e){
+        //Retrieve the values from the form input boxes
        let sport = e.target.sport_select.value;
        let limit = e.target.limit.value;
-        axios.get(`api/LeaderBoard/${sport}/${limit}`)
-            .then( res => this.setState({results : res.data}))
-            .catch( err => console.log(err));
-        e.preventDefault();
-    }
 
+       //Send HTTP GET request to server 
+        axios.get(`api/LeaderBoard/${sport}/${limit}`)
+            .then( res => this.setState({results : res.data})) // Store leaderboard result in result state array
+            .catch( err => console.log(err));
+        e.preventDefault(); //prevent form from redirecting the page on submit
+    }
+    
+    /* Function to render the Leaderboard View */
     renderLeaderBoard(){
+        //Extract result and sport arrays from state object
         const { results, sports } = this.state;
-        if(results.length > 0){
+        if(results.length > 0){ //Only show this view if the array has been populated
             return(
                 <div>
                     <div className='search-container' onSubmit={this.handleSubmit.bind(this)}>
@@ -42,6 +53,7 @@ class LeaderBoard extends Component{
                             <label className="Search-label" htmlFor="Search-box"></label>
                             <input className="Search-box" id="sport_select" list="sports" placeholder="Search Sport" type="search" autoComplete="off" />
                             <datalist id="sports">
+                                //Iterate through sport array and return option for the datalist to allow sport pre-fill in search box
                                 { sports.map( sport => {
                                         const { discipline } = sport; 
                                             return  <option key={discipline} value={discipline}>{discipline}</option>
@@ -65,8 +77,11 @@ class LeaderBoard extends Component{
                             </div>
                         </div>
                         {
+                            //Itterate through the results array and return a custom table row 
                             results.map( result => {
+                                //Extract variables from the result object;
                                 let { count, country_name, discipline, iso_code, name } = result;
+                                //If iso code exists, fetch a flag image from the API
                                 let img = (iso_code == null) ? 'N/A' : <img src={`http://www.geonames.org/flags/x/${iso_code.toLowerCase()}.gif` } height="42" width="42" style={{margin: "20px"}}/>
                                 return (
                                     <div key={Math.random()} className="leaderboard--list">
@@ -91,7 +106,9 @@ class LeaderBoard extends Component{
         }
     }
 
+    /* Main render function for component */
     render(){
+        // Extracting sport array from state object
         const { sports } = this.state;
         return(
              <div>
@@ -122,5 +139,5 @@ class LeaderBoard extends Component{
     }
 }
 
-
+//Export component to allow import in other modules;
 export default LeaderBoard;

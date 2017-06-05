@@ -13,10 +13,6 @@ class SignIn extends Component {
             id: ''
         }
     }
-    
-    componentWillUnmount(){
-        //this.props.error(null);
-    }
 
     render() {
 
