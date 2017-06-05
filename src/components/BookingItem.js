@@ -31,7 +31,7 @@ class BookingItem extends Component {
         const { family_name, given_names, title } = this.props.DB;
         if(booking !== null ){
             const { booked_by, date, depart_time, from, to, vehicle_code, when_booked } = booking;
-            let dt = date.replace(".000Z", "");
+            let dt = date.replace("Z", "");
             let dat = dt.split('T')[0];
             let time = dt.split('T')[1];
             return(

@@ -92,7 +92,7 @@ class Bookings extends Component {
                         </tr>
                         {  
                             bookings.map( booking => {
-                                let dt = booking.depart_time.replace(".000Z", "");
+                                let dt = booking.depart_time.replace("Z", "");
                                 let date = dt.split('T')[0];
                                 let time = dt.split('T')[1];
                                 return (
