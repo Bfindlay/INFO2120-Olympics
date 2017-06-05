@@ -191,7 +191,7 @@ Router.get(`/event/result/:id`, (req, res) => {
 
 Router.get('/Leaderboard/:discipline', (req,res) => {
     const { discipline } = req.params;
-    pool.query("SELECT iso_code, country_name, M.given_names || ' ' || M.family_name AS name, COUNT((SELECT COUNT(medal) FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline FROM olympics.member M JOIN olympics.participates P ON (M.member_id = P.athlete_id) JOIN olympics.country C USING (country_code) JOIN olympics.event E USING (event_id) JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE $1 GROUP BY country_name, C.iso_code, M.given_names, M.family_name, S.discipline", [`%${discipline}%`],
+    pool.query("SELECT iso_code, country_name, M.given_names || ' ' || M.family_name AS name, COUNT((SELECT COUNT(medal) FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline FROM olympics.member M JOIN olympics.participates P ON (M.member_id = P.athlete_id) JOIN olympics.country C USING (country_code) JOIN olympics.event E USING (event_id) JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE $1 GROUP BY country_name, C.iso_code, M.given_names, M.family_name, S.discipline ORDER BY count ASC, name ASC ", [`%${discipline}%`],
      (err, results) => {
           if(err){
                 console.log('error', err);

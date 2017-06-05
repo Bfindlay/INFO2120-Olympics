@@ -77,7 +77,7 @@ class Bookings extends Component {
         const booking = ( type === 'Staff' ) ? <a href="#submit-booking"><button onClick={() => this.setState({createBooking : true})} className='button'>Make Booking</button></a> : null;
         let { success, err} = this.state;
         return(
-            <div className="module-container">
+            <div className="leader-container">
             <div className="card" id="booking-card">
                 <h2>My Bookings</h2>
                 {error}

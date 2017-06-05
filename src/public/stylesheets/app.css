@@ -72,6 +72,7 @@ body{
     height: 70px;
     background: #2F496E;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin-bottom: 10em;
 
 }
 .navbar li {
@@ -236,7 +237,6 @@ select:focus {
 .card {
   overflow: scroll;
   min-width: 802px;
-  min-height: 650px;
   background: #fff;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 5px -5px;
