@@ -399,6 +399,8 @@ tr:not(#header):hover {
     margin-right: auto;
     left: 0;
     right: 0;
+    top: 0;
+    margin-top: 20em;
 }
 .leaderboard {
 	  display: flex;

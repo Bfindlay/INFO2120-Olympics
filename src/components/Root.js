@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import cookie from 'react-cookie';
 import NavBar from './NavBar';
 import Footer from './Footer';
@@ -14,6 +15,8 @@ class Root extends  Component{
         const user = cookie.load('member');
         if(user){
             this.props.reloadUser(user);
+        }else{
+            hashHistory.push('/');
         }
     }
 

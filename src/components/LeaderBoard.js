@@ -27,44 +27,65 @@ class LeaderBoard extends Component{
     }
 
     renderLeaderBoard(){
-        const { results } = this.state;
+        const { results, sports } = this.state;
         if(results.length > 0){
             return(
-                <div className="leaderboard">
-                    <div className="leaderboard--header">
-                        <div className="leaderboard--item">
-                            <div className="leaderboard--item--cell leaderboard--item--cell__user">
-                                <span>Name</span>
-                            </div>
-                            <div className="leaderboard--item--cell leaderboard--item--cell__thirty">
-                                <span>Medal Count</span>
-                            </div>
-                            <div className="leaderboard--item--cell leaderboard--item--cell__alltime">
-                                <span>Country</span>
+                <div>
+                    <div className='search-container' onSubmit={this.handleSubmit.bind(this)}>
+                        <form className="Search">
+                            <select id="limit"> 
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <label className="Search-label" htmlFor="Search-box"></label>
+                            <input className="Search-box" id="sport_select" list="sports" placeholder="Search Sport" type="search" autoComplete="off" />
+                            <datalist id="sports">
+                                { sports.map( sport => {
+                                        const { discipline } = sport; 
+                                            return  <option key={discipline} value={discipline}>{discipline}</option>
+                                    })
+                                }
+                        </datalist>
+                        </form>
+                    </div>
+                    <div className="leaderboard">
+                        <div className="leaderboard--header">
+                            <div className="leaderboard--item">
+                                <div className="leaderboard--item--cell leaderboard--item--cell__user">
+                                    <span>Name</span>
+                                </div>
+                                <div className="leaderboard--item--cell leaderboard--item--cell__thirty">
+                                    <span>Medal Count</span>
+                                </div>
+                                <div className="leaderboard--item--cell leaderboard--item--cell__alltime">
+                                    <span>Country</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {
-                        results.map( result => {
-                            let { count, country_name, discipline, iso_code, name } = result;
-                            let img = (iso_code == null) ? 'N/A' : <img src={`http://www.geonames.org/flags/x/${iso_code.toLowerCase()}.gif` } height="42" width="42" style={{margin: "20px"}}/>
-                            return (
-                                <div key={Math.random()} className="leaderboard--list">
-                                    <div className="leaderboard--item">
-                                        <div className="leaderboard--item--cell leaderboard--item--cell__user">
-                                            { name }
-                                        </div>
-                                        <div className="leaderboard--item--cell leaderboard--item--cell__thirty">
-                                            { count }
-                                        </div>
-                                        <div className="leaderboard--item--cell leaderboard--item--cell__alltime">
-                                            { img } { country_name }
+                        {
+                            results.map( result => {
+                                let { count, country_name, discipline, iso_code, name } = result;
+                                let img = (iso_code == null) ? 'N/A' : <img src={`http://www.geonames.org/flags/x/${iso_code.toLowerCase()}.gif` } height="42" width="42" style={{margin: "20px"}}/>
+                                return (
+                                    <div key={Math.random()} className="leaderboard--list">
+                                        <div className="leaderboard--item">
+                                            <div className="leaderboard--item--cell leaderboard--item--cell__user">
+                                                { name }
+                                            </div>
+                                            <div className="leaderboard--item--cell leaderboard--item--cell__thirty">
+                                                { count }
+                                            </div>
+                                            <div className="leaderboard--item--cell leaderboard--item--cell__alltime">
+                                                { img } { country_name }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        })
-                    }   
+                                )
+                            })
+                        }    
+                    </div>
                 </div>
             )
         }

@@ -54,8 +54,9 @@ class BookingItem extends Component {
 
     renderTitle(){
         const { event } = this.state;
-        if(event !== null)
-        return (
+        if(event !== null){
+            let dt = event.athletes[0].event_start.replace(".000Z", "").replace("T", "  ");
+            return (
             <div>
                 <h2>Information</h2>
                 <table>
@@ -69,7 +70,7 @@ class BookingItem extends Component {
                     </tr>
                     <tr>
                         <td> Start Time </td>
-                        <td> { event.athletes[0].event_start }</td>
+                        <td> { dt }</td>
                     </tr>
                     <tr>
                         <td> Venue</td>
@@ -78,6 +79,8 @@ class BookingItem extends Component {
                 </table>
             </div>
         )
+        }
+        
     }
 
     renderOfficials(){
@@ -112,12 +115,14 @@ class BookingItem extends Component {
     
     render(){
         return(
-            <div className="card">
-                {this.renderTitle()}
-                <h2>Results </h2>
-                {this.renderAthletes()}
-                <h2>Officials </h2>
-                {this.renderOfficials()}
+            <div className='leader-container'>
+                <div className="card">
+                    {this.renderTitle()}
+                    <h2>Results </h2>
+                    {this.renderAthletes()}
+                    <h2>Officials </h2>
+                    {this.renderOfficials()}
+                </div>
             </div>
         )
     }
