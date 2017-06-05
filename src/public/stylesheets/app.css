@@ -17,7 +17,7 @@ body{
 }
 .app-body{
     display: flex;
-    height: 80vh;
+    height: 40vh;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -385,11 +385,27 @@ tr:not(#header):hover {
 
 
 /****** LEADERBOARD ********/
+.leader-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
 .leaderboard {
-	width: 70vw;
-	box-shadow: 1px 1px 8px 0 #cccccc;
-	background: #ffffff;
-	color: #555555;
+	  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+    width: 70vw;
+    box-shadow: 1px 1px 8px 0 #cccccc;
+    background: #ffffff;
+    color: #555555;
 }
 
 .leaderboard--header {
@@ -434,9 +450,10 @@ tr:not(#header):hover {
 /*****************************/
 
 .login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
+     width: 70vw;
+    height: 40vh;
+    padding: 8% 0 0;
+    margin: 0 auto;
 }
 
 .login-page2 {
@@ -452,7 +469,7 @@ label{
   position: relative;
   z-index: 1;
   background: #F4EADE;
-  max-width: 360px;
+  max-width: 500px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;

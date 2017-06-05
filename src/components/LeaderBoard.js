@@ -94,7 +94,9 @@ class LeaderBoard extends Component{
                     </datalist>
                     </form>
                 </div>
-                { this.renderLeaderBoard() }
+                <div className="leader-container">
+                    { this.renderLeaderBoard() }
+                </div>
             </div>
         )
     }
