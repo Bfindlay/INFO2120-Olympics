@@ -6,7 +6,7 @@
 MIT License
 
 ## Using the Program
-1. ```Git Clone```
+1. ```git clone```
 2. ```npm install``` 
 3. Create dbconfig.js file in the root project directory
 ```
