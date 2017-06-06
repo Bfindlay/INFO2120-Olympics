@@ -36,7 +36,7 @@ Router.post('/Test', (req,res) =>{
 Router.post('/details/:member_id', (req, res) =>{
     const { member_id } = req.params;
     pool.query(`SELECT M.member_id as member_id, p.place_name, COUNT((SELECT COUNT(B.booked_for) FROM olympics.booking B
-        WHERE booked_for = '${member_id}')) as bookings FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id) WHERE M.member_id = '${member_id}' AND M.accommodation = P.place_id GROUP BY M.member_id, p.place_name;`, (err, response ) =>{
+        WHERE booked_for = $1)) as bookings FROM olympics.Member M JOIN olympics.place P ON (M.accommodation = P.place_id) WHERE M.member_id = $1 AND M.accommodation = P.place_id GROUP BY M.member_id, p.place_name;`,[member_id], (err, response ) =>{
             if(err){
                 console.log(err);   //TODO handle errors
                 res.status(500).send("error");
@@ -50,13 +50,13 @@ Router.post('/bookings/:member_id', (req, res) =>{
     const { member_id } = req.params;
     console.log(member_id);
     pool.query(`SELECT M.given_names || ' ' || M.family_name AS Booked_for, MM.given_names || ' ' || MM.family_name AS Booked_By, P.place_name AS to_place, PP.place_name AS from_place, depart_time, arrive_time, vehicle_code, journey_id
-FROM olympics.booking B 
+            FROM olympics.booking B 
             JOIN olympics.journey J USING (journey_id) 
 			JOIN olympics.member M ON (B.booked_for = M.member_id) 
 			JOIN olympics.member MM ON (B.booked_by = MM.member_id) 
 			JOIN olympics.place P ON (J.from_place = P.place_id)
 			JOIn olympics.place PP ON (J.to_place = PP.place_id)
-            WHERE M.member_id = '${member_id}' ORDER BY depart_time ASC`, (err, response) => {
+            WHERE M.member_id = $1 ORDER BY depart_time ASC`,[member_id], (err, response) => {
             if(err){
                 console.log('err', err); //TODO ERROR HANDLING
                 res.status(500).send("error in booking search");
@@ -104,7 +104,7 @@ Router.get('/booking/:member_id/:journey_id', (req, res) => {
 			 JOIN olympics.place P ON (P.place_id = J.from_place)
 			 JOIN olympics.place PP ON (PP.place_id = J.to_place)
 			 JOIN olympics.vehicle V USING(vehicle_code)
-            WHERE booked_for = '${member_id}' AND J.journey_id = ${journey_id};`, (err, response) => {
+            WHERE booked_for = $1 AND J.journey_id = $2`,[member_id, journey_id], (err, response) => {
         if(err){
             return res.status(500).send(err);
         }else if( response.rowCount <= 0){
@@ -119,7 +119,7 @@ Router.get('/booking/:member_id/:journey_id', (req, res) => {
 Router.post('/create/booking', (req, res) => {
     const { bookedFor, journeyID, bookedBy } = req.body.booking;
     console.log(req.body.booking);
-    pool.query(`INSERT INTO olympics.booking (booked_for, booked_by, when_booked, journey_id) VALUES('${bookedFor}', '${bookedBy}', clock_timestamp(), ${journeyID})`, (err, response) => {
+    pool.query(`INSERT INTO olympics.booking (booked_for, booked_by, when_booked, journey_id) VALUES($1, $2, clock_timestamp(), $3)`,[bookedFor, bookedBy, journeyID], (err, response) => {
         if(err){
             console.log("err", err);
             return res.status(500).send(err);
@@ -138,7 +138,7 @@ Router.get('/events/:sport', (req, res) => {
                 JOIN olympics.event E ON (P.event_id = E.event_id) 
                 JOIN olympics.member M ON (A.member_id = M.member_id)
                 JOIN olympics.place PL ON (PL.place_id = E.sport_venue)
-                JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE '%${sport}%' ORDER BY Medallist ASC;`, (err, response) =>{
+                JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE $1 ORDER BY Medallist ASC;`,[`%${sport}%`], (err, response) =>{
                 if(err){
                     console.log('error', err);
                     return res.status(500).send(err);
@@ -148,7 +148,6 @@ Router.get('/events/:sport', (req, res) => {
 })
 
 Router.get('/events', (req, res) => {
-    const { sport } = req.params;
     pool.query(`SELECT M.given_names || ' ' || m.family_name AS Medallist, medal AS Medal, E.event_name AS Event, sport_name, discipline, event_start, place_name, event_id
                 FROM olympics.participates P JOIN olympics.athlete A ON (P.athlete_id = A.member_id) 
                 JOIN olympics.event E ON (P.event_id = E.event_id) 
@@ -171,13 +170,15 @@ SELECT * FROM olympics.participates RE JOIN olympics.event E USING (event_id) JO
 Router.get(`/event/result/:id`, (req, res) => {
     const { id } = req.params;
     pool.query(`SELECT M.member_id, RE.role FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
-                WHERE RE.event_id = ${id};`, (err, officials) => {
+                WHERE RE.event_id = $1;`, [id], (err, officials) => {
         if(err){
             console.log('error', err);
             return res.status(500).send(err);
         }
-        pool.query(`SELECT event_name, discipline, member_id, medal, event_gender, event_start, title, family_name, given_names, country_name, place_name FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) JOIN olympics.country USING (country_code) JOIN olympics.sport SP USING(sport_id) JOIN olympics.place PL ON (E.sport_venue = PL.place_id) WHERE event_id = ${id}`, 
-        (err, athletes) => {
+        pool.query(`SELECT event_name, discipline, member_id, medal, event_gender, event_start, title, family_name, given_names, country_name, 
+            place_name FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) 
+            JOIN olympics.country USING (country_code) JOIN olympics.sport SP USING(sport_id) 
+            JOIN olympics.place PL ON (E.sport_venue = PL.place_id) WHERE event_id = $1`, [id], (err, athletes) => {
             if(err){
                 console.log('error', err);
                 return res.status(500).send(err);
@@ -191,8 +192,12 @@ Router.get(`/event/result/:id`, (req, res) => {
 
 Router.get('/Leaderboard/:discipline/:limit', (req,res) => {
     const { discipline, limit} = req.params;
-    pool.query("SELECT iso_code, country_name, M.given_names || ' ' || M.family_name AS name, COUNT((SELECT COUNT(medal) FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline FROM olympics.member M JOIN olympics.participates P ON (M.member_id = P.athlete_id) JOIN olympics.country C USING (country_code) JOIN olympics.event E USING (event_id) JOIN olympics.sport S USING (sport_id)  WHERE discipline ILIKE $1 GROUP BY country_name, C.iso_code, M.given_names, M.family_name, S.discipline ORDER BY count ASC, name ASC LIMIT $2", [`%${discipline}%`, limit],
-     (err, results) => {
+    pool.query(`SELECT iso_code, country_name, M.given_names || ' ' || M.family_name AS name, COUNT((SELECT COUNT(medal) 
+        FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline FROM olympics.member M 
+        JOIN olympics.participates P ON (M.member_id = P.athlete_id) JOIN olympics.country C USING (country_code) 
+        JOIN olympics.event E USING (event_id) JOIN olympics.sport S USING (sport_id)  
+        WHERE discipline ILIKE $1 GROUP BY country_name, C.iso_code, M.given_names, M.family_name, S.discipline 
+        ORDER BY count ASC, name ASC LIMIT $2`, [`%${discipline}%`, limit], (err, results) => {
           if(err){
                 console.log('error', err);
                 return res.status(500).send(err);
@@ -244,7 +249,8 @@ Router.post('/login', (req, res) => {
         const { title, member_id, family_name, given_names, country_code, accommodation } = result;
         pool.query(`SELECT CASE WHEN (SELECT EXISTS(SELECT * FROM olympics.Athlete A WHERE M.member_id = A.member_id)) = 't' THEN 'Athlete'
 	            WHEN (SELECT EXISTS(SELECT * FROM olympics.official O WHERE M.member_id = O.member_id)) = 't' THEN 'Official'
-	            WHEN (SELECT EXISTS(SELECT * FROM olympics.Staff S WHERE M.member_id = S.member_id)) = 't' THEN 'Staff' ELSE 'Unknown' END FROM olympics.member M WHERE M.member_id = '${member_id}';`, (err, response) =>{
+	            WHEN (SELECT EXISTS(SELECT * FROM olympics.Staff S WHERE M.member_id = S.member_id)) = 't' THEN 'Staff' ELSE 'Unknown' END 
+                FROM olympics.member M WHERE M.member_id = $1;`,[member_id],  (err, response) =>{
             if(err => console.log(err));
             if(response.rowCount <= 0)
                 return console.log('error with type check');
@@ -285,8 +291,6 @@ Router.post('/sign-up', function(req, res) {
 
 
 
-
-
 /***************USER LOGIN AND VERIFICATION FUNCTIONS ***************/
 let registerUser = ( name, password, email) => {
 	//TODO check if exists, resolve or reject depending on result
@@ -316,7 +320,6 @@ const attemptLogin = auth => {
             if(rowCount <= 0 ){
                 return reject('User does not exist');
             }
-
             const { pass_word  } = res.rows[0];
             
                 // User exists check password hash
