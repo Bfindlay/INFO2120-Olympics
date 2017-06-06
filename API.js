@@ -126,7 +126,6 @@ Router.post('/create/booking', (req, res) => {
         }else if( response.rowCount <= 0){
             return res.status(500).send("Error in query format");
         }
-        console.log(response);
         res.send(response.rows);
     });
 });
@@ -162,10 +161,6 @@ Router.get('/events', (req, res) => {
             })
 })
 
-/*
-SELECT * FROM olympics.runsevent RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.member_id = M.member_id)
-SELECT * FROM olympics.participates RE JOIN olympics.event E USING (event_id) JOIN olympics.member M ON (RE.athlete_id = M.member_id) WHERE event_id = 11          
-*/
 
 Router.get(`/event/result/:id`, (req, res) => {
     const { id } = req.params;
@@ -183,14 +178,13 @@ Router.get(`/event/result/:id`, (req, res) => {
                 console.log('error', err);
                 return res.status(500).send(err);
             }
-            console.log(athletes.rows);
             res.send({athletes: athletes.rows, officials: officials.rows});                 
         });                
     });
 });
 
 
-Router.get('/Leaderboard/:discipline/:limit', (req,res) => {
+Router.get('/Leaderboard/:discipline/:limit', (req, res) => {
     const { discipline, limit} = req.params;
     pool.query(`SELECT iso_code, country_name, M.given_names || ' ' || M.family_name AS name, COUNT((SELECT COUNT(medal) 
         FROM olympics.participates PP WHERE medal IS NOT NULL AND PP.athlete_id = M.member_id)) AS Count, S.discipline FROM olympics.member M 
@@ -209,31 +203,24 @@ Router.get('/Leaderboard/:discipline/:limit', (req,res) => {
 Router.get('/Sports', (req,res) => {
     pool.query("SELECT discipline from Olympics.sport", (err, response) =>{
         if(err){
-                console.log('error', err);
-                return res.status(500).send(err);
-            }
+            console.log('error', err);
+            return res.status(500).send(err);
+        }
             res.send(response.rows); 
     });
 })
-/*
 
-Test Query
 
-SELECT depart_time, from_place, to_place, nbooked  
-FROM olympics.Booking B JOIN olympics.journey J USING (journey_id) 
-WHERE depart_time = '2017-05-11 00:00:00' AND to_place = 4 AND from_place = 2 AND B.booked_for = 'A000043404'
-
-*/
 Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
     const { id, from, to, date } = req.params;
     const { token } = req.body;
-    pool.query(`SELECT depart_time, from_place, to_place, nbooked, vehicle_code FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) WHERE depart_time >= '${date}'
-                 AND to_place = ${to} AND from_place = ${from} AND B.booked_for = '${id}' ORDER BY depart_time ASC;`, (err, response) => {
+    pool.query(`SELECT depart_time, from_place, to_place, nbooked, vehicle_code FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) 
+                WHERE depart_time >= $4
+                 AND to_place = $3 AND from_place = $2 AND B.booked_for = $1 ORDER BY depart_time ASC;`,[ id, from, to, date], (err, response) => {
         if(err){
-            console.log('error', err); //TODO ERROR HANDLING
+            console.log('error', err); 
             return res.status(500).send("error in journey search");
         }else{
-            console.log(response.rows);
             res.send(response.rows);
         } 
     });
@@ -263,17 +250,6 @@ Router.post('/login', (req, res) => {
         console.log('err', err);
         res.status(401).send(err);
     });
-});
-
-Router.post('/', (req, res) => {
-    console.log('success post', req.body);
-    res.sendStatus(200);
-});
-
-
-Router.get('/', (req, res) => {
-    console.log('home request');
-    res.send("hello");
 });
 
 Router.post('/sign-up', function(req, res) {
