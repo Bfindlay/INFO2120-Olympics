@@ -214,15 +214,15 @@ Router.get('/Sports', (req,res) => {
 Router.post('/journey/:id/:from/:to/:date', (req, res) =>{
     const { id, from, to, date } = req.params;
     const { token } = req.body;
-    pool.query(`SELECT depart_time, from_place, to_place, nbooked, vehicle_code FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id) 
-                WHERE depart_time >= $4
-                 AND to_place = $3 AND from_place = $2 AND B.booked_for = $1 ORDER BY depart_time ASC;`,[ id, from, to, date], (err, response) => {
+    pool.query(`SELECT depart_time, from_place, to_place, nbooked, vehicle_code FROM olympics.Journey J JOIN olympics.booking B on (B.journey_id = J.journey_id)
+                WHERE depart_time >= $3
+                 AND to_place = $2 AND from_place = $1 ORDER BY depart_time ASC;`,[ from, to, date], (err, response) => {
         if(err){
-            console.log('error', err); 
+            console.log('error', err);
             return res.status(500).send("error in journey search");
         }else{
             res.send(response.rows);
-        } 
+        }
     });
 })
 
